@@ -204,7 +204,7 @@ tr.clk:hover td{background:var(--paper-2)}
 .hero .say b{color:var(--shu)}
 .hero .bigstamp .r{font-size:58px}
 .hero-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.how{margin-top:12px;font-size:13px;color:var(--ink-2)}.how summary{cursor:pointer;text-decoration:underline}.how p{margin:6px 0 0;max-width:60ch}
+.how{margin-top:12px;font-size:13px;color:var(--ink-2)}.how summary{cursor:pointer;text-decoration:underline}.how p{margin:6px 0 0;max-width:60ch}.how ol{margin:8px 0 0;padding-left:1.4em;max-width:60ch}.how li{margin:0 0 8px;line-height:1.7}.how li b{color:var(--ink)}
 .kgm{margin:30px 0 4px;max-width:460px}
 .kgm-bar{position:relative;height:12px;background:linear-gradient(90deg,var(--rule-2),var(--rule));border-radius:6px}
 .kgm-bar i{position:absolute;top:50%;transform:translate(-50%,-50%)}
@@ -331,6 +331,9 @@ const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const ri=(a,b)=>a+Math.floor(R()*(b-a+1));
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pct=x=>Math.round(100/(1+Math.exp(-1.702*x)));
+function rankAvg(a){const ix=a.map((v,i)=>i).sort((i,j)=>a[i]-a[j]);const r=Array(a.length);for(let i=0;i<ix.length;){let j=i;while(j+1<ix.length&&a[ix[j+1]]===a[ix[i]])j++;for(let k=i;k<=j;k++)r[ix[k]]=(i+j)/2+1;i=j+1}return r}
+function spearman(x,y){return pearson(rankAvg(x),rankAvg(y))}
+function zIn(a,i){const m=a.reduce((x,y)=>x+y,0)/a.length;const sd=Math.sqrt(a.reduce((x,y)=>x+(y-m)**2,0)/a.length)||1;return (a[i]-m)/sd}
 function pearson(x,y){const n=x.length;if(n<3)return null;let mx=0,my=0;for(let i=0;i<n;i++){mx+=x[i];my+=y[i]}mx/=n;my/=n;let a=0,b=0,c=0;for(let i=0;i<n;i++){const dx=x[i]-mx,dy=y[i]-my;a+=dx*dy;b+=dx*dx;c+=dy*dy}if(b<1e-9||c<1e-9)return null;return a/Math.sqrt(b*c)}
 const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(m,k)=>o[k]!==undefined?o[k]:m);
 const MEM={};const store={get(k,d){try{const v=localStorage.getItem(k);if(v)return JSON.parse(v)}catch(e){}return k in MEM?JSON.parse(MEM[k]):d},set(k,v){MEM[k]=JSON.stringify(v);try{localStorage.setItem(k,MEM[k])}catch(e){}}};
@@ -801,7 +804,7 @@ function vSetup(){
       <li><span>書類選考</span><span>12通の履歴書から6人を通す</span></li>
       <li><span>集団面接</span><span>6人から3人を通す</span></li>
       <li><span>個別面接</span><span>1人につき質問は3つまで。評価と確信度をつける</span></li>
-      <li><span>役員会</span><span>推薦順位を出す。決めるのは役員</span></li>
+      <li><span>役員会</span><span>推薦順位を出す。役員の評価と大きくズレると覆される</span></li>
       <li><span>三年後</span><span>採った人がどうなったか。採らなかった11人が同じ席でどうなったか。候補者はあなたの会社を口コミサイトに書く</span></li>
     </ol>
     <div class="repbox"><div>就活口コミサイトでの御社の評価　<span class="stars-s">${starsTxt(rs)}</span> <b class="num">${REP.score.toFixed(2)}</b> <span class="note">（${REP.n}件）</span></div><div class="note">応募者の集まり方：${repLabel(REP.score)}。評価を動かすのは、あなたの選考のやり方（書類を読む速さ、面接で何を聞いたか）だけです。次の応募者の質と内定承諾率に響きます。</div>${REP.n?'<div><button class="linkbtn" data-act="represet">口コミを初期状態に戻す</button></div>':''}</div>
@@ -1064,7 +1067,7 @@ function vBoard(){
   const cards=G.final.map(id=>{const c=G.cands[id];const rk=G.rank.indexOf(id);const r=G.rate[id];
     return `<article class="bcard ${rk>=0?'ranked':''}"><div class="who">${face(c)}<div><div class="nm">${esc(c.name)}</div><div class="note">${esc(profileLine(c))}</div><div class="st">${starsTxt(r.star)}</div><div class="note">確信度 ${r.conf}%</div></div>
     <div>${rk>=0?`<div class="rkbadge">${rk+1}位</div>`:done?'':`<button class="btn small" data-act="rk" data-id="${id}">${G.rank.length+1}位に推す</button>`}</div></div>${dossier(c)}</article>`}).join('');
-  let html=`<div class="fusen">役員会に推薦します。あなたの推薦は、参考意見として大切に扱われます。<br>3人の推薦順位と、1位に推す理由を決めてください。</div>`;
+  let html=`<div class="fusen">役員会に推薦します。基本はあなたの推薦順どおりに内定を出します。ただし役員3人の評価と大きくズレていると、役員の判断が優先されます。<br>3人の推薦順位と、1位に推す理由を決めてください。</div>`;
   if(!done){
     html+=`<div class="bar-row"><span class="count">推薦順位 <b>${G.rank.length}</b> / 3</span><button class="btn ghost small" data-act="rkreset" ${G.rank.length?'':'disabled'}>順位を付け直す</button></div><div class="bgrid">${cards}</div>
     <div class="form" id="reasonBox" style="margin-top:18px"><fieldset><legend>1位に推す理由</legend><div class="chips">${REASONS.map(r=>`<label class="chip"><input type="radio" name="reason" id="rs-${r[0]}" value="${r[0]}" ${G.reason===r[0]?'checked':''}><span>${r[1]}</span></label>`).join('')}</div></fieldset>
@@ -1083,22 +1086,26 @@ function meeting(){
     cfo:c=>cfg.mode==='mid'?-(c.salary-500)/60+.3*gz():-.6*(c.gap==='特になし'?0:1)+.15*c.certs.length+.4*gz(),
   };
   const who={ceo:'権田 社長',coo:'鷲尾 事業本部長',cfo:'金子 CFO'};
-  const pts={};fin.forEach(c=>pts[c.id]=0);
-  G.rank.forEach((id,i)=>pts[id]+=(3-i)*3);
+  const pts={};const tops={};fin.forEach(c=>pts[c.id]=0);
   const lines=[];const fam=c=>c.name.split(' ')[0];const nm=c=>fin.some(o=>o!==c&&fam(o)===fam(c))?c.name.replace(' ',''):fam(c);
   lines.push(['sys',`人事より推薦順位を説明。1位 ${G.cands[G.rank[0]].name}、理由「${REASONS.find(r=>r[0]===G.reason)[1]}」。`]);
   for(const k of ['ceo','coo','cfo']){
     const ord=[...fin].sort((a,b)=>sc[k](b)-sc[k](a));
     ord.forEach((c,i)=>pts[c.id]+=3-i);
-    const top=ord[0];let say;
+    const top=ord[0];tops[k]=top.id;let say;
     if(k==='ceo')say=top.taiiku?`「${nm(top)}さん、体育会だったんだろ。それで十分だよ」`:pick([`「${nm(top)}さんがいい。目が死んでない。こういうのは理屈じゃないんだ」`,`「写真を見た瞬間に${nm(top)}さんだと思ったね。俺の勘は当たるんだ」`,`「${nm(top)}さんは声がいい。声がいい人間は伸びる」`]);
     if(k==='coo')say=top.obs.work===undefined&&top.obs.pro!==undefined?`「専門的な質問への答えを見ました。現場で話が通じるのは${nm(top)}さんです」`:top.obs.work!==undefined?`「課題の出来を見ました。現場で使えるのは${nm(top)}さんです」`:`「課題を出していないなら判断材料が少ない。経歴で言えば${nm(top)}さんでしょう」`;
     if(k==='cfo')say=cfg.mode==='mid'?`「${nm(top)}さんの希望年収は${top.salary}万円。一番まともです」`:pick([`「リスクが一番少ないのは${nm(top)}さんです。根拠ですか。勘です」`,`「${nm(top)}さんは資格を持っている。少なくとも勉強はする人です」`]);
     lines.push([who[k],say]);
   }
-  const order=[...fin].sort((a,b)=>pts[b.id]-pts[a.id]||G.rank.indexOf(a.id)-G.rank.indexOf(b.id));
-  const overridden=order[0].id!==G.rank[0];
-  lines.push(['sys',`集計：${order.map(c=>`${c.name} ${pts[c.id]}点`).join('／')}（人事の推薦は1位9点・2位6点・3位3点、役員は各3・2・1点）`]);
+  // 基本は人事の推薦順。ただし人事の1位が役員の評価で最下位か、役員3人が別の1人をそろって1位に挙げたら、役員の評価順に切り替える
+  const hr1=G.rank[0];const byExec=[...fin].sort((a,b)=>pts[b.id]-pts[a.id]||G.rank.indexOf(a.id)-G.rank.indexOf(b.id));
+  const lowest=fin.every(c=>c.id===hr1||pts[c.id]>pts[hr1]);
+  const t=Object.values(tops);const unanimous=t[0]!==hr1&&t.every(x=>x===t[0]);
+  const overridden=lowest||unanimous;
+  const order=overridden?byExec:G.rank.map(id=>G.cands[id]);
+  lines.push(['sys',`役員の評価（1位3点・2位2点・3位1点の合計）：${byExec.map(c=>`${c.name} ${pts[c.id]}点`).join('／')}`]);
+  lines.push(['sys',overridden?(unanimous?`役員3人がそろって ${G.cands[t[0]].name} を1位に挙げた。人事の推薦より役員の判断を優先する。`:`人事が1位に推した ${G.cands[hr1].name} は、役員の評価で最下位。人事の推薦より役員の判断を優先する。`):'人事の推薦と役員の評価に大きなズレはない。人事の推薦順どおりに内定を出す。']);
   lines.push(['権田 社長',overridden?`「人事の意見はよく分かった。参考にさせてもらったよ。${nm(order[0])}さんで行こう」`:`「人事の目は確かだな。${nm(order[0])}さんで行こう」`]);
   let hired=null;const declined=[];
   for(const c of order){
@@ -1207,11 +1214,16 @@ function setupRadar(){
   return `<div class="setup-radar"><h4 style="margin:0 0 6px;font-size:13px">あなたの選考のクセ（${H.length}回の平均）</h4><div class="radarwrap">${radarSvg(avg,null)}<div><div class="radar-type">${t[0]}</div><p class="note">${t[1]}</p></div></div></div>`;
 }
 const sameQs=()=>G.final.every(id=>JSON.stringify([...(G.asked[id]||[])].map(k=>k==='free'?'free:'+G.free[id].type:k).sort())===JSON.stringify([...(G.asked[G.final[0]]||[])].map(k=>k==='free'?'free:'+G.free[G.final[0]].type:k).sort()));
-/* 慧眼力：0〜99（満点は存在しない）。サイコロで選ぶと平均50 */
-function keiganScore(rAdv,hiredRank,recRank,conf,viol){
-  const ra=rAdv===null?0:rAdv;const rk=hiredRank?(6.5-hiredRank)/5.5:-1;
-  const cal=(recRank<=3?1:-1)*5*(conf-50)/50;
-  return clamp(Math.round(46+30*ra+15*rk+cal-10*viol),0,99);
+/* 慧眼力：0〜100。完全にランダムに選ぶと平均50
+   ①選考の妥当性：進めた段階×三年後の成績のスピアマン順位相関（基準関連妥当性）
+   ②採用の効用：採用した人の成績の12人内z得点（Brogden-Cronbach-Gleser）
+   ③確信度の較正：「1位推薦が上位半分に入る」へのブライアースコア（Brier 1950）
+   ④不適切な質問：1回−10 */
+const KG_BASE=51.4;
+function kgCal(recRank,conf){const p=conf/100,o=recRank<=6?1:0;return 4*(.25-(p-o)**2)/.25}
+function keiganScore(rho,hiredZ,recRank,conf,viol){
+  const ra=rho===null?0:rho;const hz=hiredZ===null?-1.5:clamp(hiredZ,-2,2);
+  return clamp(Math.round(KG_BASE+30*ra+8*hz+kgCal(recRank,conf)-10*viol),0,100);
 }
 const KG_TIER=[[90,'本物の慧眼（たぶん運）','ここまで来ると、次に同じ点を取れる確率のほうが気になります。'],[75,'目利き（暫定）','サイコロよりは明らかに上。あと何回か続けば、本物かもしれません。'],[60,'平均よりはマシ','サイコロには勝ちました。僅差で。'],[45,'サイコロと互角','目をつぶって選んでも、だいたいこのくらいになります。'],[30,'直感派','あなたの直感は、あなたのことをよく知っています。候補者のことは知りません。'],[0,'逆・慧眼','あなたの逆を選べば当たります。ただし、それを知った時点で当たらなくなります。']];
 const kgTier=v=>KG_TIER.find(t=>v>=t[0]);
@@ -1230,7 +1242,7 @@ function kgPeers(n){
     const fin=[...p2].sort((a,b)=>s3[b]-s3[a]);
     const adv=cs.map((c,i)=>!p1.includes(i)?0:!p2.includes(i)?1:2+(5-fin.indexOf(i))/5);
     const hr=1+act.filter(v=>v>act[fin[0]]).length;
-    out.push(keiganScore(pearson(adv,act),hr,hr,70,0));
+    out.push(keiganScore(spearman(adv,act),zIn(act,fin[0]),hr,70,0));
   }
   return out;
 }
@@ -1271,7 +1283,7 @@ function computeResult(){
     sim:[passS.filter(c=>G.p1.has(c.id)).length,passS.length],oth:[passO.filter(c=>G.p1.has(c.id)).length,passO.length],viol:G.viol.length,radar};
   const prevH=store.get('keigan-v1',[]).filter(r=>r.radar);const prevAvg=prevH.length?[0,1,2,3,4].map(i=>Math.round(prevH.reduce((a,r)=>a+r.radar[i],0)/prevH.length)):null;
   const history=store.get('keigan-v1',[]);history.push(run);store.set('keigan-v1',history.slice(-200));
-  const kg=keiganScore(picked[0][1],G.hired!==null?G.cands[G.hired].rank:null,G.cands[G.rank[0]].rank,G.rate[G.rank[0]].conf,G.viol.length);
+  const actAll=G.cands.map(c=>c.res.total);const kg=keiganScore(spearman(adv,actAll),G.hired!==null?zIn(actAll,G.hired):null,G.cands[G.rank[0]].rank,G.rate[G.rank[0]].conf,G.viol.length);
   const peers=kgPeers(400);const top=Math.max(1,Math.round(peers.filter(v=>v>=kg).length/peers.length*100));
   run.kg=kg;history[history.length-1]=run;store.set('keigan-v1',history.slice(-200));
   const kgs=history.filter(r=>r.kg!==undefined).map(r=>r.kg);
@@ -1315,16 +1327,13 @@ function bossSection(X){
   <p class="note" style="margin-top:10px">部長の評価に入っていないもの：採用した人が三年後にどうなったか。あなたが何を質問したか（違法なもの以外）。</p></div></div></div></section>`;
 }
 function shareHref(X){
-  const h=G.hired!==null?G.cands[G.hired]:null;const rec=G.cands[G.rank[0]];const t=radarType(X.radar);
-  const lines=[`私の慧眼力は ${X.kg} / 99（${kgTier(X.kg)[1]}）`,
-    `同じ12人を見た面接官400人中、${X.top<=50?`上位${X.top}%`:`下位${Math.max(1,101-X.top)}%`}`,
-    (h?`採用した人は三年後に12人中${h.rank}位`:'採用した人：なし（全員に辞退された）')+`／確信度${G.rate[rec.id].conf}%で推した人は${rec.rank}位`,
-    `選考のクセ：${t[0]}`,
-    'サイコロで選んでも50。あなたは？','#慧眼採用課'];
-  const u=SHARE_URL?SHARE_URL.replace(/\/$/,'')+'/s/'+X.kg:'';
-  return 'https://twitter.com/intent/tweet?text='+encodeURIComponent(lines.join('\n'))+(u?'&url='+encodeURIComponent(u):'');
+  const t=radarType(X.radar);
+  const u=SHARE_URL?SHARE_URL.replace(/\/$/,'')+'/r/'+X.kg:'';
+  const lines=[`私の慧眼力は ${X.kg} / 100（${kgTier(X.kg)[1]}）`,`選考のクセ：${t[0]}`,'#慧眼採用課'];
+  if(u)lines.push(u);
+  return 'https://twitter.com/intent/tweet?text='+encodeURIComponent(lines.join('\n'));
 }
-function kgMeter(v){return `<div class="kgm" aria-label="慧眼力 ${v}。サイコロで選んだ場合は50"><div class="kgm-bar"><i class="dice" style="left:${50/99*100}%"></i><i class="me" style="left:${v/99*100}%"><span>${v}</span></i></div><div class="kgm-lab"><span>0</span><span style="left:${50/99*100}%">サイコロ 50</span><span>99</span></div></div>`}
+function kgMeter(v){return `<div class="kgm" aria-label="慧眼力 ${v}。サイコロで選んだ場合は50"><div class="kgm-bar"><i class="dice" style="left:50%"></i><i class="me" style="left:${v}%"><span>${v}</span></i></div><div class="kgm-lab"><span>0</span><span style="left:50%">サイコロ 50</span><span>100</span></div></div>`}
 function vModal(c){
   const tr=['g','con','skill','soc','cha','integ','stay','attract','wealth'];
   const rt=G.rate[c.id];const log=G.log[c.id]||[];const revealed=G.phase==='result'&&c.res;
@@ -1368,12 +1377,21 @@ function vResult(){
   const rec=G.cands[G.rank[0]];
   const rk=h?h.rank:null;const T=kgTier(X.kg);
   let out=`<section class="hero"><div class="bigstamp"><div><div class="r">${X.kg}</div><div class="t">慧眼力</div></div></div>
-  <div><p class="note">あなたの慧眼力（0〜99。満点は存在しません）</p><h2>${T[1]}</h2><p class="say">${T[2]}</p>
+  <div><p class="note">あなたの慧眼力（100点中）</p><h2>${T[1]}</h2><p class="say">${T[2]}</p>
   ${kgMeter(X.kg)}
   <p class="say">同じ12人を見た架空の面接官400人の中で、<b>${X.top<=50?`上位${X.top}%`:`下位${Math.max(1,101-X.top)}%`}</b>。${X.kgN>1?`このブラウザでのあなたの最高は <b>${X.kgBest}</b>（${X.kgN}回中）。`:''}</p>
-  <p class="say">${h?`採用した${esc(h.name)}さんは、三年後に12人中<b>${rk}位</b>でした。`:'3人とも内定を辞退し、誰も採用できませんでした。'}${h?`確信度${G.rate[rec.id].conf}%で1位に推した${h.id===rec.id?'その人':esc(rec.name)+'さん'}は${rec.rank}位。${G.overridden?`役員会はあなたの推薦を覆しました。${h.id===rec.id?'':'結果として、'+(h.rank<rec.rank?'役員のほうが正しかった。':'あなたのほうが正しかった。誰も覚えていないけれど。')}`:''}`:''}</p>
+  <p class="say">${h&&h.id===rec.id?`あなたが1位に推した${esc(rec.name)}さんを採用しました。三年後、12人中<b>${rk}位</b>でした。`:`あなたが1位に推した${esc(rec.name)}さんは、三年後に12人中${rec.rank}位。`+(h?`実際に採用した${esc(h.name)}さんは<b>${rk}位</b>でした。${G.overridden?'役員会があなたの推薦を覆しました。結果として、'+(h.rank<rec.rank?'役員のほうが正しかった。':'あなたのほうが正しかった。誰も覚えていないけれど。'):''}`:'3人とも内定を辞退し、誰も採用できませんでした。')}</p>
   <div class="hero-act"><a class="btn red" href="${shareHref(X)}" target="_blank" rel="noopener">慧眼力を X でシェア</a><button class="btn ghost" data-act="again">もう一度挑戦する</button></div>
-  <details class="how"><summary>慧眼力の計算方法</summary><p>基準点から、次を足し引きします。あなたが誰をどこまで進めたかと、三年後の実際の成績がどれだけ一致していたか（最大±30）。採用した人の順位（±15）。1位に推した人への確信度が当たっていたか（±5）。不適切な質問（1回につき−10）。目をつぶって選ぶと、平均で50になります。</p></details>
+  <details class="how"><summary>慧眼力の計算方法</summary>
+  <p>慧眼力は、人事測定の研究で標準的に使われている指標を、ゲーム用に組み合わせたものです。基準点から、次の4つを足し引きします。</p>
+  <ol>
+  <li><b>選考の妥当性（±30）</b>　12人それぞれを「どの段階まで進めたか」と「三年間の実際の成績」の順位相関（スピアマンの順位相関係数）。選考を、あとから測った職務成績との相関で評価する「基準関連妥当性」の考え方で、Schmidt &amp; Hunter（1998）やSackettほか（2022）のメタ分析、米国産業・組織心理学会（SIOP）の『人事選考手続の妥当性確認と使用に関する原則』（2018）と同じ方法です。進めた段階は順序にしか意味がないため、順位で相関をとっています。</li>
+  <li><b>採用の効用（±16）</b>　採用した人の三年間の成績を、12人の中で標準化した値（z得点）。選考の価値は「採用した人の成績が平均からどれだけ上か」に比例するという、ブログデン＝クロンバック＝グレーザーの効用モデル（Brogden 1949／Cronbach &amp; Gleser 1965）に基づきます。誰も採用できなかった場合は、平均を大きく下回る人を採用したのと同じ扱いです。</li>
+  <li><b>確信度の較正（＋4〜−12）</b>　1位に推した人が12人中の上位半分に入るかを、あなたの確信度がどれだけ正確に言い当てたか。気象予報や予測研究で使われるブライアースコア（Brier 1950）で測ります。自信過剰ほど大きく減点される「適切なスコアリングルール」で、Tetlockらの予測研究でも使われています。確信度50%は「わからない」と同じで、加点も減点もありません。</li>
+  <li><b>不適切な質問（1回につき−10）</b>　厚生労働省「公正な採用選考の基本」は、本人に責任のない事項や、思想・信条など本来自由であるべき事項を尋ねることを、就職差別につながるおそれがあるとしています。</li>
+  </ol>
+  <p>基準点は、12人を完全にランダムに選んだ場合の平均がちょうど50になるよう、モンテカルロ・シミュレーションで調整しています。「架空の面接官400人」は、同じ12人の書類と面接の印象だけを見て、少しずつ違う重みで選考する面接官をシミュレーションしたものです。</p>
+  <p>データの扱い：三年間の成績は、本人の能力に上司・配属・運が加わった値で、現実の人事評価と同じく雑音を含みます。育休の年は比較から外しています。現実の採用では、落とした人の入社後は観測できません（選抜による範囲制限）。このゲームは12人全員を同じ席に座らせた場合の三年間を計算しているので、落とした11人とも比べられます。</p></details>
   <p class="score">書類1通あたり <b>${X.secs.toFixed(1)}</b>秒</p></div></section>`;
   if(h){
     const rs=REASONS.find(r=>r[0]===G.reason);let msg;
@@ -1426,7 +1444,7 @@ function vResult(){
   <div>それ以外の人への平均★</div><div>${ms(othStars)?ms(othStars).toFixed(2):'—'}</div>
   </div><p class="note" style="margin-top:8px">書類の平均通過率は50%です。共通点は、このゲームでは成果と一切関係ありません。</p></div></div></section>
   <section class="sect about"><h3>この評価について</h3>
-  <p>本ゲームでは、面接手法と職務成績の相関を調べたメタ分析（Sackett ほか, 2022／Schmidt &amp; Hunter, 1998）や、面接官が自分に似た人を選びやすいことを示した研究（Rivera, 2012）、厚生労働省の「公正な採用選考」の考え方などを参考に、あなたの選考を評価しています。</p>
+  <p>本ゲームでは、面接手法と職務成績の相関を調べたメタ分析（Sackett ほか, 2022／Schmidt &amp; Hunter, 1998）や、面接官が自分に似た人を選びやすいことを示した研究（Rivera, 2012）、予測の当たり外れを測る方法（Brier, 1950）、厚生労働省の「公正な採用選考」の考え方などを参考に、あなたの選考を評価しています。</p>
   <p>もっとも、その物差しを選んだのも、配分を決めたのも、このゲームを作った誰かです。あなたが候補者を評価し、部長があなたを評価したように、このゲームの評価もまた、あなたに評価されています。慧眼力が低かったなら、それはあなたの目のせいかもしれないし、このゲームの目のせいかもしれません。どちらなのかを見抜けたら、それがいちばんの慧眼です。</p></section>
   <div class="foot-actions"><a class="btn red" href="${shareHref(X)}" target="_blank" rel="noopener">慧眼力を X でシェア</a><button class="btn" data-act="again">同じ設定で次の採用へ</button><button class="btn ghost" data-act="home">設定を変える</button></div>`;
   return out;
@@ -1478,5 +1496,3 @@ document.addEventListener('input',e=>{
 });
 render();
 </script>
-</body>
-</html>
