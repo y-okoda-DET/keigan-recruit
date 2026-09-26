@@ -8,8 +8,7 @@
 <meta property="og:description" content="あなたには、人を見る目がある。少なくとも、あなたはそう思っている。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://keigan-recruit.yhiokd.workers.dev">
-<!-- OGP画像を用意したら↓を有効化 -->
-<!-- <meta property="og:image" content="https://example.com/ogp.png"> -->
+<meta property="og:image" content="https://keigan-recruit.yhiokd.workers.dev/og-top.png">
 <meta name="twitter:card" content="summary_large_image">
 <style>html{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>慧眼採用課</title>
@@ -39,7 +38,7 @@
   --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 24px -12px rgba(0,0,0,.7);}
 
 *{box-sizing:border-box}
-body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.75;padding-inline:16px;padding-block:0 64px}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.75;padding-inline:16px;padding-block:0 120px}
 .wrap{max-width:1100px;margin-inline:auto}
 h1,h2,h3{font-family:var(--f-disp);font-weight:800;text-wrap:balance;line-height:1.35;margin:0}
 p{margin:0}
@@ -202,6 +201,18 @@ tr.clk:hover td{background:var(--paper-2)}
 .hero .say{margin-top:8px;color:var(--ink-2);max-width:60ch}
 .hero .score{font-family:var(--f-num);margin-top:12px;font-size:14px;color:var(--ink-2)}
 .hero .score b{font-size:26px;color:var(--ink)}
+.hero .say b{color:var(--shu)}
+.hero .bigstamp .r{font-size:58px}
+.hero-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.how{margin-top:12px;font-size:13px;color:var(--ink-2)}.how summary{cursor:pointer;text-decoration:underline}.how p{margin:6px 0 0;max-width:60ch}
+.kgm{margin:30px 0 4px;max-width:460px}
+.kgm-bar{position:relative;height:12px;background:linear-gradient(90deg,var(--rule-2),var(--rule));border-radius:6px}
+.kgm-bar i{position:absolute;top:50%;transform:translate(-50%,-50%)}
+.kgm-bar .dice{width:2px;height:22px;background:var(--ink-3)}
+.kgm-bar .me{width:18px;height:18px;border-radius:50%;background:var(--shu);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--shu)}
+.kgm-bar .me span{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-family:var(--f-num);font-weight:700;color:var(--shu);font-size:13px}
+.kgm-lab{position:relative;height:18px;font-size:11px;color:var(--ink-3);margin-top:6px}
+.kgm-lab span{position:absolute;top:0}.kgm-lab span:first-child{left:0}.kgm-lab span:last-child{right:0}.kgm-lab span:nth-child(2){transform:translateX(-50%)}
 .sect{margin-top:34px}
 .sect>h3{font-size:22px;margin-bottom:4px}
 .sect>.lede{color:var(--ink-2);font-size:14px;margin-bottom:14px;max-width:70ch}
@@ -239,6 +250,31 @@ tr.hired td{background:var(--shu-soft)}
 .kv div:nth-child(even){font-family:var(--f-num);text-align:right}
 .warn{border-left:3px solid var(--shu);background:var(--shu-soft);padding:10px 14px;font-size:14px;margin-top:12px}
 .foot-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.about p{max-width:70ch;color:var(--ink-2);margin:0 0 10px}
+.yrs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.yr{background:var(--paper);box-shadow:var(--shadow);padding:14px 16px;display:grid;grid-template-columns:1fr;gap:6px;align-content:start;border-left:0}
+.yr .yh{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--ink-3)}
+.yr .gr{font-family:var(--f-disp);font-weight:800;font-size:40px;line-height:1;color:var(--ink)}
+.yr .gr.S,.yr .gr.A{color:var(--ok)}.yr .gr.D,.yr .gr.C{color:var(--ng)}
+.yr .gr.na{font-size:18px;color:var(--ink-3);line-height:1.6}
+.yr .cm{font-size:14px}
+.yr .bs{font-size:12px;color:var(--ink-3)}
+.yr .ev{font-size:13px;color:var(--ng);font-weight:700}
+@media (max-width:640px){.yrs{grid-template-columns:1fr}}
+.challenge{background:var(--shu);color:#fff;padding:10px 14px;font-weight:700;margin:0 0 14px}.challenge b{font-family:var(--f-num);font-size:22px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--paper);border-top:2px solid var(--ink);box-shadow:0 -8px 20px -12px rgba(0,0,0,.4);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.dock-in{max-width:1100px;margin-inline:auto;display:flex;align-items:center;gap:12px;justify-content:space-between}
+.dock-msg{font-size:14px;line-height:1.5;min-width:0}
+.dock-msg b{color:var(--shu);font-family:var(--f-num);font-size:18px}
+.dock-msg .ok{color:var(--ok);font-weight:700}
+.dock-flash{color:var(--ng);font-size:12.5px;font-weight:700;animation:shake .35s}
+@keyframes shake{0%,100%{transform:none}30%{transform:translateX(-4px)}60%{transform:translateX(4px)}}
+.dock .btn{white-space:nowrap;flex:none}
+.dock .btn:not(:disabled){animation:pulse 1.6s ease-in-out 2}
+@keyframes pulse{50%{box-shadow:0 0 0 5px var(--shu-soft)}}
+@media (max-width:420px){.dock .btn{padding:10px 14px;font-size:14px}.dock-msg{font-size:13px}}
+.rate.wait{border-style:dashed;color:var(--ink-3)}
+.sheet[data-act]:not(.on) .hd span::after{content:'　押して通過';color:var(--ink-3)}
 
 .reviews{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px}
 .rv{background:var(--paper);border:1px solid var(--rule-2);padding:12px 16px;display:grid;gap:4px}
@@ -286,6 +322,7 @@ tr.hired td{background:var(--shu-soft)}
 
 <script>
 /* ============ 乱数・道具 ============ */
+const FROM=(()=>{try{const v=new URLSearchParams(location.search).get('from');return v!==null&&/^\d{1,2}$/.test(v)?+v:null}catch(e){return null}})();
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 let R=Math.random;
 const gz=(r=R)=>{let u=0;while(!u)u=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*r())};
@@ -469,23 +506,32 @@ const ageBand=a=>a<25?'20代前半':a<30?'20代後半':a<35?'30代前半':a<40?'
 
 /* ============ 顔（証明写真） ============ */
 function face(c){
-  const f=c.face,H=f.hair,S=f.skin;let back='',front='';
+  const f=c.face,H=f.hair,S=f.skin;let back='',front='',fr='',cap=1.2,op='',ears=true;
+  // fr：前髪の生え際（顔側の境界）。髪の外形は頭の楕円から作るので、輪郭と必ず一致する
   switch(f.style){
-    case 'short':front=`<path d="M28 45 C27 21.6 63 18.6 62 45 C58 34 34 33 28 45Z" fill="${H}"/>`;break;
-    case 'side':front=`<path d="M28 47 C25 20.5 66 19.5 63 43 C54 36 44 34 30 47Z" fill="${H}"/>`;break;
-    case 'buzz':front=`<path d="M29 42 C30 28 60 28 61 42 C56 35 34 35 29 42Z" fill="${H}" opacity=".8"/>`;break;
-    case 'spiky':front=`<path d="M28 45 L29 31 L34 34 L37 25 L42 31 L46 22 L50 30 L55 25 L57 33 L62 30 L62 45 C57 35 33 35 28 45Z" fill="${H}"/>`;break;
-    case 'center':front=`<path d="M28 48 C26 19.1 64 19.1 62 48 C60 36 50 33 45 38 C40 33 30 36 28 48Z" fill="${H}"/>`;break;
-    case 'slick':front=`<path d="M28 43 C29 20.7 61 20.7 62 43 C55 31 35 31 28 43Z" fill="${H}"/><path d="M36 30 Q45 26 54 30" stroke="#fff" stroke-opacity=".25" stroke-width="1.5" fill="none"/>`;break;
+    case 'short':fr='M62 45 C58 34 34 33 28 45';break;
+    case 'side':fr='M63 43 C54 36 44 34 30 47 L28 47';break;
+    case 'buzz':fr='M61 42 C56 35 34 35 29 42';cap=.35;op=' opacity=".78"';break;
+    case 'spiky':fr='M62 45 C57 35 33 35 28 45';front=`<path d="M29 40 L30 30 L34 32 L37 24 L42 29 L46 21 L50 28 L55 24 L57 31 L61 29 L61 40Z" fill="${H}"/>`;break;
+    case 'center':fr='M62 48 C60 36 50 33 45 38 C40 33 30 36 28 48';break;
+    case 'slick':fr='M62 43 C55 31 35 31 28 43';front=`<path d="M36 31 Q45 27 54 31" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" fill="none"/>`;break;
     case 'receding':front=`<path d="M29 47 C28 36 33 31 37 32 C34 36 32 41 29 47Z M61 47 C62 36 57 31 53 32 C56 36 58 41 61 47Z" fill="${H}"/>`;break;
-    case 'long':back=`<rect x="22" y="30" width="46" height="54" rx="18" fill="${H}"/>`;front=`<path d="M28 49 C26 18.7 64 18.7 62 49 C60 38 51 36 46 41 C42 36 32 38 28 49Z" fill="${H}"/>`;break;
-    case 'bob':back=`<path d="M24 50 C22 22 68 22 66 50 L66 66 L58 66 L58 58 L32 58 L32 66 L24 66Z" fill="${H}"/>`;front=`<path d="M28 48 C27 20.4 63 18.4 62 46 C55 36 40 38 28 48Z" fill="${H}"/>`;break;
-    case 'ponytail':back=`<ellipse cx="66" cy="52" rx="6" ry="15" transform="rotate(18 66 52)" fill="${H}"/>`;front=`<path d="M28 46 C27 21.2 63 18.2 62 46 C57 33 36 32 28 46Z" fill="${H}"/>`;break;
-    case 'bun':front=`<path d="M28 46 C27 21.2 63 18.2 62 46 C57 33 36 32 28 46Z" fill="${H}"/><circle cx="45" cy="23" r="7.5" fill="${H}"/>`;break;
-    case 'wavy':back=`<path d="M23 38 C17 56 27 66 21 84 L69 84 C63 66 73 56 67 38Z" fill="${H}"/>`;front=`<path d="M28 49 C26 18.7 64 18.7 62 49 C58 37 48 35 44 40 C40 35 31 38 28 49Z" fill="${H}"/>`;break;
-    case 'pixie':front=`<path d="M28 50 C24 20.1 66 18.1 63 46 C58 36 46 34 36 40 C33 43 30 46 28 50Z" fill="${H}"/>`;break;
+    case 'long':back=`<path d="M23 50 C21 22 69 22 67 50 L68 82 L22 82Z" fill="${H}"/>`;fr='M62 49 C60 38 51 36 46 41 C42 36 32 38 28 49';ears=false;break;
+    case 'bob':back=`<path d="M24 50 C22 22 68 22 66 50 L66 66 L58 66 L58 60 L32 60 L32 66 L24 66Z" fill="${H}"/>`;fr='M62 46 C55 36 40 38 28 48';ears=false;break;
+    case 'ponytail':back=`<path d="M55 30 C69 29 73 48 67 72 C64 63 61 50 55 42Z" fill="${H}"/>`;fr='M62 46 C57 33 36 32 28 46';break;
+    case 'bun':fr='M62 46 C57 33 36 32 28 46';front=`<circle cx="45" cy="${(48-f.ry-2.2).toFixed(2)}" r="6.8" fill="${H}"/>`;break;
+    case 'wavy':back=`<path d="M24 46 C21 24 69 24 66 46 C73 58 63 68 69 84 L21 84 C27 68 17 58 24 46Z" fill="${H}"/>`;fr='M62 49 C58 37 48 35 44 40 C40 35 31 38 28 49';ears=false;break;
+    case 'pixie':fr='M63 46 C58 36 46 34 36 40 C33 43 30 46 28 50';break;
   }
-  const hs=`translate(45 48) scale(${(f.rx/17).toFixed(3)} ${(f.ry/21).toFixed(3)}) translate(-45 -48)`;back=back?`<g transform="${hs}">${back}</g>`:'';front=front?`<g transform="${hs}">${front}</g>`:'';
+  const hs=`translate(45 48) scale(${(f.rx/17).toFixed(3)} ${(f.ry/21).toFixed(3)}) translate(-45 -48)`;
+  back=back?`<g transform="${hs}">${back}</g>`:'';
+  let capEl='';
+  if(fr){
+    const n=fr.match(/-?[\d.]+/g).map(Number),yE=n[1],y0=n[n.length-1];
+    const uid='hc'+Math.random().toString(36).slice(2,9);
+    capEl=`<defs><clipPath id="${uid}"><path transform="${hs}" d="${fr} L0 ${y0} L0 0 L90 0 L90 ${yE}Z"/></clipPath></defs><ellipse cx="45" cy="48" rx="${(f.rx+cap*.6).toFixed(2)}" ry="${(f.ry+cap*1.4).toFixed(2)}" fill="${H}" clip-path="url(#${uid})"${op}/>`;
+  }
+  front=capEl+(front?(f.style==='bun'?front:`<g transform="${hs}">${front}</g>`):'');
   const shade='rgba(110,62,44,.55)';
   const lx=+(45-f.gap).toFixed(2),rxp=+(45+f.gap).toFixed(2),ly=49,ry2=+(49+f.asym).toFixed(2);
   const eye=(x,y)=>{const s=f.eyeR;
@@ -510,7 +556,7 @@ function face(c){
   if(f.glasses==='rect'||f.glasses==='heavy'){const sw=f.glasses==='heavy'?2:1.1;gl=`<g fill="none" stroke="#2a2a2a" stroke-width="${sw}"><rect x="${lx-5}" y="${ly-3.5}" width="10" height="7" rx="2"/><rect x="${rxp-5}" y="${ry2-3.5}" width="10" height="7" rx="2"/><path d="M${lx+5} ${ly-.5} L${rxp-5} ${ry2-.5}"/></g>`}
   if(f.glasses==='round')gl=`<g fill="none" stroke="#6b5a45" stroke-width="1.1"><circle cx="${lx}" cy="${ly}" r="4.6"/><circle cx="${rxp}" cy="${ry2}" r="4.6"/><path d="M${lx+4.6} ${ly} L${rxp-4.6} ${ry2}"/></g>`;
   const collar=f.tie?`<path d="M36 79 L45 97 L54 79Z" fill="#fff"/><path d="M43.5 82 L46.5 82 L48 100 L45 104 L42 100Z" fill="${f.tie}"/>`:`<path d="M37 79 L45 98 L53 79Z" fill="#f4f4f2"/><path d="M35 79 L41 88 L45 80Z M55 79 L49 88 L45 80Z" fill="#fff" stroke="#d8d8d4" stroke-width=".5"/>`;
-  return `<svg viewBox="0 0 90 110" role="img" aria-label="${esc(c.name)}の証明写真"><rect width="90" height="110" fill="${f.bg}"/>${back}<path d="M8 110 C10 86 26 78 45 78 C64 78 80 86 82 110Z" fill="${f.suit}"/>${collar}<rect x="39" y="64" width="12" height="16" rx="4" fill="${S}"/><ellipse cx="${(45-f.rx+.5).toFixed(2)}" cy="51" rx="2.6" ry="4" fill="${S}"/><ellipse cx="${(45+f.rx-.5).toFixed(2)}" cy="51" rx="2.6" ry="4" fill="${S}"/><ellipse cx="45" cy="48" rx="${f.rx.toFixed(2)}" ry="${f.ry.toFixed(2)}" fill="${S}"/>${chin}${stub}${front}${brows}${eye(lx,ly)}${eye(rxp,ry2)}${bags}${gl}${nose}${blush}${blem}${mouth}</svg>`;
+  return `<svg viewBox="0 0 90 110" role="img" aria-label="${esc(c.name)}の証明写真"><rect width="90" height="110" fill="${f.bg}"/>${back}<path d="M8 110 C10 86 26 78 45 78 C64 78 80 86 82 110Z" fill="${f.suit}"/>${collar}<rect x="39" y="64" width="12" height="16" rx="4" fill="${S}"/>${ears?`<ellipse cx="${(45-f.rx+.5).toFixed(2)}" cy="51" rx="2.6" ry="4" fill="${S}"/><ellipse cx="${(45+f.rx-.5).toFixed(2)}" cy="51" rx="2.6" ry="4" fill="${S}"/>`:''}<ellipse cx="45" cy="48" rx="${f.rx.toFixed(2)}" ry="${f.ry.toFixed(2)}" fill="${S}"/>${chin}${stub}${front}${brows}${eye(lx,ly)}${eye(rxp,ry2)}${bags}${gl}${nose}${blush}${blem}${mouth}</svg>`;
 }
 
 /* ============ 面接の質問 ============ */
@@ -607,7 +653,15 @@ function sigFor(c,type){const f=FT[type];let s=0;for(const k in f.w)s+=f.w[k]*c.
 const tierOf=s=>s>.5?'hi':s>-.45?'mid':'lo';
 function poolFor(type,tier){const f=FT[type];if(f.any)return f.any;if(f.from)return Q[f.from][tier];return f[tier]}
 async function callLLM(prompt){
-  if(KEIGAN_ENDPOINT){const r=await fetch(KEIGAN_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt})});if(!r.ok)throw new Error('http '+r.status);return (await r.json()).text}
+  if(KEIGAN_ENDPOINT){
+    const ac=new AbortController();const tm=setTimeout(()=>ac.abort(),20000);let r;
+    try{r=await fetch(KEIGAN_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt}),signal:ac.signal})}
+    catch(e){throw new Error(e.name==='AbortError'?'応答が20秒以内に返りませんでした':'通信できませんでした（接続先の設定か、通信環境の問題です）')}
+    finally{clearTimeout(tm)}
+    let j=null;try{j=await r.json()}catch(e){}
+    if(!r.ok)throw new Error((j&&j.detail?j.detail:'エラー')+`（${r.status}）`);
+    if(!j||typeof j.text!=='string')throw new Error('返事の形式が想定と違いました');
+    return j.text}
   const use=window.claude&&window.claude.use;if(!use)throw new Error('unavailable');
   const sample=await window.claude.use('sample');if(!sample)throw new Error('unavailable');
   const res=await sample(prompt,{modelTier:'quick',cache:false});return res.text;
@@ -637,9 +691,9 @@ async function askFree(c,q){
   const dv=c.t.cha+.35*gz();c.obs.deliv.push(dv);
   let {type,reason}=classify(q);let text=null,src='内蔵の判定';
   if(G.cfg.ai==='ai'){
-    try{const raw=await callLLM(buildPrompt(c,q,sigs,dv));const m=raw.match(/\{[\s\S]*\}/);const j=JSON.parse(m[0]);
-      if(FT[j.type]&&j.answer){type=j.type;reason=j.reason||'';text=String(j.answer).slice(0,300);src='生成AI';}}
-    catch(e){G.aiNote='生成AIにつながらなかったので、内蔵の判定で答えました。';}
+    try{const raw=await callLLM(buildPrompt(c,q,sigs,dv));const m=raw.match(/\{[\s\S]*\}/);if(!m)throw new Error('返事を読み取れませんでした');const j=JSON.parse(m[0]);
+      if(FT[j.type]&&j.answer){type=j.type;reason=j.reason||'';text=String(j.answer).slice(0,300);src='生成AI';G.aiNote='';}else throw new Error('返事を読み取れませんでした');}
+    catch(e){G.aiNote='生成AIにつながらなかったので、内蔵の判定で答えました。理由：'+(e&&e.message||'不明');console.warn('[keigan] AI',e);}
   }
   if(!text){
     const pre=dv>.6?pick(['（よどみなく、目を見て）','（笑顔で、間を置かずに）']):dv<-.5?pick(['（少し考えてから、小さな声で）','（視線を落としたまま）']):pick(['（落ち着いた様子で）','']);
@@ -713,10 +767,24 @@ function stamps(){
   $('#approve').innerHTML=STAMP_LB.map((l,k)=>{const cls=k+1<i?'done':k+1===i?'cur':'';return `<div class="${cls}"><div class="lb">${l}</div><div class="bx">${cls==='done'?'<span>済</span>':cls==='cur'?'<span></span>':''}</div></div>`}).join('');
 }
 function go(phase){G.phase=phase;render();window.scrollTo({top:0});}
+function dock(){
+  if(!G||G.modal!=null||G.phase==='result')return '';
+  const p=G.phase;let msg='',btn='';
+  if(p==='docs'){const n=G.p1.size;msg=n<6?`通過 <b>${n}</b> / 6　あと${6-n}通、履歴書を押して選んでください`:`<span class="ok">6通そろいました。</span>`;btn=`<button class="btn" data-act="next1" ${n===6?'':'disabled'}>集団面接へ進める</button>`;}
+  else if(p==='group'){const n=G.p2.size;msg=n<3?`通過 <b>${n}</b> / 3　あと${3-n}人、カードを押して選んでください`:`<span class="ok">3人そろいました。</span>`;btn=`<button class="btn" data-act="next2" ${n===3?'':'disabled'}>個別面接へ進める</button>`;}
+  else if(p==='iv'){const c=G.cands[G.final[G.iv]];const k=(G.asked[c.id]||[]).length;const st=(G.rate[c.id]||{}).star;
+    msg=G.pending?'候補者が答えを考えています……':k<3?`${G.iv+1}人目　質問 <b>${k}</b> / 3　${k?'答えは面接記録に出ています。':''}あと${3-k}つ聞けます`:!st?'3つ聞き終わりました。<b>★</b>で評価をつけてください':`<span class="ok">評価しました。</span>`;
+    btn=k<3?(G.pending?'':`<button class="btn ghost" data-act="goqs">質問を選ぶ</button>`):!st?`<button class="btn ghost" data-act="gorate">評価欄へ</button>`:`<button class="btn" data-act="nextiv">${G.iv<2?'次の候補者へ':'役員会の準備へ'}</button>`;}
+  else if(p==='board'){if(!G.board){const r=G.rank.length;msg=r<3?`推薦順位 <b>${r}</b> / 3　カードの「${r+1}位に推す」を押してください`:!G.reason?'最後に、1位に推す理由を選んでください':`<span class="ok">準備ができました。</span>`;
+      btn=r===3&&!G.reason?`<button class="btn ghost" data-act="goreason">理由を選ぶ</button>`:`<button class="btn" data-act="meet" ${r===3&&G.reason?'':'disabled'}>役員会を開く</button>`;}
+    else{msg='役員会の結論が出ました。';btn=`<button class="btn" data-act="toresult">三年後を見る</button>`;}}
+  const fl=G.flash?`<div class="dock-flash">${esc(G.flash)}</div>`:'';
+  return `<div class="dock" role="region" aria-label="次にすること" aria-live="polite"><div class="dock-in"><div class="dock-msg">${fl}<span>${msg}</span></div>${btn}</div></div>`;
+}
 function render(){
   stamps();const m=$('#main');
   const p=G?G.phase:'setup';
-  m.innerHTML=(p==='setup'?vSetup():p==='docs'?vDocs():p==='group'?vGroup():p==='iv'?vIv():p==='board'?vBoard():vResult())+(G&&G.modal!=null?vModal(G.cands[G.modal]):'');
+  m.innerHTML=(p==='setup'?vSetup():p==='docs'?vDocs():p==='group'?vGroup():p==='iv'?vIv():p==='board'?vBoard():vResult())+(G&&G.modal!=null?vModal(G.cands[G.modal]):'')+dock();
 }
 const profileLine=c=>`${c.gender==='未回答'?'性別未回答':c.gender}・${c.age}歳・${c.mode==='new'?c.uni:`転職${c.hops}回・前職 ${c.jobs[c.jobs.length-1].co.replace('株式会社','')}`}`;
 
@@ -726,6 +794,7 @@ function vSetup(){
   const rs=Math.round(REP.score);
   return `<section class="setup">
   <div class="intro">
+    ${FROM!==null?`<p class="challenge">友人の慧眼力は <b>${FROM}</b>。あなたは、超えられますか。</p>`:''}
     <h2>あなたには、人を見る目がある。</h2>
     <p class="sub">少なくとも、あなたはそう思っている。</p>
     <ol>
@@ -791,10 +860,9 @@ function sheet(c,sel,still){
 }
 function vDocs(){
   const n=G.p1.size;
-  return `<div class="fusen">${IND[G.cfg.ind].name}・${SIZE[G.cfg.size].name}の${G.cfg.mode==='new'?'新卒':'中途'}採用。職種は<b>${IND[G.cfg.ind].role[G.cfg.mode]}</b>。<br>履歴書は12通。6通に判子を押してください。一通に何秒かけたかは、こちらで数えておきます。</div>
+  return `<div class="fusen">${IND[G.cfg.ind].name}・${SIZE[G.cfg.size].name}の${G.cfg.mode==='new'?'新卒':'中途'}採用。職種は<b>${IND[G.cfg.ind].role[G.cfg.mode]}</b>。<br>履歴書は12通。通す6通を押して判子を押してください（もう一度押すと取り消し）。一通に何秒かけたかは、こちらで数えておきます。</div>
   <div class="bar-row"><span class="count">通過 <b>${n}</b> / 6</span><button class="btn" data-act="next1" ${n===6?'':'disabled'}>集団面接へ進める</button></div>
-  <div class="grid">${G.cands.map(c=>sheet(c,G.p1.has(c.id))).join('')}</div>
-  <div class="bar-row"><span class="count">通過 <b>${n}</b> / 6</span><button class="btn" data-act="next1" ${n===6?'':'disabled'}>集団面接へ進める</button></div>`;
+  <div class="grid">${G.cands.map(c=>sheet(c,G.p1.has(c.id))).join('')}</div>`;
 }
 
 /* ============ 2. 集団面接 ============ */
@@ -803,9 +871,101 @@ const INTRO={
   mid:['「{nm}と申します。{gs}をしていました。よろしくお願いいたします」','「{nm}です。本日はよろしくお願いします」（深くお辞儀をした）','「{nm}です。{gs}のことを少しお話しできればと思います。よろしくお願いします」','「{nm}です。{hobby}が好きです。よろしくお願いします」（笑いは起きなかった）'],
   lo:['「……{nm}です。えっと、{gs}を少し。よろしくお願いします」','「{nm}です。……以上です」（面接官が次の言葉を待ったが、何も来なかった）','「あ、{nm}です。すみません、ちょっと緊張していて」（声が裏返った）','「{nm}です。{gs}を……すみません、最初からいいですか」'],
 };
-const GD_HI=['「そもそも目標が『半分にする』なのか『相手が困らない』なのかで、打ち手が変わると思います」','「案を増やす前に、今いちばん時間を食っているものを一つ決めませんか」','「その案だと、費用は誰が持つんですか」','「一つ前の案、試すなら最初の一か月で効果が分かる形にできますよね」','「全部やると予算が足りないので、やらないことを先に決めましょう」','「それ、うまくいったかどうかを何で判断しますか」','「さっきの二つの案は同じ問題を解いているので、一本にまとめられます」','「現場の人が今それをやっていない理由が、たぶん一番のヒントです」'];
-const GD_MID=['「SNSを活用するのはどうでしょうか」','「まずアンケートを取ってニーズを把握すべきだと思います」','「成功事例を参考にするのがいいと思います」','「〇〇さんの意見に賛成で、そこに少し付け加えると……」','「ターゲットを明確にすることが大事だと思います」','「インフルエンサーとコラボするのはどうでしょう」','「PDCAを回していくことが重要だと思います」','「若手の意見を取り入れる仕組みがあるといいと思います」'];
-const GD_LO=['「若い人はやっぱりTikTokだと思います！」','「とりあえず全部やってみればいいと思います」','（前の人と同じ内容を、別の言葉で言い直した）','「AIを使えば解決すると思います」','「逆に、あえて何もしないというのはどうでしょう」（誰も拾わなかった）','「私のバイト先ではこうだったんですけど……」（5分続いた）','「それって結局、やる気の問題じゃないですか」','「ちょっと話を戻していいですか」（戻った先は、誰も話していない論点だった）'];
+const GD_GEN={
+  hi:['「案を増やす前に、何をもって成功とするかを決めませんか」','「その案だと、費用は誰が持つんですか」','「それ、うまくいったかどうかを何で判断しますか」','「さっきの二つの案は同じ問題を解いているので、一本にまとめられます」','「時間が半分過ぎたので、ここからは案を絞りませんか」'],
+  mid:['「{o}さんの意見に賛成で、そこに少し付け加えると……」','「まず前提を整理したほうがいいと思います」','「いろいろな視点から考えることが大事だと思います」','「成功事例を参考にするのがいいと思います」'],
+  lo:['（前の人と同じ内容を、別の言葉で言い直した）','「とりあえず全部やってみればいいと思います」','「{prev}ではこうだったんですけど……」（5分続いた）','「ちょっと話を戻していいですか」（戻った先は、誰も話していない論点だった）'],
+};
+const GD_Q={
+  '社内の問い合わせ対応を、半年で半分に減らす仕組みを考えてください':{
+    hi:['「まず、問い合わせの上位10件で全体の何割になるかを見ませんか。たぶん半分はそこで片づきます」','「来る前に答えを置くのか、来た後を速くするのか、どっちを狙うかで全然違います」','「FAQを作っても読まれなければ減りません。どこで迷って問い合わせているのかを先に知りたいです」'],
+    mid:['「FAQページを充実させればいいと思います」','「チャットボットを導入するのはどうでしょうか」','「問い合わせの内容を分類するところから始めるべきだと思います」'],
+    lo:['「窓口を減らせば、問い合わせも減ると思います」','「みんながもっと自分で調べればいいと思います」','「AIに全部答えさせれば、ゼロにできます」']},
+  '親世代でも迷わず使える家計簿アプリを企画してください':{
+    hi:['「親世代が今どう家計を管理しているかを先に聞きたいです。ノートに書いているなら、ノートより楽じゃないと使わないので」','「機能を足すより、最初の画面でやることを一つにしたほうがいいと思います」','「入れてもらうのが目標なのか、使い続けてもらうのが目標なのかで設計が変わります」'],
+    mid:['「文字を大きくして、ボタンを少なくするのがいいと思います」','「レシートを撮るだけで入力できると便利だと思います」','「子ども世代が設定してあげる機能があるといいと思います」'],
+    lo:['「若者向けにしたほうが流行ると思います」','「親はスマホを使えないので、紙の家計簿でいいと思います」（課題が終わった）','「ゲーム要素を入れれば、みんな使います」']},
+  '社内の会議時間を3割減らす方法を考えてください':{
+    hi:['「『この会議で決めること』が一行で書けない会議は、会議じゃなくていいと思います」','「まず今の会議時間を測りませんか。3割がどれくらいか、誰も分かっていないので」','「一番長い会議を一つ潰すほうが、全部を少しずつ短くするより早いです」'],
+    mid:['「会議を30分までに制限すればいいと思います」','「アジェンダを事前に共有するべきだと思います」','「立ったまま会議をするのはどうでしょう」'],
+    lo:['「会議をなくして、全部チャットにすればいいと思います」','「偉い人が来なければ早く終わると思います」','「何を話すかを決める会議をしませんか」（誰も笑わなかった）']},
+  'アフリカで日本の冷凍食品を売るとしたら、最初の一年で何をしますか':{
+    hi:['「冷凍庫がある家庭がどれくらいあるかで、売る相手が家庭か飲食店か変わります」','「最初の一年は売る年じゃなくて、冷凍のまま届く物流があるかを確かめる年だと思います」','「『日本の冷凍食品だから売れる』という前提が、いちばん怪しいと思います」'],
+    mid:['「現地の食文化を調査するところから始めるべきだと思います」','「まずは一つの国に絞ったほうがいいと思います」','「現地の企業と組むのがいいと思います」'],
+    lo:['「アフリカは暑いので、冷たい食べ物は売れると思います」','「寿司を売れば間違いないと思います」','「アフリカって、何か国あるんでしたっけ」（議論が3分止まった）']},
+  '地方の日本酒を海外で売る事業計画を立ててください':{
+    hi:['「どの国に売るかより先に、現地で誰が扱ってくれるかを決めないと進まないと思います」','「酒税と輸送費を乗せたら現地でいくらになるか、先に出しませんか」','「日本酒として売るか、ワインの代わりとして売るかで、並ぶ棚が変わります」'],
+    mid:['「海外の日本食レストランに売り込むのがいいと思います」','「ラベルを英語にして、デザインを変えるべきだと思います」','「海外の展示会に出るのがいいと思います」'],
+    lo:['「外国の人は日本が好きなので、売れると思います」','「インフルエンサーに飲んでもらえば広まります」','「お酒が苦手なので、よく分かりません」（正直だった）']},
+  '中古トラックを東南アジアで売る新規事業を考えてください':{
+    hi:['「買う側が一括で払えないなら、売るよりローンをつけるほうが商売になると思います」','「壊れたときに部品が手に入るかどうかで、買う側の判断は決まると思います」','「どの国が右ハンドルで、中古車の輸入規制がどうなっているかを先に確認したいです」'],
+    mid:['「日本製は品質がいいので、それをアピールすべきだと思います」','「現地の販売代理店と組むのがいいと思います」','「まず需要を調査するべきだと思います」'],
+    lo:['「新車より安いので、売れると思います」','「トラックに日本のアニメを描けば話題になります」','「そもそもトラックって、何トンからトラックなんですか」']},
+  '工場の不良率を半年で半分にする方法を考えてください':{
+    hi:['「不良の種類ごとに件数を並べませんか。上の2つで半分を超えていたら、そこだけやればいいので」','「不良が増え始めた時期に、何が変わったかを先に知りたいです」','「検査で弾く話と、そもそも作らない話は分けたほうがいいと思います」'],
+    mid:['「作業手順書を見直すべきだと思います」','「検査を増やせば不良は減ると思います」','「現場の声を聞くのが大事だと思います」'],
+    lo:['「作業する人がもっと気をつければいいと思います」','「機械を全部新しくすればいいと思います」','「不良品も、安く売ればいいんじゃないですか」']},
+  '売れなくなった家電を、別の用途で売り直す方法を考えてください':{
+    hi:['「今でも買っている人が何に使っているかを調べると、答えがもう出ている気がします」','「用途を変えるなら売る場所も変わります。家電売り場じゃないかもしれません」','「機能を足すより、一つ削って安くするほうが別の客に届くと思います」'],
+    mid:['「高齢者向けに売るのはどうでしょうか」','「デザインを変えれば売れると思います」','「海外で売るのがいいと思います」'],
+    lo:['「インテリアとして飾れると思います」','「とりあえずSNSでバズらせればいいと思います」','「その家電、何でしたっけ」（課題文を読み直していた）']},
+  '若手が3年で辞めない工場にするには、何を変えますか':{
+    hi:['「辞めた人に理由を聞かないと、たぶん的外れな施策になります」','「給料の問題なのか、仕事の中身の問題なのかで、打ち手がまるで違います」','「辞めない理由を作るより、辞める理由を一つ消すほうが早いと思います」'],
+    mid:['「先輩がつくメンター制度があるといいと思います」','「給料を上げるべきだと思います」','「休みを取りやすくするのがいいと思います」'],
+    lo:['「最近の若者は根性がないので、仕方ないと思います」','「社員旅行を復活させればいいと思います」','「工場にWi-Fiを入れればいいと思います」']},
+  '誰も知らない地方の銭湯に、若者を来させる企画を考えてください':{
+    hi:['「一回来させるのと、また来させるのは別の話なので、どっちを狙うか決めませんか」','「銭湯そのものより、行く理由を作るほうが早いと思います。サウナとか、帰りの一杯とか」','「来た若者が写真を撮りたくなる場所が、今その銭湯にあるかどうかです」'],
+    mid:['「SNSで発信するのがいいと思います」','「若者向けのイベントを開くのはどうでしょうか」','「学生割引を作るべきだと思います」'],
+    lo:['「若者はお風呂に入らないので、難しいと思います」','「銭湯をカフェにしちゃえばいいと思います」（銭湯ではなくなった）','「有名人に来てもらえばいいと思います」']},
+  '売上が落ちている老舗和菓子店のSNS戦略を考えてください':{
+    hi:['「売上が落ちている理由が、SNSで解決できる種類のものか先に確かめたいです」','「今のお客さんが何を理由に買っているかを出さないと、何を発信するか決まりません」','「フォロワーが増えることと、店に来る人が増えることは別なので、後者で測りませんか」'],
+    mid:['「インスタで商品の写真を発信するのがいいと思います」','「職人さんの作業風景を動画にするといいと思います」','「季節限定の商品を作って発信するのはどうでしょう」'],
+    lo:['「若い人はやっぱりTikTokだと思います！」','「和菓子をカラフルにすれば映えると思います」','「インフルエンサーに100人くらい頼めばいいと思います」']},
+  '予算10万円で、新しい缶コーヒーを話題にしてください':{
+    hi:['「10万円だと広告は買えないので、誰かに話してもらう仕掛けしかないと思います」','「話題にするのがゴールなのか、売るのがゴールなのか、先に決めたいです」','「10万円でいちばん安く人の目に触れる場所って、自販機そのものじゃないですか」'],
+    mid:['「SNSのキャンペーンをやるのがいいと思います」','「パッケージを変わったデザインにすればいいと思います」','「大学で試飲を配るのはどうでしょう」'],
+    lo:['「10万円は少なすぎるので、予算を増やしてもらうべきだと思います」','「有名人に飲んでもらえば話題になります」（予算の話は聞いていなかった）','「無料で配れば、みんな飲むと思います」']},
+  '地方の中小企業に「融資以外」で何を売りますか':{
+    hi:['「社長が今いちばん困っていることを聞かないと、何を売っても押し売りになります」','「後継者がいない会社が多いので、事業承継の相談は売れると思います」','「銀行が売りやすいものと、会社が買いたいものがずれている気がします」'],
+    mid:['「保険を売るのがいいと思います」','「経営のコンサルティングを提供するのはどうでしょうか」','「取引先を紹介するビジネスマッチングがいいと思います」'],
+    lo:['「投資信託をすすめればいいと思います」','「融資以外……融資じゃだめなんですか」','「社長と仲良くなれば、何でも売れると思います」']},
+  '20代にNISAを始めてもらうにはどうしますか':{
+    hi:['「始めない理由が『知らない』なのか『お金がない』なのかで、全然違う話になります」','「説明を増やすより、口座を開くまでの手間を一つ減らすほうが効くと思います」','「『月100円からでいい』と言ったほうが、最初の一歩は軽くなると思います」'],
+    mid:['「SNSで分かりやすく説明するのがいいと思います」','「職場で説明会を開くのはどうでしょう」','「始めた人にポイントをあげるキャンペーンがいいと思います」'],
+    lo:['「20代はお金がないので無理だと思います」','「絶対に儲かると言えば、みんな始めます」（面接官がメモを取った）','「NISAって、何の略でしたっけ」']},
+  '支店を半分に減らしても、顧客満足を落とさない方法を考えてください':{
+    hi:['「支店に来ている人が何をしに来ているかを先に分けませんか。スマホで済む用事なら支店はいらないので」','「閉めるなら、困る人が誰かを先に決めて、その人だけ手厚くするほうがいいと思います」','「満足度を何で測るかを決めないと、落ちたかどうかも分かりません」'],
+    mid:['「アプリを使いやすくするのがいいと思います」','「移動店舗を走らせるのはどうでしょう」','「お年寄りには電話で対応するといいと思います」'],
+    lo:['「支店が半分になったら、満足度も半分になると思います」','「残った支店を豪華にすればいいと思います」','「全部ネットにすれば、支店はゼロでいいと思います」']},
+  '人手が足りない店舗で、客の満足を落とさずに回す方法を考えてください':{
+    hi:['「忙しい時間と暇な時間で人の配置を変えるだけで、かなり回ると思います」','「お客さんが待たされて一番嫌な場面はどこか、先に一つ決めませんか」','「人を増やせないなら作業を減らすしかないので、やめられる作業を探したいです」'],
+    mid:['「セルフレジを入れるのがいいと思います」','「スタッフの教育を強化すべきだと思います」','「時給を上げて人を集めればいいと思います」'],
+    lo:['「店長が頑張ればいいと思います」','「営業時間を短くすれば人は足りると思います」（客のことは忘れていた）','「ロボットを入れればいいと思います」']},
+  '駅前店の売上を、値下げせずに1割上げてください':{
+    hi:['「客数を増やすか客単価を上げるかで打ち手が分かれるので、どっちに伸びしろがありますか」','「駅前なら、前を通る人のうち何割が入っているかを知りたいです」','「新しい客を呼ぶより、一品足してもらうほうが簡単だと思います」'],
+    mid:['「新商品を出すのがいいと思います」','「ポイントカードを作るといいと思います」','「店の外観を目立たせるべきだと思います」'],
+    lo:['「値下げが一番早いと思います」（条件を読んでいなかった）','「SNSでバズらせればいいと思います」','「駅前だから、何もしなくても大丈夫だと思います」']},
+  '店舗のフードロスを半分にする仕組みを考えてください':{
+    hi:['「捨てているものの上位3つを出せば、たぶん半分はそこです」','「作りすぎなのか、売れ残りなのか、仕入れすぎなのかで、止める場所が違います」','「閉店前の値引きは、定価で買う客を減らすかもしれないので、そこは測りたいです」'],
+    mid:['「閉店前に値引きするのがいいと思います」','「余った食材をまかないにすればいいと思います」','「需要予測をしっかりするべきだと思います」'],
+    lo:['「スタッフが持って帰ればいいと思います」','「お客さんに残さず食べてもらえばいいと思います」','「ロスが出るほど作れているなら、いいことだと思います」']},
+  '無人島に3人で漂着しました。最初の1週間の計画を立ててください':{
+    hi:['「最初の一日は、水を確保することだけ決めませんか。他は全部その後です」','「助けを待つのか、脱出するのかで、1週間の使い方が真逆になります」','「3人で何ができるかを先に出したいです。できないことを計画しても意味がないので」'],
+    mid:['「まず役割分担をするべきだと思います」','「食料を探すのが最優先だと思います」','「火を起こして、救助のサインを出すのがいいと思います」'],
+    lo:['「私はたぶん泳いで帰れると思います」','「無人島って、スマホは使えますか」','「3人が誰なのかによると思います」（議論が5分止まった）']},
+  '新入社員の離職を減らす施策を、1つに絞って提案してください':{
+    hi:['「1つに絞るなら、辞めた人がいつ辞めたかを見たいです。3か月なら配属、1年なら上司の問題なので」','「施策の前に、辞めてほしくない人が辞めているのかどうかを確かめたいです」','「入社前に、仕事の嫌な部分を正直に見せておくのが一番安いと思います」'],
+    mid:['「メンター制度を作るのがいいと思います」','「定期的に面談をするべきだと思います」','「給料を上げるのが一番だと思います」'],
+    lo:['「辞めない人を採ればいいと思います」','「1つに絞るのは難しいので、5つ提案します」（条件を無視した）','「飲み会を増やせば、仲良くなって辞めないと思います」']},
+  'この会社の10年後の主力事業を考えてください':{
+    hi:['「今の主力事業が10年後も伸びているのか、先にそこを確かめたいです」','「何が流行るかより、この会社が他社に負けないものは何かから考えたいです」','「今のお客さんが10年後も困っていそうなことを、先に並べませんか」'],
+    mid:['「AIを使った事業がいいと思います」','「環境に配慮した事業が主力になると思います」','「海外展開を進めるべきだと思います」'],
+    lo:['「メタバースだと思います」','「10年後は、たぶん私この会社にいないので……」（本音だった）','「宇宙です」（理由は最後まで出なかった）']},
+  '日本に信号機はいくつありますか（フェルミ推定）':{
+    hi:['「交差点の数から出しませんか。信号がある交差点の割合と、1か所あたりの台数に分ければいいので」','「都市部と地方で密度が全然違うので、分けて見積もったほうがいいと思います」','「車用と歩行者用を両方数えるかどうか、先に決めておきたいです」'],
+    mid:['「日本の面積から計算するのがいいと思います」','「1つの市にいくつあるかを考えて、市の数をかけるのはどうでしょう」','「人口から考えるのがいいと思います」'],
+    lo:['「100万個くらいだと思います」（根拠を聞かれて黙った）','「調べればすぐ分かると思います」','「赤と青と黄色で、3つと数えるんですか」']},
+};
 const NOTES={
   socHi:['黙っていた人に話を振った','反対意見にも「それもありですね」と先に言ってから話した','他の人の案に名前をつけて整理した','議論が荒れた場面で一度要約を入れた'],
   socLo:['他人の発言を「つまり」でまとめて、自分の案に戻した','他の人が話している途中で割り込んだ（2回）','他人の案を、自分の案のように言い直した'],
@@ -816,7 +976,7 @@ const NOTES={
   chaLo:['ほとんど発言しなかった','話を振られるまで黙っていた','発言の最初に必ず「すみません」と言った'],
   neutral:['うなずきが多い','メモを細かく取っていた','ときどき時計を見た','貧乏ゆすりをしていた','他の候補者の発言に大きく笑った','水に一度も口をつけなかった','付箋を色分けして使っていた','椅子に浅く座っていた'],
 };
-const GD_REACT={hi:['「〇〇さんの案、前提だけ直せば使えると思います」','「今の意見、もう少し詳しく聞かせてもらえますか」','「私の案は取り下げます。そっちのほうがいいです」','「反対の人の意見も一回聞きませんか」'],mid:['「なるほど、いいですね」','「私もそう思います」','（うなずきながら聞いていた）','「確かに、それもありですね」'],lo:['「いや、それは違うと思います」（食い気味だった）','「さっきも言いましたけど……」','（他の人が話している間、ずっと自分のメモを書いていた）','「それ、意味あります？」']};
+const GD_REACT={hi:['「{o}さんの案、前提だけ直せば使えると思います」','「今の意見、もう少し詳しく聞かせてもらえますか」','「私の案は取り下げます。そっちのほうがいいです」','「反対の人の意見も一回聞きませんか」'],mid:['「なるほど、いいですね」','「私もそう思います」','（うなずきながら聞いていた）','「確かに、それもありですね」'],lo:['「いや、それは違うと思います」（食い気味だった）','「さっきも言いましたけど……」','（他の人が話している間、ずっと自分のメモを書いていた）','「それ、意味あります？」']};
 function gdRole(c){const h=c.t.cha+.6*gz(),k=c.t.con+.6*gz();if(h>.9)return pick(['司会（自分から立候補）','発表役（自分から立候補）']);if(k>.9)return pick(['書記','タイムキーパー']);if(h>.3)return '発表役（じゃんけんで負けた）';return 'なし'}
 function gdNotes(c){
   const t=c.t,o=v=>v+.8*gz();const cand=[];
@@ -835,16 +995,20 @@ function gdNotes(c){
 function prepGroup(){
   if(G.gdReady)return;
   G.gdTopic=pick([...IND[G.cfg.ind].gd,...GD_COMMON]);
-  G.cands.filter(c=>G.p1.has(c.id)).forEach(c=>{
+  const mem=G.cands.filter(c=>G.p1.has(c.id));const GQ=GD_Q[G.gdTopic]||{hi:[],mid:[],lo:[]};const used=new Set();
+  const take=a=>{const f=a.filter(x=>!used.has(x));if(!f.length)return null;const v=pick(f);used.add(v);return v};
+  mem.forEach(c=>{
     const tt=c.obs.talk;const nm=c.name.split(' ')[0];
+    const others=mem.filter(o=>o!==c).map(o=>o.name.split(' ')[0]).filter(x=>x!==nm);const ov={o:others.length?pick(others):'前の方',prev:G.cfg.mode==='new'?'私のバイト先':'前の会社'};
     c.intro=fill(pick(INTRO[tt>.6?'hi':tt>-.4?'mid':'lo']),{nm,gs:c.gs,hobby:c.hobby});
-    c.gdQuote=pick(c.obs.gdC>.45?GD_HI:c.obs.gdC>-.4?GD_MID:GD_LO);c.gdNotes=gdNotes(c);{const sv=c.t.soc+.7*gz();c.gdReact=pick(GD_REACT[sv>.5?'hi':sv>-.5?'mid':'lo'])}c.gdRole=gdRole(c);c.talkN=Math.round(clamp(4+2.2*c.obs.talk,1,9));
+    const tier=c.obs.gdC>.45?'hi':c.obs.gdC>-.4?'mid':'lo';
+    c.gdQuote=fill(take(GQ[tier])||take(GD_GEN[tier])||pick(GD_GEN[tier]),ov);c.gdNotes=gdNotes(c);{const sv=c.t.soc+.7*gz();c.gdReact=fill(pick(GD_REACT[sv>.5?'hi':sv>-.5?'mid':'lo']),ov)}c.gdRole=gdRole(c);c.talkN=Math.round(clamp(4+2.2*c.obs.talk,1,9));
   });G.gdReady=true;
 }
 function vGroup(){
   prepGroup();const list=G.cands.filter(c=>G.p1.has(c.id));
   const n=G.p2.size;
-  return `<div class="fusen">集団面接。6人並べて40分。声の大きい人から順に賢く見える時間です。<br>3人を個別面接に進めてください。</div>
+  return `<div class="fusen">集団面接。6人並べて40分。声の大きい人から順に賢く見える時間です。<br>3人のカードを押して、個別面接に進めてください。</div>
   <div class="bar-row"><span class="count">通過 <b>${n}</b> / 3</span><button class="btn" data-act="next2" ${n===3?'':'disabled'}>個別面接へ進める</button></div>
   <div class="theme"><h4>グループディスカッションの課題</h4><p>${esc(G.gdTopic)}</p></div>
   <div class="grid">${list.map(c=>`<article class="sheet ${G.p2.has(c.id)?'on':''}" data-act="t2" data-id="${c.id}" tabindex="0" role="button" aria-pressed="${G.p2.has(c.id)}">
@@ -878,9 +1042,9 @@ function vIv(){
     </div>
     <div>
       <div class="log">${log.length?log.map(e=>`<div class="ex"><div class="qq">Q. ${esc(eqLabel(e))}${e.free?`<span class="tagfree">自由質問</span>`:''}</div><div class="aa">${esc(e.text)}</div>${e.aside?`<div class="aside">${esc(e.aside)}</div>`:''}</div>`).join(''):'<p class="empty">左から質問を選ぶか、自由質問を書いてください。</p>'}${G.pending?'<p class="thinking">（候補者が考えています……）</p>':''}${G.aiNote?`<p class="note">${esc(G.aiNote)}</p>`:''}</div>
-      ${full?`<div class="rate"><div><h4 style="margin:0 0 4px;font-size:13px">この人の評価</h4><div class="stars">${[1,2,3,4,5].map(s=>`<button data-act="star" data-s="${s}" class="${s<=rt.star?'on':''}" aria-label="${s}点">★</button>`).join('')}</div></div>
+      ${full?`<div class="rate"><div><h4 style="margin:0 0 4px;font-size:13px">この人の評価（★を押す）</h4><div class="stars">${[1,2,3,4,5].map(s=>`<button data-act="star" data-s="${s}" class="${s<=rt.star?'on':''}" aria-label="${s}点">★</button>`).join('')}</div></div>
       <div><label for="conf" style="font-size:13px">確信度　<b class="num" id="confv">${rt.conf}</b>%</label><input type="range" id="conf" min="50" max="100" step="5" value="${rt.conf}"></div>
-      <div><button class="btn" data-act="nextiv" ${rt.star?'':'disabled'}>${G.iv<2?'次の候補者へ':'役員会の準備へ'}</button></div></div>`:''}
+      <div><button class="btn" data-act="nextiv" ${rt.star?'':'disabled'}>${G.iv<2?'次の候補者へ':'役員会の準備へ'}</button></div></div>`:`<div class="rate wait"><p class="note" style="margin:0">あと${3-asked.length}つ質問すると、ここで★の評価と確信度をつけられます。</p></div>`}
     </div>
   </div>`;
 }
@@ -903,7 +1067,7 @@ function vBoard(){
   let html=`<div class="fusen">役員会に推薦します。あなたの推薦は、参考意見として大切に扱われます。<br>3人の推薦順位と、1位に推す理由を決めてください。</div>`;
   if(!done){
     html+=`<div class="bar-row"><span class="count">推薦順位 <b>${G.rank.length}</b> / 3</span><button class="btn ghost small" data-act="rkreset" ${G.rank.length?'':'disabled'}>順位を付け直す</button></div><div class="bgrid">${cards}</div>
-    <div class="form" style="margin-top:18px"><fieldset><legend>1位に推す理由</legend><div class="chips">${REASONS.map(r=>`<label class="chip"><input type="radio" name="reason" id="rs-${r[0]}" value="${r[0]}" ${G.reason===r[0]?'checked':''}><span>${r[1]}</span></label>`).join('')}</div></fieldset>
+    <div class="form" id="reasonBox" style="margin-top:18px"><fieldset><legend>1位に推す理由</legend><div class="chips">${REASONS.map(r=>`<label class="chip"><input type="radio" name="reason" id="rs-${r[0]}" value="${r[0]}" ${G.reason===r[0]?'checked':''}><span>${r[1]}</span></label>`).join('')}</div></fieldset>
     <div><button class="btn" data-act="meet" ${G.rank.length===3&&G.reason?'':'disabled'}>役員会を開く</button></div></div>`;
   }else{
     html+=`${G.board.html}<div class="foot-actions"><button class="btn" data-act="toresult">三年後を見る</button></div><div style="margin-top:22px" class="bgrid">${cards}</div>`;
@@ -1043,6 +1207,33 @@ function setupRadar(){
   return `<div class="setup-radar"><h4 style="margin:0 0 6px;font-size:13px">あなたの選考のクセ（${H.length}回の平均）</h4><div class="radarwrap">${radarSvg(avg,null)}<div><div class="radar-type">${t[0]}</div><p class="note">${t[1]}</p></div></div></div>`;
 }
 const sameQs=()=>G.final.every(id=>JSON.stringify([...(G.asked[id]||[])].map(k=>k==='free'?'free:'+G.free[id].type:k).sort())===JSON.stringify([...(G.asked[G.final[0]]||[])].map(k=>k==='free'?'free:'+G.free[G.final[0]].type:k).sort()));
+/* 慧眼力：0〜99（満点は存在しない）。サイコロで選ぶと平均50 */
+function keiganScore(rAdv,hiredRank,recRank,conf,viol){
+  const ra=rAdv===null?0:rAdv;const rk=hiredRank?(6.5-hiredRank)/5.5:-1;
+  const cal=(recRank<=3?1:-1)*5*(conf-50)/50;
+  return clamp(Math.round(46+30*ra+15*rk+cal-10*viol),0,99);
+}
+const KG_TIER=[[90,'本物の慧眼（たぶん運）','ここまで来ると、次に同じ点を取れる確率のほうが気になります。'],[75,'目利き（暫定）','サイコロよりは明らかに上。あと何回か続けば、本物かもしれません。'],[60,'平均よりはマシ','サイコロには勝ちました。僅差で。'],[45,'サイコロと互角','目をつぶって選んでも、だいたいこのくらいになります。'],[30,'直感派','あなたの直感は、あなたのことをよく知っています。候補者のことは知りません。'],[0,'逆・慧眼','あなたの逆を選べば当たります。ただし、それを知った時点で当たらなくなります。']];
+const kgTier=v=>KG_TIER.find(t=>v>=t[0]);
+function kgPeers(n){
+  // 同じ12人・同じ三年後を、見える情報だけで選ぶ架空の面接官 n 人
+  const r=mulberry32(G.seed^0x51ed27);const g=()=>gz(r);const cs=G.cands;const out=[];const act=cs.map(c=>c.res.total);
+  const z=a=>{const m=a.reduce((x,y)=>x+y,0)/a.length;const sd=Math.sqrt(a.reduce((x,y)=>x+(y-m)**2,0)/a.length)||1;return a.map(v=>(v-m)/sd)};
+  const Zc=z(cs.map(c=>c.conc)),Zi=z(cs.map(c=>c.imp)),Zt=z(cs.map(c=>c.tier)),Zs=cs.map(c=>c.similar?1:0);
+  for(let k=0;k<n;k++){
+    const w=[Math.abs(.6+.5*g()),.5+.5*g(),.4+.5*g(),.3*Math.abs(g())];
+    const s1=cs.map((c,i)=>w[0]*Zc[i]+w[1]*Zi[i]+w[2]*Zt[i]+w[3]*Zs[i]+.9*g());
+    const p1=[...cs.keys()].sort((a,b)=>s1[b]-s1[a]).slice(0,6);
+    const s2=cs.map((c,i)=>s1[i]+.6*(c.obs.gdC+.5*g())+.4*(c.obs.talk));
+    const p2=[...p1].sort((a,b)=>s2[b]-s2[a]).slice(0,3);
+    const s3=cs.map((c,i)=>s2[i]+.8*(.5*c.t.con+.3*c.t.skill+.2*c.t.g+.7*g()));
+    const fin=[...p2].sort((a,b)=>s3[b]-s3[a]);
+    const adv=cs.map((c,i)=>!p1.includes(i)?0:!p2.includes(i)?1:2+(5-fin.indexOf(i))/5);
+    const hr=1+act.filter(v=>v>act[fin[0]]).length;
+    out.push(keiganScore(pearson(adv,act),hr,hr,70,0));
+  }
+  return out;
+}
 function computeResult(){
   const cfg=G.cfg;const r=mulberry32(G.seed^0x5bd1e995);
   G.R0secs=(G.t1-G.t0)/1000/12;
@@ -1080,7 +1271,11 @@ function computeResult(){
     sim:[passS.filter(c=>G.p1.has(c.id)).length,passS.length],oth:[passO.filter(c=>G.p1.has(c.id)).length,passO.length],viol:G.viol.length,radar};
   const prevH=store.get('keigan-v1',[]).filter(r=>r.radar);const prevAvg=prevH.length?[0,1,2,3,4].map(i=>Math.round(prevH.reduce((a,r)=>a+r.radar[i],0)/prevH.length)):null;
   const history=store.get('keigan-v1',[]);history.push(run);store.set('keigan-v1',history.slice(-200));
-  G.R={best,hist,N,bestFirst,picked,world,history,secs:G.R0secs,reviews,before,after:REP.score,factors,radar,prevAvg};G.R.boss=bossGrade(G.R);
+  const kg=keiganScore(picked[0][1],G.hired!==null?G.cands[G.hired].rank:null,G.cands[G.rank[0]].rank,G.rate[G.rank[0]].conf,G.viol.length);
+  const peers=kgPeers(400);const top=Math.max(1,Math.round(peers.filter(v=>v>=kg).length/peers.length*100));
+  run.kg=kg;history[history.length-1]=run;store.set('keigan-v1',history.slice(-200));
+  const kgs=history.filter(r=>r.kg!==undefined).map(r=>r.kg);
+  G.R={best,hist,N,bestFirst,picked,world,history,secs:G.R0secs,reviews,before,after:REP.score,factors,radar,prevAvg,kg,top,kgBest:Math.max(...kgs),kgN:kgs.length};G.R.boss=bossGrade(G.R);
 }
 function rbar(label,r,mine){
   if(r===null)return `<div class="rbar"><span>${label}</span><div class="track"></div><span class="num">—</span></div>`;
@@ -1121,13 +1316,15 @@ function bossSection(X){
 }
 function shareHref(X){
   const h=G.hired!==null?G.cands[G.hired]:null;const rec=G.cands[G.rank[0]];const t=radarType(X.radar);
-  const lines=['慧眼採用課で面接官をやった。',
-    h?`採用した人：12人中${h.rank}位`:'採用した人：なし（全員に辞退された）',
-    `確信度${G.rate[rec.id].conf}%で推した人：${rec.rank}位`,
-    `選考のクセ：${t[0]}（中身${X.radar[0]}・印象${X.radar[1]}・肩書き${X.radar[2]}・親近感${X.radar[3]}・質問設計${X.radar[4]}）`,
-    `部長からの評価：${X.boss.g}`,'#慧眼採用課'];
-  return 'https://twitter.com/intent/tweet?text='+encodeURIComponent(lines.join('\n'))+(SHARE_URL?'&url='+encodeURIComponent(SHARE_URL):'');
+  const lines=[`私の慧眼力は ${X.kg} / 99（${kgTier(X.kg)[1]}）`,
+    `同じ12人を見た面接官400人中、${X.top<=50?`上位${X.top}%`:`下位${Math.max(1,101-X.top)}%`}`,
+    (h?`採用した人は三年後に12人中${h.rank}位`:'採用した人：なし（全員に辞退された）')+`／確信度${G.rate[rec.id].conf}%で推した人は${rec.rank}位`,
+    `選考のクセ：${t[0]}`,
+    'サイコロで選んでも50。あなたは？','#慧眼採用課'];
+  const u=SHARE_URL?SHARE_URL.replace(/\/$/,'')+'/s/'+X.kg:'';
+  return 'https://twitter.com/intent/tweet?text='+encodeURIComponent(lines.join('\n'))+(u?'&url='+encodeURIComponent(u):'');
 }
+function kgMeter(v){return `<div class="kgm" aria-label="慧眼力 ${v}。サイコロで選んだ場合は50"><div class="kgm-bar"><i class="dice" style="left:${50/99*100}%"></i><i class="me" style="left:${v/99*100}%"><span>${v}</span></i></div><div class="kgm-lab"><span>0</span><span style="left:${50/99*100}%">サイコロ 50</span><span>99</span></div></div>`}
 function vModal(c){
   const tr=['g','con','skill','soc','cha','integ','stay','attract','wealth'];
   const rt=G.rate[c.id];const log=G.log[c.id]||[];const revealed=G.phase==='result'&&c.res;
@@ -1142,23 +1339,42 @@ function vModal(c){
     ${c.intro||log.length?`<article class="sheet"><div class="hd"><b>面接記録</b><span></span></div>${c.intro?`<div class="sec"><h4>集団面接（発言${c.talkN}回）</h4><p class="quote">${esc(c.intro)}</p><p class="note">役割：${esc(c.gdRole||'なし')}</p><p class="quote">${esc(c.gdQuote)}</p><p class="quote">${esc(c.gdReact||'')}</p><ul class="memo">${c.gdNotes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}${log.length?`<div class="sec"><h4>個別面接</h4>${log.map(e=>`<div class="qa"><div class="qq">Q. ${esc(eqLabel(e))}</div><div>${esc(e.text)}</div></div>`).join('')}</div>`:''}</article>`:''}
   </div></div></div>`;
 }
+const YC={
+  S:['期待を大きく上回った。来期はチームを任せたい。','周りの数字まで引き上げた。手放したくない。','指示していないことまで先回りして片づけていた。'],
+  A:['安定して成果を出している。任せて問題ない。','目標は達成。報告も早い。','一度つまずいたが、自分で立て直した。'],
+  B:['可もなく不可もなく。期待どおり。','言われたことは確実にこなす。それ以上はまだ。','特に問題なし。特に印象もない。'],
+  C:['指示待ちが目立つ。自分から動いてほしい。','締め切りを二度落とした。本人は理由を説明できる。','手は動いているが、成果につながっていない。'],
+  D:['目標の半分に届かなかった。改善計画の対象とする。','同じミスを繰り返している。配置の見直しが必要。','本人と話し合ったが、噛み合わなかった。'],
+};
+const YC_BAD=['（上司より）報告が遅い。','（上司より）主体性が足りない。','（上司より）もっと空気を読んでほしい。'];
+function yearsSection(c){
+  const gOf=v=>v>1.2?'S':v>.45?'A':v>-.35?'B':v>-1.05?'C':'D';
+  const boss=m=>m>.5?'当たり':m<-.5?'外れ':'普通';
+  const lv=c.gender==='女性'?'産休・育休':'育休';const used=new Set();
+  const pk=a=>{const f=a.filter(x=>!used.has(x));const v=pick(f.length?f:a);used.add(v);return v};
+  const cards=c.yrHtml||(c.yrHtml=[0,1,2].map(y=>{const r=c.res.ys[y];
+    if(r===null)return `<div class="yr"><div class="yh"><span>${y+1}年目</span></div><div class="gr na">${c.res.st==='懲戒'?'処分を受け、退職済み':'退職済み'}</div></div>`;
+    if(r.leave)return `<div class="yr"><div class="yh"><span>${y+1}年目</span><span>上司：${boss(r.mgr)}</span></div><div class="gr na">評価対象外</div><div class="cm">${lv}を取得。</div>${c.res.st==='育休後退職'&&!c.res.ys.slice(y+1).some(Boolean)?'<div class="ev">復帰せず、そのまま退職した。</div>':''}</div>`;
+    const g=gOf(r.perf);let cm=pk(YC[g]);if(r.mgr<-.7&&(g==='C'||g==='D'))cm+=' '+pk(YC_BAD);
+    const ev=r.ev==='scandal'?'<div class="ev">不祥事で懲戒処分。</div>':r.quit?`<div class="ev">${g==='S'||g==='A'?'年度末で、条件のいい会社に移った。':'年度末で退職した。'}</div>`:'';
+    return `<div class="yr"><div class="yh"><span>${y+1}年目</span><span>上司：${boss(r.mgr)}</span></div><div class="gr ${g}">${g}</div><div class="cm">${esc(cm)}</div>${ev}</div>`}).join(''));
+  return `<section class="sect"><h3>${esc(c.name)}さんの三年間の人事評価</h3><p class="lede">あなたが採用した人の、入社後の評価です（S〜Dの5段階）。評価をつけたのは配属先の上司で、その上司も当たり外れがあります。</p>
+  <div class="yrs">${cards}</div>
+  <p class="note" style="margin-top:10px">三年の成績は12人中${c.rank}位。${c.res.st!=='在籍'?`現在：${c.res.st}。`:'現在も在籍しています。'} <button class="linkbtn" data-act="open" data-id="${c.id}">能力・上司・相性・運の内訳を見る</button></p></section>`;
+}
 function vResult(){
   if(!G.R)computeResult();
   const X=G.R,cfg=G.cfg;const h=G.hired!==null?G.cands[G.hired]:null;
   const rec=G.cands[G.rank[0]];
-  let title,say;const rk=h?h.rank:null;
-  if(!h){title='欠員採用';say='誰も採らなかった。会社は特に困らなかった。それがいちばん怖い。';}
-  else if(rk===1){title='慧眼（今回は）';say='12人中1位。次も当たると思った瞬間から、あなたは平均に戻り始めます。';}
-  else if(rk<=3){title='目利き（暫定）';say='サイコロよりは良かった。それが実力かどうかは、あと200回やれば分かります。';}
-  else if(rk<=6){title='平均的な人事';say='12人からランダムに選んだ場合の期待値は6.5位です。おめでとうございます。ほぼ誤差です。';}
-  else if(rk<=9){title='直感派';say='あなたの直感は、あなたのことをよく知っています。候補者のことは知りません。';}
-  else {title='逆・慧眼';say='あなたの逆を選べば当たります。ただし、それを知った時点で当たらなくなります。';}
-  const score=h?Math.round((12-rk)/11*100):20;const pen=G.viol.length*15;
-  let out=`<section class="hero"><div class="bigstamp"><div><div class="r">${h?`${rk}<small>位</small>`:'—'}</div><div class="t">${h?'12人中':'採用なし'}</div></div></div>
-  <div><h2>${title}</h2><p class="say">${say}</p>
-  <p style="margin-top:12px"><a class="btn red small" href="${shareHref(X)}" target="_blank" rel="noopener">結果を X でシェア</a></p>
-  <p class="score">採用スコア <b>${Math.max(0,score-pen)}</b> / 100${pen?`（不適切な質問 −${pen}）`:''}　／　書類1通あたり <b>${X.secs.toFixed(1)}</b>秒</p>
-  ${h?`<p class="say">あなたが確信度${G.rate[rec.id].conf}%で1位に推した${esc(rec.name)}さんは、${rec.rank}位でした。${G.overridden?`役員会はあなたの推薦を覆しました。${h.id===rec.id?'':'結果として、'+(h.rank<rec.rank?'役員のほうが正しかった。':'あなたのほうが正しかった。誰も覚えていないけれど。')}`:''}</p>`:''}</div></section>`;
+  const rk=h?h.rank:null;const T=kgTier(X.kg);
+  let out=`<section class="hero"><div class="bigstamp"><div><div class="r">${X.kg}</div><div class="t">慧眼力</div></div></div>
+  <div><p class="note">あなたの慧眼力（0〜99。満点は存在しません）</p><h2>${T[1]}</h2><p class="say">${T[2]}</p>
+  ${kgMeter(X.kg)}
+  <p class="say">同じ12人を見た架空の面接官400人の中で、<b>${X.top<=50?`上位${X.top}%`:`下位${Math.max(1,101-X.top)}%`}</b>。${X.kgN>1?`このブラウザでのあなたの最高は <b>${X.kgBest}</b>（${X.kgN}回中）。`:''}</p>
+  <p class="say">${h?`採用した${esc(h.name)}さんは、三年後に12人中<b>${rk}位</b>でした。`:'3人とも内定を辞退し、誰も採用できませんでした。'}${h?`確信度${G.rate[rec.id].conf}%で1位に推した${h.id===rec.id?'その人':esc(rec.name)+'さん'}は${rec.rank}位。${G.overridden?`役員会はあなたの推薦を覆しました。${h.id===rec.id?'':'結果として、'+(h.rank<rec.rank?'役員のほうが正しかった。':'あなたのほうが正しかった。誰も覚えていないけれど。')}`:''}`:''}</p>
+  <div class="hero-act"><a class="btn red" href="${shareHref(X)}" target="_blank" rel="noopener">慧眼力を X でシェア</a><button class="btn ghost" data-act="again">もう一度挑戦する</button></div>
+  <details class="how"><summary>慧眼力の計算方法</summary><p>基準点から、次を足し引きします。あなたが誰をどこまで進めたかと、三年後の実際の成績がどれだけ一致していたか（最大±30）。採用した人の順位（±15）。1位に推した人への確信度が当たっていたか（±5）。不適切な質問（1回につき−10）。目をつぶって選ぶと、平均で50になります。</p></details>
+  <p class="score">書類1通あたり <b>${X.secs.toFixed(1)}</b>秒</p></div></section>`;
   if(h){
     const rs=REASONS.find(r=>r[0]===G.reason);let msg;
     if(!['fit','gut'].includes(G.reason)){const k=G.reason;const pos=1+G.cands.filter(c=>c.t[k]>rec.t[k]).length;msg=`1位推薦の理由は「${rs[1]}」。${esc(rec.name)}さんの実際の${TRAIT_JP[k]}は、12人中${pos}位でした。`}
@@ -1166,6 +1382,7 @@ function vResult(){
     else msg=`1位推薦の理由は「なんとなく、目が良かった」。正直で良いと思います。`;
     out+=`<p class="warn">${msg} <button class="linkbtn" data-act="open" data-id="${rec.id}">推した人を見る</button>${h.id!==rec.id?` ／ <button class="linkbtn" data-act="open" data-id="${h.id}">採用した人を見る</button>`:''}</p>`;
   }
+  if(h)out+=yearsSection(h);
   out+=bossSection(X);
   const sorted=[...G.cands].sort((a,b)=>a.rank-b.rank);const mx=Math.max(...G.cands.map(c=>Math.abs(c.res.total)))||1;const pmx=Math.max(...G.cands.map(c=>Math.abs(c.pot)))||1;
   const hint=c=>c.mode==='new'?c.gHead:c.ach[0];USED=new Set();sorted.forEach(c=>{if(c.fate===undefined)c.fate=fateText(c,c.rank,12)});
@@ -1187,16 +1404,7 @@ function vResult(){
   <div class="panel"><div class="radarwrap">${radarSvg(X.radar,X.prevAvg)}<div><div class="radar-type">${t[0]}</div><p class="say" style="margin-top:6px">${t[1]}</p>
   ${X.prevAvg?'<div class="legend"><span><i></i>今回</span><span><i class="avg"></i>これまでの平均</span></div>':''}
   <div class="kv" style="margin-top:12px;font-size:12.5px;color:var(--ink-2)"><div>中身</div><div>発言・回答の具体性</div><div>印象</div><div>話のうまさと見た目</div><div>肩書き</div><div>学歴と経歴</div><div>親近感</div><div>母校・趣味の一致</div><div>質問設計</div><div>聞いた質問の予測力</div></div></div></div></div></section>`;}
-  out+=`<section class="sect"><h3>あなたの判断が拾っていたもの</h3><p class="lede">あなたが各候補者をどこまで進めたか（書類落ち＝0、集団落ち＝1、最終3人は2＋評価）と、それぞれの要素との相関です。12人分なので揺れは大きめです。</p>
-  <div class="cols"><div class="panel"><h4>今回の選考</h4>${axis}${X.picked.map(([l,r],i)=>rbar(l,r,i===0)).join('')}</div>
-  <div class="panel"><h4>このゲームの世界で、各情報が三年後の成果をどれだけ予測するか</h4>${axis}${X.world.map(([l,r])=>rbar(l,r)).join('')}<p class="note" style="margin-top:8px">${IND[cfg.ind].name}・${SIZE[cfg.size].name}の候補者1,200人で計算。どれを使っても、成果の大半は説明できません。</p></div></div></section>`;
-  const used=new Set(Object.values(G.asked).flat());const frees=G.final.filter(id=>G.free[id]);const same=sameQs();
-  out+=`<section class="sect"><h3>あなたの質問の答え合わせ</h3><p class="lede">面接手法と職務成績の相関の目安（Sackett ほか 2022年のメタ分析などによる）。このゲームの数値もおおむねこれに合わせています。</p>
-  <div class="panel"><div class="kv">${['behav','situ','work','pro','ref','reverse','motive','animal','hobby','pressure'].filter(k=>!(Q[k].midOnly&&cfg.mode==='new')).map(k=>`<div>${used.has(k)?'<b>●</b> ':'<span style="color:var(--ink-3)">○</span> '}${esc(qLabel(k))}<span class="note">　${Q[k].tag}</span></div><div>${Q[k].v?'≈ '+Q[k].v.toFixed(2):'ほぼ 0'}</div>`).join('')}</div>
-  ${frees.length?`<div style="margin-top:14px">${frees.map(id=>{const f=G.free[id],t=FT[f.type];return `<div class="fqv">あなたの自作質問「${esc(f.q)}」（${esc(G.cands[id].name)}さんへ）は、予測力 ${t.v?'≈ '+t.v.toFixed(2):'ほぼ 0'} の<b>${t.label}</b>でした。${t.say}<br><span class="note">判定：${f.src}${f.reason?`（${esc(f.reason)}）`:''}</span></div>`}).join('')}</div>`:''}
-  <p class="note" style="margin-top:10px">参考：構造化面接全体 ≈ 0.42、非構造化面接 ≈ 0.19、一般知的能力 ≈ 0.31、誠実性 ≈ 0.19、学歴（年数）≈ 0.10、職務経験年数 ≈ 0.09。</p>
-  ${same?'<p class="note">3人に同じ質問をしていました。比べられる材料をそろえたのは、今回あなたがした中でいちばん賢いことです。</p>':'<p class="note">3人に違う質問をしていました。違う物差しで測った3人を、一つの順位に並べたことになります。</p>'}
-  ${G.viol.length?`<p class="warn">不適切な質問を${G.viol.length}回しています（${[...new Set(G.viol.map(v=>v.q==='free'?`「${v.text}」`:Q[v.q].label))].join('、')}）。家族、結婚・出産、出身地、宗教、尊敬する人物などは本人の能力や適性と関係がなく、厚生労働省の「公正な採用選考」の考え方で、聞くべきでない事項とされています。</p>`:''}</div></section>`;
+  if(G.viol.length)out+=`<p class="warn">不適切な質問を${G.viol.length}回しています（${[...new Set(G.viol.map(v=>v.q==='free'?`「${esc(v.text)}」`:Q[v.q].label))].join('、')}）。家族、結婚・出産、出身地、宗教、尊敬する人物などは本人の能力や適性と関係がなく、厚生労働省の「公正な採用選考」の考え方で、聞くべきでない事項とされています。</p>`;
   const H=X.history;const pairs=H.flatMap(r=>r.stars||[]);const rs=pearson(pairs.map(p=>p.s),pairs.map(p=>p.z));
   const ranks=H.filter(r=>r.rank).map(r=>r.rank);const avgR=ranks.length?ranks.reduce((a,b)=>a+b,0)/ranks.length:null;
   const sp=H.reduce((a,r)=>[a[0]+r.sim[0],a[1]+r.sim[1]],[0,0]),op=H.reduce((a,r)=>[a[0]+r.oth[0],a[1]+r.oth[1]],[0,0]);
@@ -1209,6 +1417,7 @@ function vResult(){
   <div>あなたの★と三年後の成果の相関</div><div>${rs===null?'データ不足':(rs>=0?'+':'')+rs.toFixed(2)}</div>
   <div>1位推薦の平均確信度</div><div>${Math.round(confs.reduce((a,b)=>a+b,0)/confs.length)}%</div>
   <div>1位推薦が実際に上位3位以内だった率</div><div>${Math.round(hit/H.length*100)}%</div>
+  <div>慧眼力の平均／最高</div><div>${(()=>{const k=H.filter(r=>r.kg!==undefined).map(r=>r.kg);return k.length?Math.round(k.reduce((x,y)=>x+y,0)/k.length)+' ／ '+Math.max(...k):'—'})()}</div>
   </div></div>
   <div class="panel"><div class="kv">
   <div>あなたと共通点がある人の書類通過率</div><div>${sp[1]?Math.round(sp[0]/sp[1]*100)+'%':'—'}</div>
@@ -1216,7 +1425,10 @@ function vResult(){
   <div>共通点がある人への平均★</div><div>${ms(simStars)?ms(simStars).toFixed(2):'—'}</div>
   <div>それ以外の人への平均★</div><div>${ms(othStars)?ms(othStars).toFixed(2):'—'}</div>
   </div><p class="note" style="margin-top:8px">書類の平均通過率は50%です。共通点は、このゲームでは成果と一切関係ありません。</p></div></div></section>
-  <div class="foot-actions"><a class="btn red" href="${shareHref(X)}" target="_blank" rel="noopener">結果を X でシェア</a><button class="btn" data-act="again">同じ設定で次の採用へ</button><button class="btn ghost" data-act="home">設定を変える</button></div>`;
+  <section class="sect about"><h3>この評価について</h3>
+  <p>本ゲームでは、面接手法と職務成績の相関を調べたメタ分析（Sackett ほか, 2022／Schmidt &amp; Hunter, 1998）や、面接官が自分に似た人を選びやすいことを示した研究（Rivera, 2012）、厚生労働省の「公正な採用選考」の考え方などを参考に、あなたの選考を評価しています。</p>
+  <p>もっとも、その物差しを選んだのも、配分を決めたのも、このゲームを作った誰かです。あなたが候補者を評価し、部長があなたを評価したように、このゲームの評価もまた、あなたに評価されています。慧眼力が低かったなら、それはあなたの目のせいかもしれないし、このゲームの目のせいかもしれません。どちらなのかを見抜けたら、それがいちばんの慧眼です。</p></section>
+  <div class="foot-actions"><a class="btn red" href="${shareHref(X)}" target="_blank" rel="noopener">慧眼力を X でシェア</a><button class="btn" data-act="again">同じ設定で次の採用へ</button><button class="btn ghost" data-act="home">設定を変える</button></div>`;
   return out;
 }
 
@@ -1227,11 +1439,15 @@ function scrollToLog(){if(!matchMedia('(max-width:820px)').matches)return;const 
 function restart(){CFG={...G.cfg};G=null;render();setTimeout(()=>{$('#setupForm').requestSubmit()},0)}
 function act(el,e){
   const a=el.dataset.act,id=el.dataset.id!==undefined?+el.dataset.id:null;
+  if(G)G.flash='';
+  if(a==='goqs'){const r=$('.qs');if(r)r.scrollIntoView({behavior:smooth(),block:'start'});return}
+  if(a==='gorate'){const r=$('.rate');if(r)r.scrollIntoView({behavior:smooth(),block:'center'});return}
+  if(a==='goreason'){const r=$('#reasonBox');if(r)r.scrollIntoView({behavior:smooth(),block:'center'});return}
   if(a==='close'){if(e&&el.classList.contains('veil')&&e.target!==el)return;G.modal=null;render();return}
   if(a==='open'){G.modal=id;render();return}
-  if(a==='t1'){G.p1.has(id)?G.p1.delete(id):G.p1.size<6&&G.p1.add(id);render();return}
+  if(a==='t1'){if(G.p1.has(id))G.p1.delete(id);else if(G.p1.size<6)G.p1.add(id);else G.flash='通過は6通までです。取り消すには、判子のある履歴書をもう一度押してください。';render();return}
   if(a==='next1'){G.t1=performance.now();go('group');return}
-  if(a==='t2'){G.p2.has(id)?G.p2.delete(id):G.p2.size<3&&G.p2.add(id);render();return}
+  if(a==='t2'){if(G.p2.has(id))G.p2.delete(id);else if(G.p2.size<3)G.p2.add(id);else G.flash='通過は3人までです。取り消すには、選んだカードをもう一度押してください。';render();return}
   if(a==='next2'){G.final=[...G.p2];G.iv=0;go('iv');return}
   if(a==='ask'){const c=G.cands[G.final[G.iv]];G.asked[c.id]=G.asked[c.id]||[];G.log[c.id]=G.log[c.id]||[];if(G.asked[c.id].length>=3)return;G.asked[c.id].push(el.dataset.q);G.log[c.id].push(ask(c,el.dataset.q));if(!G.rate[c.id])G.rate[c.id]={star:0,conf:70};render();scrollToLog();return}
   if(a==='freeask'){const c=G.cands[G.final[G.iv]];const q=(G.fqDraft||'').trim();if(!q||G.pending)return;G.asked[c.id]=G.asked[c.id]||[];G.log[c.id]=G.log[c.id]||[];if(G.asked[c.id].length>=3||G.asked[c.id].includes('free'))return;
@@ -1239,7 +1455,7 @@ function act(el,e){
     askFree(c,q).then(e=>{G.asked[c.id].push('free');G.log[c.id].push(e);G.fqDraft='';if(!G.rate[c.id])G.rate[c.id]={star:0,conf:70};G.pending=false;render();scrollToLog()});return}
   if(a==='star'){const c=G.cands[G.final[G.iv]];G.rate[c.id].star=+el.dataset.s;render();return}
   if(a==='nextiv'){G.aiNote='';G.fqDraft='';if(G.iv<2){G.iv++;go('iv')}else go('board');return}
-  if(a==='rk'){if(!G.board&&!G.rank.includes(id)&&G.rank.length<3){G.rank.push(id);render()}return}
+  if(a==='rk'){if(!G.board&&!G.rank.includes(id)&&G.rank.length<3){G.rank.push(id);if(G.rank.length===2){const rest=G.final.find(x=>!G.rank.includes(x));G.rank.push(rest)}render();if(G.rank.length===3&&!G.reason){const r=$('#reasonBox');if(r)r.scrollIntoView({behavior:smooth(),block:'center'})}}return}
   if(a==='rkreset'){G.rank=[];render();return}
   if(a==='meet'){meeting();render();const mn=$('.minutes');if(mn)mn.scrollIntoView({behavior:smooth(),block:'start'});return}
   if(a==='toresult'){go('result');return}
