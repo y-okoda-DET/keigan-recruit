@@ -1329,7 +1329,7 @@ function bossSection(X){
 function shareHref(X){
   const t=radarType(X.radar);
   const u=SHARE_URL?SHARE_URL.replace(/\/$/,'')+'/r/'+X.kg:'';
-  const lines=[`私の慧眼力は ${X.kg} / 100（${kgTier(X.kg)[1]}）`,`選考のクセ：${t[0]}`,'#慧眼採用課'];
+  const lines=['面接で12人から1人を選び、三年後の人事評価で「人を見る目」を採点される採用ゲームを遊んだ。',`結果、慧眼力 ${X.kg} / 100（${kgTier(X.kg)[1]}）。`,`選考のクセは「${t[0]}」らしい。`,'#慧眼採用課'];
   if(u)lines.push(u);
   return 'https://twitter.com/intent/tweet?text='+encodeURIComponent(lines.join('\n'));
 }
@@ -1446,7 +1446,7 @@ function vResult(){
   <section class="sect about"><h3>この評価について</h3>
   <p>本ゲームでは、面接手法と職務成績の相関を調べたメタ分析（Sackett ほか, 2022／Schmidt &amp; Hunter, 1998）や、面接官が自分に似た人を選びやすいことを示した研究（Rivera, 2012）、予測の当たり外れを測る方法（Brier, 1950）、厚生労働省の「公正な採用選考」の考え方などを参考に、あなたの選考を評価しています。</p>
   <p>もっとも、その物差しを選んだのも、配分を決めたのも、このゲームを作った誰かです。あなたが候補者を評価し、部長があなたを評価したように、このゲームの評価もまた、あなたに評価されています。慧眼力が低かったなら、それはあなたの目のせいかもしれないし、このゲームの目のせいかもしれません。どちらなのかを見抜けたら、それがいちばんの慧眼です。</p></section>
-  <div class="foot-actions"><a class="btn red" href="${shareHref(X)}" target="_blank" rel="noopener">慧眼力を X でシェア</a><button class="btn" data-act="again">同じ設定で次の採用へ</button><button class="btn ghost" data-act="home">設定を変える</button></div>`;
+  <div class="foot-actions"><a class="btn red" href="${shareHref(X)}" target="_blank" rel="noopener">慧眼力を X でシェア</a><button class="btn" data-act="again">同じ設定で次の採用へ</button><button class="btn ghost" data-act="home">TOPに戻る</button></div>`;
   return out;
 }
 
