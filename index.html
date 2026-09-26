@@ -1,0 +1,1266 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="人事になって人を採用する。三年後、採らなかった11人と答え合わせをする採用シミュレーション。">
+<meta property="og:title" content="慧眼採用課">
+<meta property="og:description" content="あなたには、人を見る目がある。少なくとも、あなたはそう思っている。">
+<meta property="og:type" content="website">
+<!-- 公開後にURLとOGP画像を入れる -->
+<!-- <meta property="og:url" content="https://example.com/"> -->
+<!-- <meta property="og:image" content="https://example.com/ogp.png"> -->
+<meta name="twitter:card" content="summary_large_image">
+<style>html{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>慧眼採用課</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Shippori+Mincho+B1:wght@600;800&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --desk:#E2E6E1;--paper:#FCFCFA;--paper-2:#F2F4F0;--ink:#1B1E22;--ink-2:#5B6268;--ink-3:#8A9196;
+  --rule:#CBD2CD;--rule-2:#E3E7E3;--shu:#C23B22;--shu-soft:rgba(194,59,34,.09);
+  --fusen:#F4DD62;--fusen-ink:#2B2715;--memo:#2A4B8C;--ok:#2E7550;--ng:#A33A26;
+  --bar:#3E5E57;--bar-2:#B9C4BF;--veil:rgba(20,24,22,.55);
+  --shadow:0 1px 0 rgba(20,30,25,.05),0 8px 20px -12px rgba(20,30,25,.35);
+  --f-disp:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;
+  --f-body:'BIZ UDPGothic','Hiragino Sans','Yu Gothic',system-ui,sans-serif;
+  --f-num:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;--desk:#13171A;--paper:#1C2124;--paper-2:#242A2E;--ink:#E6E8E3;--ink-2:#9CA4A8;--ink-3:#6E777C;
+  --rule:#3A4348;--rule-2:#2C3337;--shu:#E35E45;--shu-soft:rgba(227,94,69,.13);
+  --fusen:#CBB24A;--fusen-ink:#1D1A0C;--memo:#95AFE6;--ok:#62BA8C;--ng:#E58B75;--bar:#8FB3A8;--bar-2:#3F4A4E;--veil:rgba(0,0,0,.65);
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 24px -12px rgba(0,0,0,.7);}}
+:root[data-theme="dark"]{
+  color-scheme:dark;--desk:#13171A;--paper:#1C2124;--paper-2:#242A2E;--ink:#E6E8E3;--ink-2:#9CA4A8;--ink-3:#6E777C;
+  --rule:#3A4348;--rule-2:#2C3337;--shu:#E35E45;--shu-soft:rgba(227,94,69,.13);
+  --fusen:#CBB24A;--fusen-ink:#1D1A0C;--memo:#95AFE6;--ok:#62BA8C;--ng:#E58B75;--bar:#8FB3A8;--bar-2:#3F4A4E;--veil:rgba(0,0,0,.65);
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 24px -12px rgba(0,0,0,.7);}
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.75;padding-inline:16px;padding-block:0 64px}
+.wrap{max-width:1100px;margin-inline:auto}
+h1,h2,h3{font-family:var(--f-disp);font-weight:800;text-wrap:balance;line-height:1.35;margin:0}
+p{margin:0}
+button{font:inherit;color:inherit}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--memo);outline-offset:2px}
+
+.top{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:flex-end;justify-content:space-between;padding-block:28px 18px;border-bottom:1px solid var(--rule);margin-bottom:22px}
+.brand h1{font-size:30px;letter-spacing:.12em}
+.brand p{color:var(--ink-2);font-size:13px;margin-top:2px}
+.approve{display:grid;grid-template-columns:repeat(5,56px);border:1px solid var(--ink-2);background:var(--paper)}
+.approve div{border-left:1px solid var(--rule);text-align:center}
+.approve div:first-child{border-left:0}
+.approve .lb{font-size:11px;letter-spacing:.2em;border-bottom:1px solid var(--rule);padding-block:2px;color:var(--ink-2)}
+.approve .bx{height:48px;display:grid;place-items:center}
+.approve .done .bx span{width:34px;height:34px;border:2px solid var(--shu);border-radius:50%;color:var(--shu);font-family:var(--f-disp);font-weight:800;font-size:13px;display:grid;place-items:center;transform:rotate(-12deg)}
+.approve .cur .bx span{width:34px;height:34px;border:1.5px dashed var(--ink-3);border-radius:50%}
+.approve .cur .lb{color:var(--ink);font-weight:700}
+
+.fusen{background:var(--fusen);color:var(--fusen-ink);padding:14px 18px;max-width:640px;box-shadow:var(--shadow);transform:rotate(-.6deg);font-size:14.5px;line-height:1.8}
+.fusen b{font-weight:700}
+.bar-row{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:space-between;margin-block:18px}
+
+.btn{border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);padding:10px 22px;border-radius:2px;cursor:pointer;font-weight:700;letter-spacing:.06em}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.red{background:var(--shu);border-color:var(--shu);color:#fff;text-decoration:none;display:inline-block}
+.btn.small{padding:5px 12px;font-size:13px;letter-spacing:.02em}
+.count{font-family:var(--f-num);font-size:14px;color:var(--ink-2)}
+.count b{color:var(--shu);font-size:20px}
+.linkbtn{background:none;border:0;padding:0;color:var(--memo);text-decoration:underline;cursor:pointer;font-size:12.5px}
+
+.setup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:32px;align-items:start}
+@media (max-width:820px){.setup{grid-template-columns:1fr}}
+.intro h2{font-size:clamp(28px,5vw,44px);line-height:1.3;letter-spacing:.02em}
+.intro .sub{font-family:var(--f-disp);font-size:20px;color:var(--ink-2);margin-top:10px}
+.intro ol{margin:26px 0 0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.intro li{display:grid;grid-template-columns:5.5em 1fr;gap:10px;padding-block:9px;border-bottom:1px solid var(--rule);font-size:14px}
+.intro li span:first-child{font-family:var(--f-disp);font-weight:800}
+.intro li span:last-child{color:var(--ink-2)}
+.repbox{margin-top:20px;background:var(--paper);border:1px solid var(--rule);padding:12px 16px;font-size:14px;display:grid;gap:4px}
+.stars-s{color:var(--shu);letter-spacing:2px}
+.form{background:var(--paper);box-shadow:var(--shadow);padding:22px 22px 26px;display:grid;gap:20px}
+.form fieldset{border:0;padding:0;margin:0;display:grid;gap:8px}
+.form legend{font-weight:700;font-size:13px;letter-spacing:.12em;color:var(--ink-2);margin-bottom:6px;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:block;border:1px solid var(--rule);padding:7px 14px;border-radius:2px;font-size:14px;background:var(--paper)}
+.chip small{display:block;font-size:11px;color:var(--ink-3);line-height:1.3}
+.chip input:checked+span{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.chip input:checked+span small{color:var(--paper);opacity:.75}
+.chip input:focus-visible+span{outline:2px solid var(--memo);outline-offset:2px}
+.form select,.form input[type=text]{font:inherit;font-size:16px;background:var(--paper-2);color:var(--ink);border:1px solid var(--rule);padding:8px 10px;border-radius:2px;width:100%}
+.me{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.me label{font-size:13px;color:var(--ink-2);display:grid;gap:4px}
+.note{font-size:12.5px;color:var(--ink-3)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:18px}
+.sheet{position:relative;background:var(--paper);box-shadow:var(--shadow);border:1px solid var(--rule-2);padding:0}
+.sheet[data-act]{cursor:pointer;transition:transform .15s}
+.sheet[data-act]:hover{transform:translateY(-2px)}
+.sheet.on{outline:2px solid var(--shu);outline-offset:-2px}
+.sheet .hd{display:flex;justify-content:space-between;align-items:baseline;padding:8px 14px;border-bottom:1.5px solid var(--ink)}
+.sheet .hd b{font-family:var(--f-disp);letter-spacing:.5em;font-size:15px}
+.sheet .hd span{font-family:var(--f-num);font-size:12px;color:var(--ink-3)}
+.idrow{display:grid;grid-template-columns:84px 1fr;border-bottom:1px solid var(--rule)}
+.photo{border-right:1px solid var(--rule);padding:8px;display:grid;place-items:center}
+.photo svg{width:68px;height:auto;display:block}
+.idrow dl{margin:0;display:grid}
+.idrow dl div{display:grid;grid-template-columns:3.2em 1fr;border-bottom:1px solid var(--rule-2)}
+.idrow dl div:last-child{border-bottom:0}
+.idrow dt{font-size:11px;color:var(--ink-3);padding:5px 0 5px 8px;border-right:1px solid var(--rule-2)}
+.idrow dd{margin:0;padding:4px 10px;font-size:13.5px}
+.idrow .nm{font-size:18px;font-family:var(--f-disp);font-weight:800;letter-spacing:.08em}
+.tier{display:block;font-size:11px;color:var(--ink-3)}
+.flag{display:inline-block;font-size:11px;background:var(--fusen);color:var(--fusen-ink);padding:0 6px;margin-left:6px;border-radius:1px;vertical-align:1px;white-space:nowrap}
+.sec{padding:8px 14px;border-bottom:1px solid var(--rule-2)}
+.sec:last-of-type{border-bottom:0}
+.sec h4{margin:0 0 2px;font-size:11px;letter-spacing:.14em;color:var(--ink-3);font-weight:700}
+.sec p,.sec li{font-size:13.5px;line-height:1.7}
+.sec .lead{font-weight:700}
+.sec ul{margin:0;padding-left:1.1em}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.looks{padding:7px 14px 10px;font-size:12.5px;color:var(--ink-2);background:var(--paper-2)}
+.stamp{position:absolute;right:14px;top:44px;width:64px;height:64px;border-radius:50%;border:3px solid var(--shu);color:var(--shu);font-family:var(--f-disp);font-weight:800;font-size:17px;display:grid;place-items:center;transform:rotate(-14deg) scale(.6);opacity:0;transition:.18s;pointer-events:none;background:var(--shu-soft);letter-spacing:.05em}
+.on .stamp{opacity:.92;transform:rotate(-14deg) scale(1)}
+
+.theme{background:var(--paper);border:1px solid var(--rule);padding:12px 16px;margin-bottom:18px}
+.theme h4{margin:0;font-size:11px;letter-spacing:.14em;color:var(--ink-3)}
+.theme p{font-family:var(--f-disp);font-weight:800;font-size:19px}
+.who{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;padding:10px 14px;border-bottom:1.5px solid var(--ink)}
+.who svg{width:56px;height:auto;display:block}
+.who .nm{font-family:var(--f-disp);font-weight:800;font-size:17px;letter-spacing:.06em}
+.meter{display:flex;gap:3px}
+.mrow{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:11.5px;color:var(--ink-3)}
+.meter i{width:12px;height:6px;background:var(--rule)}
+.meter i.f{background:var(--ink)}
+.quote{font-size:14px}
+.memo{color:var(--memo);font-size:13px}
+.memo li::marker{content:"— "}
+.qa{font-size:13px;padding-block:5px;border-top:1px dotted var(--rule)}
+.qa:first-of-type{border-top:0}
+.qa .qq{color:var(--ink-2);font-size:12px}
+
+.iv{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:22px;align-items:start}
+@media (max-width:820px){.iv{grid-template-columns:1fr}}
+.qs{display:grid;gap:8px}
+.q{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;text-align:left;border:1px solid var(--rule);background:var(--paper);padding:10px 12px;border-radius:2px;cursor:pointer}
+.q:hover:not(:disabled){border-color:var(--ink)}
+.q:disabled{opacity:.4;cursor:default}
+.q.asked{opacity:1;border-color:var(--ink);background:var(--paper-2)}
+.q small{font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log{background:var(--paper);box-shadow:var(--shadow);padding:6px 18px;min-height:80px}
+.log .ex{padding-block:12px;border-bottom:1px solid var(--rule-2)}
+.log .ex:last-child{border-bottom:0}
+.log .qq{font-size:13px;color:var(--ink-2)}
+.log .aa{margin-top:4px}
+.aside{color:var(--memo);font-size:13px;margin-top:4px}
+.log .empty{color:var(--ink-3);padding-block:18px;font-size:14px}
+.rate{margin-top:16px;background:var(--paper);border:1.5px solid var(--ink);padding:14px 18px;display:grid;gap:12px}
+.stars{display:flex;gap:4px}
+.stars button{background:none;border:0;font-size:28px;line-height:1;cursor:pointer;color:var(--rule);padding:2px}
+.stars button.on{color:var(--shu)}
+.rate input[type=range]{width:100%;accent-color:var(--shu)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs span{font-size:13px;padding:4px 12px;border:1px solid var(--rule);background:var(--paper)}
+.tabs span.cur{border-color:var(--ink);font-weight:700}
+.tabs span.dn{color:var(--ink-3);text-decoration:line-through}
+
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px;align-items:start}
+.bcard{background:var(--paper);box-shadow:var(--shadow);border:1px solid var(--rule-2)}
+.bcard.ranked{outline:2px solid var(--shu);outline-offset:-2px}
+.st{color:var(--shu);letter-spacing:2px}
+.rkbadge{font-family:var(--f-disp);font-weight:800;font-size:26px;color:var(--shu);line-height:1}
+.minutes{background:var(--paper);box-shadow:var(--shadow);padding:20px 22px;margin-top:20px}
+.minutes h3{font-size:20px;letter-spacing:.2em;border-bottom:1.5px solid var(--ink);padding-bottom:6px;margin-bottom:10px}
+.line{display:grid;grid-template-columns:7.5em 1fr;gap:12px;padding-block:7px;border-bottom:1px dotted var(--rule);animation:in .5s both}
+.line b{font-size:13px}
+.line.sys{grid-template-columns:1fr;color:var(--ink-2);font-size:14px}
+@keyframes in{from{opacity:.001;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.line{animation:none}.sheet,.stamp{transition:none}}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{border-bottom:1px solid var(--rule-2);padding:7px 8px;text-align:left;vertical-align:middle}
+th{font-size:11px;letter-spacing:.1em;color:var(--ink-3);font-weight:700;border-bottom:1.5px solid var(--ink)}
+.scroll{overflow-x:auto}
+tr.clk{cursor:pointer}
+tr.clk:hover td{background:var(--paper-2)}
+.pname{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:center;min-width:15em}
+.pname svg{width:34px;height:auto;display:block}
+.pname small{display:block;font-size:11.5px;color:var(--ink-3);line-height:1.4}
+
+.hero{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:var(--paper);box-shadow:var(--shadow);padding:24px}
+@media (max-width:640px){.hero{grid-template-columns:1fr}}
+.bigstamp{width:150px;height:150px;border-radius:50%;border:5px solid var(--shu);color:var(--shu);display:grid;place-items:center;text-align:center;transform:rotate(-10deg);font-family:var(--f-disp);font-weight:800;background:var(--shu-soft)}
+.bigstamp .r{font-size:44px;line-height:1}
+.bigstamp .r small{font-size:16px}
+.bigstamp .t{font-size:13px;letter-spacing:.2em;border-top:2px solid var(--shu);padding-top:3px;margin-top:4px}
+.hero h2{font-size:clamp(24px,4vw,34px)}
+.hero .say{margin-top:8px;color:var(--ink-2);max-width:60ch}
+.hero .score{font-family:var(--f-num);margin-top:12px;font-size:14px;color:var(--ink-2)}
+.hero .score b{font-size:26px;color:var(--ink)}
+.sect{margin-top:34px}
+.sect>h3{font-size:22px;margin-bottom:4px}
+.sect>.lede{color:var(--ink-2);font-size:14px;margin-bottom:14px;max-width:70ch}
+.years{display:grid;gap:10px}
+.yr{display:grid;grid-template-columns:5em 3.2em 1fr;gap:14px;align-items:center;background:var(--paper);padding:12px 16px;border-left:3px solid var(--rule)}
+.yr .y{font-family:var(--f-disp);font-weight:800}
+.grade{font-family:var(--f-disp);font-weight:800;font-size:26px;text-align:center}
+.g-S,.g-A{color:var(--ok)}.g-C,.g-D{color:var(--ng)}.g-B{color:var(--ink-2)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:18px}
+.panel{background:var(--paper);box-shadow:var(--shadow);padding:16px 18px}
+.panel h4{margin:0 0 10px;font-size:14px}
+.rbar{display:grid;grid-template-columns:9.5em 1fr 3.4em;gap:10px;align-items:center;font-size:13px;padding-block:4px}
+.rbar .track{position:relative;height:12px;background:var(--paper-2)}
+.rbar .track::after{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;border-left:1px solid var(--ink-3)}
+.rbar .fill{position:absolute;top:0;bottom:0;background:var(--bar)}
+.rbar .fill.neg{background:var(--ng)}
+.rbar.mine .fill{background:var(--shu)}
+.axis{display:grid;grid-template-columns:9.5em 1fr 3.4em;gap:10px;font-size:11px;color:var(--ink-3)}
+.axis div:nth-child(2){display:flex;justify-content:space-between}
+.pbar{height:8px;background:var(--paper-2);width:100px;position:relative}
+.pbar i{position:absolute;left:0;top:0;bottom:0;background:var(--bar)}
+.tbar{display:grid;grid-template-columns:6.5em 1fr 3em;gap:10px;align-items:center;font-size:13px;padding-block:3px}
+.tbar .pbar{width:auto}
+.cut{display:inline-block;font-size:11px;border:1px solid var(--rule);padding:0 6px;white-space:nowrap}
+.cut.h{border-color:var(--shu);color:var(--shu);font-weight:700}
+tr.hired td{background:var(--shu-soft)}
+.fate{font-size:12.5px;color:var(--ink-2);min-width:16em}
+.hist{display:flex;align-items:flex-end;gap:4px;height:120px;border-bottom:1px solid var(--ink-3);padding-top:14px}
+.hist div{flex:1;background:var(--bar);position:relative;min-height:1px}
+.hist div.me{background:var(--shu)}
+.hist div span{position:absolute;top:-17px;left:0;right:0;text-align:center;font-size:10px;font-family:var(--f-num);color:var(--ink-2)}
+.hlab{display:flex;gap:4px}
+.hlab span{flex:1;text-align:center;font-size:11px;font-family:var(--f-num);color:var(--ink-3)}
+.kv{display:grid;grid-template-columns:1fr auto;gap:4px 14px;font-size:14px}
+.kv div:nth-child(even){font-family:var(--f-num);text-align:right}
+.warn{border-left:3px solid var(--shu);background:var(--shu-soft);padding:10px 14px;font-size:14px;margin-top:12px}
+.foot-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+.reviews{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px}
+.rv{background:var(--paper);border:1px solid var(--rule-2);padding:12px 16px;display:grid;gap:4px}
+.rv .meta{font-size:11.5px;color:var(--ink-3)}
+.rv .s{color:var(--shu);letter-spacing:2px;font-size:14px}
+.rv p{font-size:14px}
+.repline{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;background:var(--paper);box-shadow:var(--shadow);padding:14px 18px;margin-bottom:14px}
+.repline b{font-family:var(--f-num);font-size:22px}
+
+.veil{position:fixed;inset:0;background:var(--veil);z-index:20;display:grid;place-items:start center;overflow-y:auto;padding:max(16px,env(safe-area-inset-top,0px)) 16px 40px}
+.modal{background:var(--desk);max-width:760px;width:100%;box-shadow:var(--shadow);margin-top:24px}
+.modal .mh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:var(--paper);border-bottom:1.5px solid var(--ink);position:sticky;top:0;z-index:1}
+.modal .mh h3{font-size:18px}
+.modal .mb{padding:16px;display:grid;gap:14px}
+.freeq{margin-top:12px;border:1.5px dashed var(--ink-3);background:var(--paper);padding:12px;display:grid;gap:8px}
+.freeq label{font-weight:700;font-size:13px}
+.freeq textarea{font:inherit;font-size:16px;background:var(--paper-2);color:var(--ink);border:1px solid var(--rule);padding:8px 10px;border-radius:2px;width:100%;resize:vertical}
+.freeq .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.tagfree{display:inline-block;font-size:11px;border:1px solid var(--memo);color:var(--memo);padding:0 6px;margin-left:6px}
+.thinking{color:var(--ink-2);font-size:14px;padding-block:12px}
+.fqv{padding-block:10px;border-top:1px solid var(--rule-2);font-size:14px}
+.fqv:first-child{border-top:0}
+.radarwrap{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:18px;align-items:center}
+@media (max-width:640px){.radarwrap{grid-template-columns:1fr}}
+.radarwrap svg{width:100%;max-width:380px;height:auto;display:block}
+.radar-type{font-family:var(--f-disp);font-weight:800;font-size:22px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);margin-top:8px}
+.legend i{display:inline-block;width:18px;height:0;border-top:2px solid var(--shu);vertical-align:middle;margin-right:5px}
+.legend i.avg{border-top:2px dashed var(--ink-2)}
+.factor{display:grid;grid-template-columns:1fr auto;gap:12px;font-size:13.5px;padding-block:4px;border-bottom:1px dotted var(--rule)}
+.factor span:last-child{font-family:var(--f-num)}
+.setup-radar{margin-top:16px;background:var(--paper);border:1px solid var(--rule);padding:12px 16px}
+.setup-radar .radarwrap{grid-template-columns:1fr}
+.setup-radar .radarwrap svg{max-width:300px;margin-inline:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><h1>慧眼採用課</h1><p>人事部 第二採用グループ</p></div>
+    <div class="approve" id="approve" aria-label="選考の進捗"></div>
+  </header>
+  <main id="main"></main>
+</div>
+
+<script>
+/* ============ 乱数・道具 ============ */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let R=Math.random;
+const gz=(r=R)=>{let u=0;while(!u)u=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*r())};
+const pick=(a,r=R)=>a[Math.floor(r()*a.length)];
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const ri=(a,b)=>a+Math.floor(R()*(b-a+1));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pct=x=>Math.round(100/(1+Math.exp(-1.702*x)));
+function pearson(x,y){const n=x.length;if(n<3)return null;let mx=0,my=0;for(let i=0;i<n;i++){mx+=x[i];my+=y[i]}mx/=n;my/=n;let a=0,b=0,c=0;for(let i=0;i<n;i++){const dx=x[i]-mx,dy=y[i]-my;a+=dx*dy;b+=dx*dx;c+=dy*dy}if(b<1e-9||c<1e-9)return null;return a/Math.sqrt(b*c)}
+const fill=(s,o)=>s.replace(/\{(\w+)\}/g,(m,k)=>o[k]!==undefined?o[k]:m);
+const MEM={};const store={get(k,d){try{const v=localStorage.getItem(k);if(v)return JSON.parse(v)}catch(e){}return k in MEM?JSON.parse(MEM[k]):d},set(k,v){MEM[k]=JSON.stringify(v);try{localStorage.setItem(k,MEM[k])}catch(e){}}};
+
+/* ============ 世界の設定 ============ */
+const IND={
+  it:{name:'IT・Web',role:{new:'総合職（エンジニア）',mid:'バックエンドエンジニア'},w:{g:.35,skill:.30,con:.20,soc:.10,cha:.05},quit:.12,work:'簡単なバグの原因を探してもらう',pro:{q:'このシステムが急に遅くなったと言われたら、最初に何を確認しますか',hi:['「まず『いつから』『全員か一部か』を聞きます。そのあとログとリリース履歴を見ます。直前に何か変えていれば、たいていそこです」', '「再現するかを先に確かめます。再現しないうちに推測で直すのはやめます」', '「前に似たことがあって、原因は夜間バッチでした。なので、まず時間帯を見ます」'],mid:['「サーバーの負荷を見ると思います」', '「データベースが原因のことが多いと聞きました」'],lo:['「再起動します」', '「メモリを増やせば速くなると思います」', '「すみません、インフラは詳しくなくて」']},gd:['社内の問い合わせ対応を、半年で半分に減らす仕組みを考えてください','親世代でも迷わず使える家計簿アプリを企画してください','社内の会議時間を3割減らす方法を考えてください']},
+  shosha:{name:'総合商社',role:{new:'総合職',mid:'事業投資担当'},w:{g:.25,con:.25,soc:.25,cha:.15,skill:.10},quit:.07,work:'新しい取引先の与信メモを1枚で書いてもらう',pro:{q:'為替が急に20円円高になったら、輸出の取引で何が起きますか',hi:['「円に換えたときの受取額が減ります。為替予約をしているかどうかで影響がまるで違うので、まずそこを確認します」', '「契約通貨によります。円建てなら相手が困り、ドル建てならうちが困ります。どちらの話ですか」'],mid:['「輸出企業には不利だと思います」', '「利益が減るので、価格を見直すと思います」'],lo:['「円高なので、輸出は有利になると思います」（逆だった）', '「すみません、為替は勉強中です」']},gd:['アフリカで日本の冷凍食品を売るとしたら、最初の一年で何をしますか','地方の日本酒を海外で売る事業計画を立ててください','中古トラックを東南アジアで売る新規事業を考えてください']},
+  maker:{name:'メーカー',role:{new:'技術系総合職',mid:'品質保証エンジニア'},w:{con:.30,g:.25,skill:.25,soc:.15,cha:.05},quit:.08,work:'不良品のデータから原因の仮説を立ててもらう',pro:{q:'同じ不良が3日続けて出たら、まず何をしますか',hi:['「ラインを止めるかどうかを先に決めます。それから、不良が出始めた日に変わったもの（材料、人、設備、手順）を順に確認します」', '「不良品を全部取っておきます。捨てると原因が追えなくなるので」'],mid:['「原因を調べて、対策を立てます」', '「なぜなぜ分析をやります」'],lo:['「作業者に注意を呼びかけます」', '「検査の回数を増やします」（不良そのものは減らない）']},gd:['工場の不良率を半年で半分にする方法を考えてください','売れなくなった家電を、別の用途で売り直す方法を考えてください','若手が3年で辞めない工場にするには、何を変えますか']},
+  ad:{name:'広告代理店',role:{new:'総合職（営業・プランナー）',mid:'アカウントプランナー'},w:{g:.25,cha:.20,soc:.20,con:.20,skill:.15},quit:.14,work:'架空の商品のコピーを3案出してもらう',pro:{q:'クライアントの商品に明らかな欠点があるとき、広告でどう扱いますか',hi:['「欠点を隠した広告は、買った人の口コミで負けます。その欠点が気にならない人に絞って届けるほうを先に考えます」', '「欠点を先に言ってしまう手もあります。正直さが売りになる商品なら、ですが」'],mid:['「長所を強調して、欠点には触れないようにします」', '「ターゲットを変えれば、なんとかなると思います」'],lo:['「インパクトのある表現で、欠点を忘れさせます」', '「有名人を起用すればいいと思います」']},gd:['誰も知らない地方の銭湯に、若者を来させる企画を考えてください','売上が落ちている老舗和菓子店のSNS戦略を考えてください','予算10万円で、新しい缶コーヒーを話題にしてください']},
+  fin:{name:'金融',role:{new:'総合職',mid:'法人融資担当'},w:{con:.30,g:.30,soc:.15,skill:.15,cha:.10},quit:.10,integ:.32,work:'決算書を見て融資の懸念点を挙げてもらう',pro:{q:'売上は伸びているのに、現金が減っている会社があります。何を疑いますか',hi:['「売掛金が回収できていないか、在庫が積み上がっていないかを見ます。黒字倒産の典型なので」', '「設備投資の支払いが先に出ているだけかもしれません。まず資金繰り表を見せてもらいます」'],mid:['「経費を使いすぎているのかもしれません」', '「借入の返済が大きいのだと思います」'],lo:['「売上が伸びているなら、問題ないと思います」', '「社長に聞いてみます」']},gd:['地方の中小企業に「融資以外」で何を売りますか','20代にNISAを始めてもらうにはどうしますか','支店を半分に減らしても、顧客満足を落とさない方法を考えてください']},
+  retail:{name:'小売・外食',role:{new:'店長候補',mid:'エリアマネージャー候補'},w:{con:.30,soc:.30,g:.15,skill:.15,cha:.10},quit:.18,work:'来週のシフト表の穴を埋めてもらう',pro:{q:'売上は去年と同じなのに、利益だけが落ちている店があります。何を見ますか',hi:['「値引きと廃棄の額を先に見ます。売上が同じで利益が落ちるなら、原価か人件費のどちらかなので」', '「シフトの組み方を見ます。暇な時間帯に人が余っていることが多いので」'],mid:['「人件費を見直します」', '「仕入れ値が上がっていないか確認します」'],lo:['「もっとお客さんを呼べばいいと思います」', '「スタッフのやる気の問題だと思います」']},gd:['人手が足りない店舗で、客の満足を落とさずに回す方法を考えてください','駅前店の売上を、値下げせずに1割上げてください','店舗のフードロスを半分にする仕組みを考えてください']},
+};
+const SIZE={
+  startup:{name:'スタートアップ',sub:'社員40名・創業4年・まだ赤字',luck:.8,accept:.52,quit:.05,mgr:.9},
+  sme:{name:'中小企業',sub:'社員300名・創業48年',luck:.6,accept:.64,quit:0,mgr:.7},
+  big:{name:'大企業',sub:'社員12,000名・東証プライム上場',luck:.45,accept:.86,quit:-.04,mgr:.5},
+};
+const GD_COMMON=['無人島に3人で漂着しました。最初の1週間の計画を立ててください','新入社員の離職を減らす施策を、1つに絞って提案してください','この会社の10年後の主力事業を考えてください','日本に信号機はいくつありますか（フェルミ推定）'];
+const TRAIT_JP={g:'地頭',con:'誠実性',skill:'実務スキル',soc:'協調性',cha:'話のうまさ',integ:'倫理観',stay:'定着しやすさ',attract:'見た目',wealth:'実家の太さ'};
+const UNIS=[
+  {t:1,label:'いわゆるボーダーフリー',list:['未来創造大学','国際ビジネス情報大学','さくら総合大学']},
+  {t:2,label:'中堅私大',list:['東和大学','中央経済大学','関東学芸大学','洛央大学']},
+  {t:3,label:'中堅上位・地方国立',list:['北辰大学','青葉学院大学','立明館大学','西海大学']},
+  {t:4,label:'難関私大・難関国立',list:['明応義塾大学','早稲野大学','一橋台大学']},
+  {t:5,label:'国立最難関',list:['東都大学']},
+];
+const UNI_LABEL={'明応義塾大学':'難関私大','早稲野大学':'難関私大','一橋台大学':'難関国立','北辰大学':'地方国立','西海大学':'地方国立','青葉学院大学':'中堅上位私大','立明館大学':'中堅上位私大','洛央大学':'中堅私大'};
+const MY_UNIS=['東都大学','明応義塾大学','北辰大学','東和大学','未来創造大学'];
+const FAC=['経済学部','法学部','商学部','文学部','理工学部','情報学部','国際教養学部','社会学部','工学部','教育学部','薬学部','農学部'];
+const HOBBIES=['読書','映画','料理','旅行','カフェ巡り','ヨガ','推し活','韓国ドラマ','美術館巡り','写真','ランニング','登山','キャンプ','筋トレ','サウナ','ゴルフ','ゲーム','アニメ','将棋','競馬'];
+const FAM=['佐藤','鈴木','高橋','田中','伊藤','渡辺','山本','中村','小林','加藤','吉田','山田','佐々木','山口','松本','井上','木村','林','斎藤','清水','森','池田','橋本','阿部','石川','前田','藤田','小川','岡田','後藤','長谷川','村上','近藤','石井','坂本','遠藤','青木','西村','福田','太田','三浦','藤原','中島','原田','小野','竹内','金子','和田','中野','上田','杉山','千葉','野口','菅原','宮崎','大塚'];
+const G_M=['蓮','陽翔','湊','大翔','悠真','颯','樹','大和','翔太','拓海','健太','誠','直樹','亮','航','隼人','康介','圭','慎也','智也','雄大','陸','悠斗','拓也','隆之','和樹','俊介','修','啓太','大輔'];
+const G_F=['陽菜','結衣','葵','さくら','美咲','凛','花','真央','彩','優奈','智子','由佳','瑞希','遥','ひかり','紗希','七海','莉子','美月','杏','愛','千夏','麻衣','詩織','奈々','香織','恵','朋美','彩花','里奈'];
+const G_N=['晴','薫','渚','千尋','司','翼','光','真琴','ひなた','歩','楓','優','瑞穂','透','央'];
+
+const GAKU=[
+  {k:'circle',s:'サークル運営',h:['テニスサークルの代表として部員{b}名をまとめた','イベントサークルの幹事長を務めた'],c:'新歓で入会者を{a}名から{b}名に増やした。自分の担当はビラを配る場所の見直しだけで、曜日ごとの反応を記録して2か所に絞った。残りは先輩の人脈のおかげです。'},
+  {k:'startup',s:'学生団体の立ち上げ',h:['学生起業し、代表として事業を立ち上げた','学生団体を創設し、代表を務めた'],c:'中古教科書の売買サービスを作った。登録者は{b}人まで増えたが利益は出ず、1年で閉じた。仕入れを甘く見ていたのが原因だと思っている。'},
+  {k:'abroad',s:'留学',h:['カナダへ1年間留学し、多様な価値観に触れた','交換留学で現地の学生と共同研究を行った'],c:'最初の3か月は授業についていけず、講義を録音して毎晩聞き直した。最終学期は{b}人中3番の成績だった。友達はあまりできなかった。'},
+  {k:'baito',s:'アルバイト',h:['飲食店のバイトリーダーとして売上向上に貢献した','塾講師として担当生徒の成績を向上させた'],c:'居酒屋でシフトの穴が月に{a}回出ていた。店長に頼んで希望の提出を2週間早めたら{c}回まで減った。売上への効果は分からない。'},
+  {k:'research',s:'研究',h:['研究室で成果を出し、学会発表を行った','卒業研究で新しい分析手法を提案した'],c:'データの前処理に半年かかった。途中で指導教員と方針がずれて、一度全部やり直した。学会では質問に1つ答えられなかった。'},
+  {k:'sports',s:'体育会の部活動',h:['体育会ラグビー部で主将を務め、チームを全国大会へ導いた','体育会バレー部の副主将としてチームを支えた'],c:'練習メニューを見直して、怪我人を年{a}人から{c}人に減らした。試合の成績は正直あまり変わらなかった。'},
+  {k:'volunteer',s:'ボランティア',h:['被災地支援のボランティア団体でリーダーを務めた','子ども食堂の運営に携わった'],c:'子ども食堂で毎回食材が余っていたので、前週の来場数から量を決める表を作った。廃棄は半分くらいになったが、表を更新しているのは結局自分だけです。'},
+  {k:'seminar',s:'ゼミ活動',h:['ゼミ活動に力を入れ、地域課題の解決に取り組んだ','学業に注力し、GPA3.8を取得した'],c:'地元商店街で聞き取りを{b}件やった。結論は「今すぐ打てる手は特にない」だった。教授には褒められなかった。'},
+  {k:'band',s:'学園祭の運営',h:['学園祭実行委員長として来場者数を過去最高にした','学園祭実行委員として企画運営に携わった'],c:'学園祭の入場待ちが最大{a}0分出ていた。入口を2つに分けて、案内係の立ち位置を図にしたら半分になった。案内係には嫌われた。'},
+  {k:'intern',s:'長期インターン',h:['ベンチャー企業の長期インターンで営業成績トップを獲得した','長期インターンで新規事業の立ち上げに参画した'],c:'インターンでテレアポを{b}件かけて、アポが取れたのは{c}件だった。断られた理由を全部メモして、最後の月に台本を一行だけ変えた。'},
+];
+const VAGUE=['メンバー一人ひとりと真摯に向き合い、チームの一体感を醸成することで、大きな成果を上げることができました。この経験から周囲を巻き込む力を身につけました。','困難な状況でも決して諦めず、主体的に行動し続けた結果、目標を達成することができました。この経験を貴社でも活かしたいと考えております。','多様な価値観を持つ仲間と協働し、課題解決に向けて粘り強く取り組みました。その中で傾聴力とリーダーシップを培いました。','「当事者意識」を大切に、常に一歩先を考えて行動しました。その結果、周囲からの信頼を得ることができました。','前例のない課題に対し、仮説と検証を繰り返しながら最適解を模索しました。この経験は私の大きな財産です。'];
+const MIDG=['チーム全体で施策を実行し、前年比{p}%の成果を達成しました。私はその中心として活動しました。','課題を分析して改善策を立案・実行し、数値を{a}から{b}へ向上させました。','週{c}回の定例ミーティングを設け、メンバーの意見を集約して改善を重ねました。'];
+const MOTIVE={
+  slick:['貴社の「挑戦を楽しむ」という理念に深く共感し、私の強みである巻き込み力を最大限に発揮できると確信しております。','貴社でなら、社会に新しい価値を生み出すという私の夢を実現できると強く感じ、志望いたしました。','説明会で拝見した社員の皆様の熱量に心を動かされ、この環境で自分を試したいと強く思いました。','業界のリーディングカンパニーである貴社で、人々の「当たり前」を変える仕事がしたいと考えています。'],
+  mid:['安定した経営基盤と、若手にも裁量がある社風に魅力を感じました。','業界の中でも伸びている点に惹かれ、自分も成長できると考えました。','商品を日常的に使っており、作る側に関わりたいと思いました。'],
+  bland:['正直、業界研究はまだ途中です。説明会で聞いた地味な仕事の話が、自分に向いている気がしました。','家から通えることと、会った社員の話が具体的だったことが理由です。','前職の取引先として見ていて、仕事が丁寧だと思っていました。'],
+};
+const PREV={3:['丸の内ホールディングス','日邦電機','東亜銀行','大八洲商事'],2:['ミナト精工','サンライズ物流','北斗システム','あおば食品'],1:['ウルトラDX','ネクストリーム','やりがいプランニング','グローバルスマイル']};
+const ACH_IMP=['社内MVPを2度受賞','担当売上を3年で2.4倍に','新規事業の立ち上げを主導','全国営業コンテスト1位','社長賞を受賞'];
+const ACH_CON=['担当顧客{b}社。解約率を半年で{p}%下げた。やったのは定例訪問を月1回から隔週にしただけ。','夜間の障害呼び出しを月{a}回から{c}回に減らした。手順書の最初の版は誰にも使われず、2回書き直した。','後輩3名の指導を担当。うち1名は辞めた。理由はいまだによく分かっていない。','見積もりの作り直しが月{a}件あったのを{c}件にした。原因の大半は自分の確認漏れだった。','在庫の廃棄を年{p}%減らした。発注の締め時間を1時間早めただけで、効果が出るまで4か月かかった。'];
+const ACH_MID=['目標達成率110%を3期連続で継続','チームリーダーとして業務改善に取り組み、生産性を向上','大手顧客を中心に担当し、安定した売上を確保'];
+const ACH_VAG=['さまざまなプロジェクトに主体的に関わり、組織の成長に貢献してきました。','幅広い業務を経験し、柔軟な対応力を身につけました。','常に顧客視点を忘れず、信頼関係の構築に努めてきました。'];
+const LOOK_HI=['整った顔立ち','清潔感がある','笑顔が印象的','背筋が伸びていて堂々としている','肌がきれい','目元が涼しげ','写真より実物のほうが良い','華がある','立ち姿がきれい','よく通る声'];
+const LOOK_MID=['落ち着いた雰囲気','髪型が几帳面に整っている','地味だが感じは悪くない','スーツが少し大きい','写真と実物がほぼ同じ','特に印象に残らない','真面目そう','眉が太い','就活生の平均値のような身なり','メガネの奥の目が優しい','少し早口'];
+const LOOK_LO=['寝癖が一か所ある','襟元が少し乱れている','目の下にクマ','やや猫背','写真の加工が強め','肌荒れが目立つ','スーツにシワ','汗をかいている','前髪が目にかかっている','表情が硬い','爪が長い'];
+const LOOK_X=['高そうな腕時計','ボールペンを3本持参','靴がよく磨かれている','リュックで来た','ハンカチにアイロンがかかっている','声が低く落ち着いている','受付に傘を忘れた','5分前ちょうどに到着','20分前に着いてロビーで待っていた','学生なのに名刺入れを持っていた','香水が強め','貧乏ゆすり','ペットボトルのお茶を机に置いた','資料をクリアファイルに入れていた','方言が少し出る','相槌が「なるほどです」','受付で深々とお辞儀した','エレベーターで清掃員に会釈した','面接前にトイレの鏡で練習していたらしい','待合室でずっと単語帳を見ていた'];
+const CERTS=['簿記2級','FP2級','基本情報技術者','宅建','秘書検定2級','漢検準1級','MOS Excel','ITパスポート','販売士2級','色彩検定2級'];
+
+/* ============ 評判（口コミ） ============ */
+let REP=store.get('keigan-rep-v1',{score:3.5,n:0});
+const repLabel=s=>s>=3.9?'良い応募者が集まりやすい':s>=3.3?'普通':s>=2.7?'少し集まりにくい':'集まりにくい';
+const starsTxt=n=>'★'.repeat(n)+'☆'.repeat(5-n);
+
+/* ============ 状態 ============ */
+const PHASES=['setup','docs','group','iv','board','result'];
+const STAMP_LB=['書類','集団','個別','役員','結果'];
+let G=null;
+let CFG={mode:'new',ind:'it',size:'sme',uni:'北辰大学',hobby:'カフェ巡り',ai:''};
+
+/* ============ 候補者生成 ============ */
+function weights(cfg){
+  const w={...IND[cfg.ind].w};
+  if(cfg.mode==='new'){const s=w.skill*.6;w.skill-=s;w.g+=s*.5;w.con+=s*.5;}
+  else{w.skill+=.08;w.g-=.04;w.con-=.04;}
+  return w;
+}
+function givenFor(gd){
+  if(gd==='男性')return R()<.15?pick(G_N):pick(G_M);
+  if(gd==='女性')return R()<.15?pick(G_N):pick(G_F);
+  return R()<.6?pick(G_N):pick(R()<.5?G_M:G_F);
+}
+function makeFace(c){
+  const a=c.t.attract,gd=c.gender;
+  const M=['short','side','buzz','spiky','center','slick'],F=['long','bob','ponytail','bun','wavy','pixie'];
+  let style=gd==='男性'?pick(M):gd==='女性'?pick(F):pick([...M,...F]);
+  if(gd!=='女性'&&(c.age>34||a<-.9)&&R()<.35)style='receding';
+  const eyeType=a>.45?'pretty':a<-.45?pick(['plain','narrow','plain']):pick(['plain','narrow','pretty']);
+  const fem=gd==='女性'||(gd==='未回答'&&R()<.5);
+  const f={
+    skin:pick(['#F1D3B8','#E7C19F','#D9AB86','#F4DCC7','#C9956E']),
+    hair:pick(['#1d1a18','#2b2320','#3b2d25','#4b3a2e','#6a4e38','#7a5a3a']),
+    style,bg:pick(['#CFE0EA','#DDE4EA','#D6E2DC','#E6E2D8']),
+    rx:clamp(16.8-.2*a+gz()*.5,16,18.6),ry:clamp(21+gz()*.6-.3*a,19.5,22.5),
+    eyeType,eyeR:clamp(1.55+.4*a+gz()*.15,1.05,2.3),gap:clamp(6.5+(a<0?(-a)*.9*(R()<.5?-1:1):0)+gz()*.3,5,8.4),
+    asym:a<-.3?clamp(-a*.7,0,1.6)*(R()<.5?-1:1):0,
+    nose:a>.3?'small':a<-.5?'big':pick(['small','line']),
+    mouth:a>.5?(fem?'lips':'smile'):a<-.6?'crooked':(c.t.cha+gz()*.6>.2?'smile':'flat'),
+    bags:a<-.35||R()<.1,chin:a<-1.1,
+    blem:a<-.8?Array.from({length:3+Math.floor(R()*4)},()=>[34+R()*22,52+R()*12]):[],
+    stubble:gd==='男性'&&a<.2&&R()<.35,
+    blush:a>.5&&fem&&R()<.8,
+    lashes:fem&&eyeType==='pretty',
+    brow:a<-.6?pick(['thick','uneven']):a>.4?'neat':pick(['neat','thick','thin']),
+    glasses:R()<.28?(a<-.4?'heavy':pick(['rect','round'])):null,
+    tie:gd==='男性'?pick(['#2c3e70','#6b2230','#2f4f3e','#444','#8a6a2a']):gd==='女性'?null:pick(['#2c3e70',null]),
+    suit:pick(['#2a2f36','#23272c','#343a42','#2d3340']),
+  };
+  f.stubs=f.stubble?Array.from({length:22},()=>[36+R()*18,60+R()*8]):[];
+  return f;
+}
+function makeCand(cfg,id){
+  const t={};['g','con','cha','integ','stay','wealth','attract'].forEach(k=>t[k]=gz());
+  const q=(REP.score-3.5)*.25;t.g+=q;t.con+=q;
+  t.soc=.35*t.cha+.9*gz();
+  t.skill=.45*t.g+.3*t.con+.75*gz()+q;
+  const w=weights(cfg);let pot=0,ss=0;for(const k in w){pot+=w[k]*t[k];ss+=w[k]*w[k]}
+  pot/=Math.sqrt(ss)*1.25;
+  const gr=R();const gender=gr<.47?'男性':gr<.94?'女性':'未回答';
+  const c={id,t,pot,gender,name:pick(FAM)+' '+givenFor(gender),obs:{deliv:[]},mode:cfg.mode};
+  const e=.32*t.g+.45*t.wealth+.12*t.con+.8*gz();
+  let tier=e>1.1?5:e>.45?4:e>-.2?3:e>-.9?2:1;
+  if(R()<.12){c.uni=cfg.uni;tier=UNIS.find(u=>u.list.includes(cfg.uni)).t;}
+  else c.uni=pick(UNIS[tier-1].list);
+  c.tier=tier;c.tierLabel=UNI_LABEL[c.uni]||UNIS[tier-1].label;c.fac=pick(FAC);
+  c.alma=c.uni===cfg.uni;
+  c.hobby=R()<.2?cfg.hobby:pick(HOBBIES.filter(h=>h!==cfg.hobby));
+  c.sameHobby=c.hobby===cfg.hobby;c.similar=c.alma||c.sameHobby;
+  const nums={a:ri(6,18),b:ri(40,160),c:ri(1,5),p:ri(8,35)};
+  c.conc=.32*t.con+.2*t.g+.12*t.skill+.9*gz();
+  c.imp=.6*t.cha+.35*t.wealth+.6*gz();
+  c.polish=.6*t.cha+.2*t.con+.7*gz();
+  const pol=c.polish>.45?'slick':c.polish>-.35?'mid':'bland';c.motive=pick(MOTIVE[pol]);
+  c.certs=[];const nc=Math.round(clamp(.9+.45*t.con+.1*t.g+.9*gz(),0,4));const pool=[...CERTS];for(let i=0;i<nc;i++)c.certs.push(pool.splice(Math.floor(R()*pool.length),1)[0]);
+  c.toeic=R()<.2?null:Math.round(clamp(560+130*(.4*t.g+.35*t.wealth+.2*t.con+.5*gz()),300,990)/5)*5;
+  if(cfg.mode==='new'){
+    c.age=22+(R()<.25?1:0);
+    const g=pick(GAKU);c.gs=g.s;c.taiiku=g.k==='sports';
+    c.gHead=fill(g.h[c.imp>0?0:1],nums);
+    c.gBody=c.conc>.45?fill(g.c,nums):c.conc>-.35?fill(pick(MIDG),nums):pick(VAGUE);
+    c.gap=c.age>22?pick(['1年浪人','1年留年（本人いわく「自分探し」）','休学して1年ワーキングホリデー']):(R()<.1?'在学中に半年休学':'特になし');
+    c.episode=g.s;
+  }else{
+    c.age=26+Math.floor(R()*17);
+    const prest=.4*(tier-3)/1.2+.3*t.skill+.7*gz();
+    c.hops=Math.round(clamp(.9-.8*t.stay+.6*gz()+(c.age-30)/9,0,5));
+    const yrs=c.age-23;const jobs=[];let left=yrs;
+    for(let i=0;i<=c.hops;i++){const last=i===c.hops;const y=last?left:Math.max(1,Math.round(left/(c.hops-i+1)+gz()*.8));left-=y;const pt=i===0?(prest>.5?3:prest>-.5?2:1):clamp(Math.round(2+gz()*.8),1,3);jobs.push({co:'株式会社'+pick(PREV[pt]),y:Math.max(1,y),pt})}
+    c.jobs=jobs;c.prest=prest;
+    c.ach=[];if(c.imp>.3)c.ach.push(pick(ACH_IMP));
+    c.ach.push(c.conc>.45?fill(pick(ACH_CON),nums):c.conc>-.35?pick(ACH_MID):pick(ACH_VAG));
+    c.salary=Math.round((430+70*prest+13*(c.age-26)+25*gz())/10)*10;
+    c.gap=pick(['退職理由：キャリアアップのため','退職理由：会社の方針転換','退職理由：（空欄）','退職理由：家庭の事情','退職理由：上司との方針の違い','退職理由：会社都合（事業撤退）']);
+    c.episode=pick(['取引先の立て直し','新システムの移行','赤字店舗の改善','クレーム対応の仕組みづくり','大口顧客の解約危機']);
+    c.gs=jobs[jobs.length-1].co.replace('株式会社','')+'での仕事';
+  }
+  const lookA=t.attract>.7?pick(LOOK_HI):t.attract>-.6?pick(LOOK_MID):pick(LOOK_LO);
+  let x1=pick(LOOK_X),x2=pick(LOOK_X);while(x2===x1)x2=pick(LOOK_X);
+  c.looks=R()<.5?[lookA,x1]:[lookA,x1,x2];
+  c.face=makeFace(c);
+  c.obs.talk=.75*t.cha+.5*gz();
+  c.obs.gdC=.35*t.g+.2*t.soc+.1*t.skill+.85*gz();
+  return c;
+}
+const ageBand=a=>a<25?'20代前半':a<30?'20代後半':a<35?'30代前半':a<40?'30代後半':'40代';
+
+/* ============ 顔（証明写真） ============ */
+function face(c){
+  const f=c.face,H=f.hair,S=f.skin;let back='',front='';
+  switch(f.style){
+    case 'short':front=`<path d="M28 45 C27 25 63 22 62 45 C58 34 34 33 28 45Z" fill="${H}"/>`;break;
+    case 'side':front=`<path d="M28 47 C25 23 66 22 63 43 C54 36 44 34 30 47Z" fill="${H}"/>`;break;
+    case 'buzz':front=`<path d="M29 42 C30 28 60 28 61 42 C56 35 34 35 29 42Z" fill="${H}" opacity=".8"/>`;break;
+    case 'spiky':front=`<path d="M28 45 L29 31 L34 34 L37 25 L42 31 L46 22 L50 30 L55 25 L57 33 L62 30 L62 45 C57 35 33 35 28 45Z" fill="${H}"/>`;break;
+    case 'center':front=`<path d="M28 48 C26 24 64 24 62 48 C60 36 50 33 45 38 C40 33 30 36 28 48Z" fill="${H}"/>`;break;
+    case 'slick':front=`<path d="M28 43 C29 23 61 23 62 43 C55 31 35 31 28 43Z" fill="${H}"/><path d="M36 30 Q45 26 54 30" stroke="#fff" stroke-opacity=".25" stroke-width="1.5" fill="none"/>`;break;
+    case 'receding':front=`<path d="M29 47 C28 36 33 31 37 32 C34 36 32 41 29 47Z M61 47 C62 36 57 31 53 32 C56 36 58 41 61 47Z" fill="${H}"/>`;break;
+    case 'long':back=`<rect x="22" y="30" width="46" height="54" rx="18" fill="${H}"/>`;front=`<path d="M28 49 C26 24 64 24 62 49 C60 38 51 36 46 41 C42 36 32 38 28 49Z" fill="${H}"/>`;break;
+    case 'bob':back=`<path d="M24 50 C22 22 68 22 66 50 L66 66 L58 66 L58 58 L32 58 L32 66 L24 66Z" fill="${H}"/>`;front=`<path d="M28 48 C27 26 63 24 62 46 C55 36 40 38 28 48Z" fill="${H}"/>`;break;
+    case 'ponytail':back=`<ellipse cx="66" cy="52" rx="6" ry="15" transform="rotate(18 66 52)" fill="${H}"/>`;front=`<path d="M28 46 C27 25 63 22 62 46 C57 33 36 32 28 46Z" fill="${H}"/>`;break;
+    case 'bun':front=`<path d="M28 46 C27 25 63 22 62 46 C57 33 36 32 28 46Z" fill="${H}"/><circle cx="45" cy="23" r="7.5" fill="${H}"/>`;break;
+    case 'wavy':back=`<path d="M23 38 C17 56 27 66 21 84 L69 84 C63 66 73 56 67 38Z" fill="${H}"/>`;front=`<path d="M28 49 C26 24 64 24 62 49 C58 37 48 35 44 40 C40 35 31 38 28 49Z" fill="${H}"/>`;break;
+    case 'pixie':front=`<path d="M28 50 C24 24 66 22 63 46 C58 36 46 34 36 40 C33 43 30 46 28 50Z" fill="${H}"/>`;break;
+  }
+  const hs=`translate(45 48) scale(${(f.rx/17).toFixed(3)} ${(f.ry/21).toFixed(3)}) translate(-45 -48)`;back=back?`<g transform="${hs}">${back}</g>`:'';front=front?`<g transform="${hs}">${front}</g>`:'';
+  const shade='rgba(110,62,44,.55)';
+  const lx=+(45-f.gap).toFixed(2),rxp=+(45+f.gap).toFixed(2),ly=49,ry2=+(49+f.asym).toFixed(2);
+  const eye=(x,y)=>{const s=f.eyeR;
+    if(f.eyeType==='pretty')return `<ellipse cx="${x}" cy="${y}" rx="${(s*1.7).toFixed(2)}" ry="${(s*1.15).toFixed(2)}" fill="#fff" stroke="#3a2a22" stroke-width=".7"/><circle cx="${x}" cy="${y}" r="${(s*.95).toFixed(2)}" fill="#3b2a20"/><circle cx="${x}" cy="${y}" r="${(s*.45).toFixed(2)}" fill="#111"/><circle cx="${(x+s*.35).toFixed(2)}" cy="${(y-s*.35).toFixed(2)}" r="${(s*.3).toFixed(2)}" fill="#fff"/>${f.lashes?`<path d="M${(x-s*1.8).toFixed(1)} ${(y-s*.6).toFixed(1)} Q${x} ${(y-s*1.8).toFixed(1)} ${(x+s*1.9).toFixed(1)} ${(y-s*.8).toFixed(1)}" stroke="#1a1a1a" stroke-width="1.2" fill="none"/>`:''}`;
+    if(f.eyeType==='narrow')return `<path d="M${(x-2.3).toFixed(1)} ${y} Q${x} ${(y-1.2).toFixed(1)} ${(x+2.3).toFixed(1)} ${y}" stroke="#222" stroke-width="1.3" fill="none" stroke-linecap="round"/>`;
+    return `<circle cx="${x}" cy="${y}" r="${(s*.8).toFixed(2)}" fill="#222"/>`;};
+  const bw=f.brow==='thick'?2.4:f.brow==='thin'?1:1.6;const as=f.asym;
+  const brows=f.brow==='uneven'?`<path d="M${lx-4} 44 L${lx+3} 42" stroke="${H}" stroke-width="2" stroke-linecap="round"/><path d="M${rxp-3} ${43.5+as} L${rxp+4} ${45.5+as}" stroke="${H}" stroke-width="2" stroke-linecap="round"/>`:
+    `<path d="M${lx-4} 44 Q${lx} 42.3 ${lx+3.5} 43.5" stroke="${H}" stroke-width="${bw}" fill="none" stroke-linecap="round"/><path d="M${rxp-3.5} ${43.5+as} Q${rxp} ${42.3+as} ${rxp+4} ${44+as}" stroke="${H}" stroke-width="${bw}" fill="none" stroke-linecap="round"/>`;
+  const bags=f.bags?`<path d="M${lx-3} ${ly+3.4} Q${lx} ${ly+5} ${lx+3} ${ly+3.4}" stroke="rgba(90,60,50,.45)" fill="none" stroke-width=".9"/><path d="M${rxp-3} ${ry2+3.4} Q${rxp} ${ry2+5} ${rxp+3} ${ry2+3.4}" stroke="rgba(90,60,50,.45)" fill="none" stroke-width=".9"/>`:'';
+  const nose=f.nose==='small'?`<path d="M45.4 52.5 Q44.3 55.6 46 56" stroke="${shade}" stroke-width=".9" fill="none" stroke-linecap="round"/>`:f.nose==='big'?`<ellipse cx="45" cy="55.6" rx="3.4" ry="2.6" fill="${shade}" opacity=".45"/><circle cx="43.4" cy="56.6" r=".8" fill="#5a3326"/><circle cx="46.6" cy="56.6" r=".8" fill="#5a3326"/>`:`<path d="M45 51 L44 56 L46.5 56.3" stroke="${shade}" stroke-width="1" fill="none" stroke-linejoin="round"/>`;
+  const mouth=f.mouth==='smile'?`<path d="M40 60 Q45 64.5 50 60" fill="none" stroke="#8a4b3a" stroke-width="1.4" stroke-linecap="round"/>`:
+    f.mouth==='lips'?`<path d="M41 60.2 Q45 58.6 49 60.2 Q45 63.8 41 60.2Z" fill="#c2575a"/>`:
+    f.mouth==='crooked'?`<path d="M40 61.5 Q44 60.5 50 59.3" fill="none" stroke="#7a4636" stroke-width="1.5" stroke-linecap="round"/>`:
+    `<path d="M41 61 H49" stroke="#8a4b3a" stroke-width="1.3" stroke-linecap="round"/>`;
+  const blush=f.blush?`<ellipse cx="36.5" cy="56" rx="3" ry="1.7" fill="#e88a8a" opacity=".35"/><ellipse cx="53.5" cy="56" rx="3" ry="1.7" fill="#e88a8a" opacity=".35"/>`:'';
+  const blem=f.blem.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r=".75" fill="#b0584a" opacity=".6"/>`).join('');
+  const stub=f.stubs.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r=".4" fill="#3a302a" opacity=".55"/>`).join('');
+  const jaw=48+f.ry;
+  const chin=f.chin?`<path d="M37 ${(jaw-1).toFixed(1)} Q45 ${(jaw+4).toFixed(1)} 53 ${(jaw-1).toFixed(1)}" stroke="${shade}" fill="none" stroke-width="1"/>`:'';
+  let gl='';
+  if(f.glasses==='rect'||f.glasses==='heavy'){const sw=f.glasses==='heavy'?2:1.1;gl=`<g fill="none" stroke="#2a2a2a" stroke-width="${sw}"><rect x="${lx-5}" y="${ly-3.5}" width="10" height="7" rx="2"/><rect x="${rxp-5}" y="${ry2-3.5}" width="10" height="7" rx="2"/><path d="M${lx+5} ${ly-.5} L${rxp-5} ${ry2-.5}"/></g>`}
+  if(f.glasses==='round')gl=`<g fill="none" stroke="#6b5a45" stroke-width="1.1"><circle cx="${lx}" cy="${ly}" r="4.6"/><circle cx="${rxp}" cy="${ry2}" r="4.6"/><path d="M${lx+4.6} ${ly} L${rxp-4.6} ${ry2}"/></g>`;
+  const collar=f.tie?`<path d="M36 79 L45 97 L54 79Z" fill="#fff"/><path d="M43.5 82 L46.5 82 L48 100 L45 104 L42 100Z" fill="${f.tie}"/>`:`<path d="M37 79 L45 98 L53 79Z" fill="#f4f4f2"/><path d="M35 79 L41 88 L45 80Z M55 79 L49 88 L45 80Z" fill="#fff" stroke="#d8d8d4" stroke-width=".5"/>`;
+  return `<svg viewBox="0 0 90 110" role="img" aria-label="${esc(c.name)}の証明写真"><rect width="90" height="110" fill="${f.bg}"/>${back}<path d="M8 110 C10 86 26 78 45 78 C64 78 80 86 82 110Z" fill="${f.suit}"/>${collar}<rect x="39" y="64" width="12" height="16" rx="4" fill="${S}"/><ellipse cx="${(45-f.rx+.5).toFixed(2)}" cy="51" rx="2.6" ry="4" fill="${S}"/><ellipse cx="${(45+f.rx-.5).toFixed(2)}" cy="51" rx="2.6" ry="4" fill="${S}"/><ellipse cx="45" cy="48" rx="${f.rx.toFixed(2)}" ry="${f.ry.toFixed(2)}" fill="${S}"/>${chin}${stub}${front}${brows}${eye(lx,ly)}${eye(rxp,ry2)}${bags}${gl}${nose}${blush}${blem}${mouth}</svg>`;
+}
+
+/* ============ 面接の質問 ============ */
+const Q={
+  behav:{label:'これまでで一番困難だった状況で、あなた自身は何をして、結果どうなりましたか',tag:'行動面接',v:.42,w:{con:.5,skill:.3,g:.2},noise:.6,
+    hi:['「{ep}のときです。最初の一か月は何をしても数字が動かなかったので、原因の候補を三つに分けて一つずつ潰しました。二つは外れでした。途中で自分の判断ミスがあって一度やり直しています」','「{ep}です。正直、途中で投げ出しかけました。やったのは毎日の記録と、うまくいかなかったことを翌週やめることだけです。結果は目標の八割でした」','「{ep}で、担当が自分一人になった時期があります。全部は無理なので、やらないことを先に三つ決めて周りに伝えました。怒られましたが、残りは間に合いました」','「{ep}です。自分のミスで一度信頼を失いました。謝ってから、週に一回、進み具合を数字で報告するようにしました。元に戻るまで半年かかりました」','「{ep}のときに、前任のやり方を全部変えようとして失敗しました。二回目は一つだけ変えて、効いたかどうか確かめてから次に進みました」'],
+    mid:['「{ep}のとき、チームで話し合って役割を分担し、みんなで乗り越えました。最終的には目標を達成できました」','「{ep}で意見が割れたときに、双方の話をよく聞いて、まとめることができました」','「{ep}では大変なこともありましたが、諦めずに続けたことで成長できたと思います」','「{ep}のとき、自分から声をかけてチームの雰囲気を良くしました。結果的にうまくいきました」'],
+    lo:['「困難……ですか。あまり困ったことはないです。なんとかなってきたので」','「{ep}のとき、周りが本気になってくれなかったのが一番大変でした。最後は自分が全部やりました」','「困難はたくさんありましたが、どれも乗り越えてきました。具体的には……いろいろです」','「{ep}のときに先輩が厳しくて。でも耐えました。耐えるのは得意です」','「今この瞬間が一番困難です」（笑いを取りにいったが、場は静かだった）']},
+  situ:{label:'入社3か月目、上司と顧客の指示が食い違ったらどうしますか',tag:'状況面接',v:.35,w:{g:.45,soc:.4,con:.15},noise:.7,
+    hi:['「まず、どこが食い違っているのかを一行で書いて上司に見せます。顧客には『確認して何時までに返します』とだけ伝えます。自分が決めていい範囲かどうかが一番大事なので」','「顧客の指示の理由を先に聞きます。理由が分かれば、上司の指示と両立できる形があるかもしれないので。なければ上司に決めてもらいます」','「その場では約束しません。三か月目の自分が決めて外れたら、困るのは顧客なので。ただ、返事の期限だけはその場で決めます」','「上司の指示が古い情報に基づいていないかをまず疑います。前にそれで失敗したことがあるので」'],
+    mid:['「上司に相談します。報連相が大事だと思うので」','「まずは両方の話をよく聞きます」','「会社の方針に従うのが基本だと思います」','「先輩に、過去に同じことがあったか聞いてみます」'],
+    lo:['「お客様が第一なので、お客様の言う通りにします」','「両方の顔を立てて、うまくやります」','「上司の指示が絶対なので、顧客には申し訳ないですが断ります」','「うーん……そのときになってみないと分からないです」','「自分なら、そうならないように最初から気をつけます」']},
+  work:{label:'その場で実務課題を出す（15分）',tag:'ワークサンプル',v:.33,w:{skill:.5,g:.4,con:.1},noise:.45,accept:-.03,
+    hi:['（2分ほど課題を眺めてから、要点を3つに絞って提出。1つには「情報が足りないので仮定を置いた」と書き添えてあった）','（最初に質問を2つしてから取りかかった。どちらも的を射ていた）','（10分で提出。残りの5分で見直して、1か所自分で直した）','（完璧ではないが、一番大事な部分から順に手をつけていた）'],
+    mid:['（時間内に提出。抜けはあるが、方向は合っている）','（丁寧で読みやすい。ただ、平凡）','（最初の方針で進めて途中で詰まり、最後に少し持ち直した）'],
+    lo:['（丁寧に時間をかけて書いたが、問われていることに答えていない）','（「普段はもっとできるんですが」と言って、半分のところで提出）','（見た目は整っているが、中身はネットで見たことのある一般論だった）','（課題文を読み違えていた。本人は最後まで気づかなかった）']},
+  ref:{label:'前職の上司に話を聞いてもいいですか',tag:'リファレンス',v:.13,midOnly:true,w:{integ:.55,con:.3,skill:.15},noise:.7,
+    hi:['（前の上司「締め切りを破ったことが一度もない人です。飲み会には来ませんでしたけど」）','（前の上司「数字は普通です。でも、あの人がいた期間は新人が辞めなかった」）','（前の上司「悪い報告を一番先に持ってくる人でした。それが一番ありがたかった」）'],
+    mid:['（前の上司「特に問題はなかったですよ。普通に」）','（前の上司「真面目でしたよ。印象は薄いですが」）','（前の上司「よく覚えていないんですが、問題はなかったはずです」）'],
+    lo:['（前の上司「……優秀ではありました。数字の報告を少し盛る癖はありましたね」）','（候補者「前の上司とは少し……別の方でもいいですか」）','（前の上司「……ノーコメントで」）','（前の上司「辞め方がちょっと……いえ、仕事はしていました」）']},
+  motive:{label:'なぜ弊社なんですか',tag:'志望動機',v:.10,w:{cha:.6,con:.2},noise:.8,
+    hi:['「中期経営計画を読みました。業界の中であえて地味な領域に投資している点に……」（3分続いた。よく調べてある）','「説明会で聞いた、失敗したプロジェクトの話が一番印象に残っています。失敗を話す会社は少ないので」','「社員の方に3人会いました。3人とも仕事の愚痴が具体的だったのが、逆に信用できると思いました」','「御社の商品を実際に使っていて、不満が2つあります。それを直す側に回りたいんです」'],
+    mid:['「若手から裁量がある社風に惹かれました」','「安定していて、長く働けると思ったからです」','「業界トップクラスのシェアに魅力を感じました」','「社員の方の雰囲気が良かったからです」'],
+    lo:['「正直、第一志望ではないです。でも今日話を聞いて、興味は湧いています」','「えっと……（手元のメモを見て）……御社の理念に共感したからです」','「親に勧められました」','「御社のことはまだよく知らないんですが、だからこそ知りたいと思いました」']},
+  reverse:{label:'最後に何か質問はありますか',tag:'逆質問',v:.08,w:{cha:.4,g:.3,con:.2},noise:.8,
+    hi:['「配属されて最初の半年で『できている』と判断される基準は何ですか」','「この部署で、去年いちばん困ったことは何でしたか」','「3年目までに辞めた方は、どんな理由が多いですか」','「面接官の方が、今の仕事で一番嫌いな業務は何ですか」（面接官が少し笑った）'],
+    mid:['「御社で活躍している方の共通点を教えてください」','「入社までに勉強しておくべきことはありますか」','「研修制度について教えてください」','「御社の強みは何だとお考えですか」'],
+    lo:['「特にありません」','「有給は取りやすいですか」','「残業はどのくらいありますか」（最初の質問がこれだった）','「今日の結果はいつ頃分かりますか」']},
+  animal:{label:'自分を動物に例えると？',tag:'雑談系',v:0,w:{cha:.8},noise:.9,
+    hi:['「カメレオンです。どんな環境にもすぐ適応できるので」（用意してきた顔だった）','「ペンギンです。飛べませんが、泳ぎなら誰にも負けません」（場が少し和んだ）','「ハチです。小さいですが、群れの中で自分の役割を果たします」','「イルカです。頭が良くて、仲間思いなので」（自分で言った）'],
+    mid:['「犬ですかね。人懐っこいとよく言われます」','「猫だと思います。マイペースなので」','「ライオン……は言い過ぎなので、柴犬で」'],
+    lo:['「……ナマケモノ、でしょうか。いえ、なんでもないです」','「えっ、動物……ですか。……人間、とか」','「（10秒考えて）……ハムスター」（理由は最後まで出てこなかった）']},
+  hobby:{label:'休日は何をしてるんですか（雑談）',tag:'雑談系',v:0,w:{cha:.5},noise:.9},
+  pressure:{label:'その経歴だと、正直厳しいと思うんですが？',tag:'圧迫面接',v:.02,w:{cha:.5},noise:.9,accept:-.15,
+    hi:['「そう見えるのは分かります。ただ……」（表情は崩れなかった）','「厳しいのは承知で来ています。どこが一番足りないと思われましたか」','「そう思われるなら、今日で判断を変えていただけるように話します」'],
+    mid:['「……精一杯、頑張ります」','「……すみません」','「そうかもしれません」（声が小さくなった）'],
+    lo:['（沈黙が8秒続いた）','（目に涙が浮かんだ。本人は必死に隠していた）','「……じゃあ、なんで呼んだんですか」']},
+  pro:{label:'',tag:'専門質問',v:.30,w:{skill:.55,g:.35,con:.1},noise:.6},
+  family:{label:'ご両親はどんなお仕事を？',tag:'',v:0,viol:true},
+  marry:{label:'結婚や出産のご予定は？',tag:'',v:0,viol:true,accept:-.2},
+};
+const Q_ORDER=['behav','situ','work','pro','ref','motive','reverse','animal','hobby','pressure','family','marry'];
+const qLabel=k=>k==='work'?`その場で実務課題（15分）：${IND[G.cfg.ind].work}`:k==='pro'?IND[G.cfg.ind].pro.q:Q[k].label;
+const eqLabel=e=>e.qtext?e.qtext:qLabel(e.qid);
+
+/* ============ 自由質問 ============ */
+// 自分でホストする場合：APIキーを持つ自前のサーバー（例：Cloudflare Workers）のURLを入れる。
+// POST {prompt} を受け取り、Claude Haiku の返答を {text} で返す想定。空なら使わない。
+const KEIGAN_ENDPOINT='';
+// 公開したURL。Xでシェアしたときに添付される。
+const SHARE_URL='';
+const FT={
+  behav:{label:'行動面接',v:.42,w:{con:.5,skill:.3,g:.2},noise:.6,from:'behav',say:'研究上いちばん当てになる種類の質問です。自力でたどり着いたなら大したものです。'},
+  situ:{label:'状況面接',v:.35,w:{g:.45,soc:.4,con:.15},noise:.7,from:'situ',say:'悪くない質問です。仮定の話でも、考え方の筋は見えます。'},
+  knowledge:{label:'知識・専門性',v:.30,w:{skill:.6,g:.4},noise:.65,say:'知識は測れます。その知識が仕事で使われるかは、また別の話です。',
+    hi:['「前提から整理すると……」（要点がまとまっていて、知らない部分は知らないと言った）','「正確な数字は分かりません。ただ、こう考えます」（筋道が通っていた）','「前にそこで一度失敗していて、そのとき調べました」（実体験つきだった）'],
+    mid:['「ニュースで見た範囲ですが……」（間違ってはいない）','「授業で少しやりました。たしか……」（半分くらい合っている）'],
+    lo:['「すみません、勉強不足です」','（自信満々に答えたが、事実と違っていた）','「それは入社してから覚えます」']},
+  self:{label:'自己PR系',v:.10,w:{cha:.6,con:.2},noise:.8,say:'自己評価を聞きました。分かるのは、その人が自分をどう売り込むかです。',
+    hi:['「面倒な確認を最後までやるところです。前に一度それで大きな事故を防いだことがあって……」（例がついていた）','「弱みは、見切りが遅いことです。去年それで二か月無駄にしました」（あっさり言った）'],
+    mid:['「粘り強さです。何事も最後までやり抜きます」','「周りからは、真面目だとよく言われます」','「5年後にはチームを任される人になりたいです」'],
+    lo:['「強み……ですか。優しいとは言われます」','「特に思いつかないです」','「弱みは、完璧主義すぎるところです」（よく聞く答えだった）']},
+  motive:{label:'志望動機系',v:.10,w:{cha:.6,con:.2},noise:.8,from:'motive',say:'志望動機は、どれだけ準備してきたかと、話のうまさを測ります。'},
+  chat:{label:'雑談',v:.02,w:{cha:.5},noise:.9,say:'雑談でした。場は和みます。予測力はほぼゼロです。',
+    hi:['「それで言うと、最近……」（楽しそうに話が広がった）','「あ、それ好きなんです。実は……」（あなたも少し笑った）'],
+    mid:['「ええと、そうですね……」（無難な答えだった）','「普通ですね。人並みには」'],
+    lo:['「……特にないです」','「え、あ、はい……」（会話はそこで終わった）']},
+  odd:{label:'奇問',v:0,w:{cha:.8},noise:.9,say:'奇問でした。あなたが楽しかったなら、それが唯一の成果です。',
+    hi:['「面白い質問ですね。私なら……」（用意していないはずなのに、それらしい答えがすぐ出てきた）','「それは……ですね、理由は三つあります」（本当に三つ出てきた）'],
+    mid:['「うーん……」（しばらく考えて、無難な答えを出した）','「難しいですね……では、これで」'],
+    lo:['「えっ……」（固まった）','「すみません、質問の意図が分からなくて」（それが一番まともな反応かもしれない）']},
+  pressure:{label:'圧迫',v:.02,w:{cha:.5},noise:.9,from:'pressure',accept:-.15,say:'圧迫でした。測られたのは候補者のストレス耐性ではなく、あなたの会社の評判です。'},
+  viol:{label:'不適切な質問',v:0,w:{},noise:0,accept:-.2,say:'不適切な質問でした。厚労省が「就職差別につながるおそれがある」としている種類です。',
+    any:['「……それは、お答えしないといけませんか」','「……」（一瞬、表情が消えた）','「えっと……はい、あの……」（困った顔で、それでも答えた）','「それは選考に関係ありますか」（まっすぐこちらを見た）']},
+};
+const FT_ORDER=['behav','situ','knowledge','self','motive','chat','odd','pressure','viol'];
+function classify(q){
+  const t=q.replace(/\s/g,'');
+  const tests=[
+    ['viol',/(出身(?!大学|校|学部)|地元|どこ育ち|ご?両親|親御|父親|母親|お父|お母|親の(仕事|職業)|家族|兄弟|姉妹|実家|結婚|出産|妊娠|子ども|子供|彼氏|彼女|恋人|交際|宗教|信仰|支持政党|政党|政治|本籍|出身地|生まれ(?!変わ)|国籍|住まい|持ち家|尊敬する人|愛読書|労働組合|容姿|体重|身長|病気|持病)/],
+    ['pressure',/(厳し|無理|甘い|なめ|本気で|通用しな|ダメ|だめ|向いてな|使えな|なぜ落ち|落ちた理由|価値ある|いる意味)/],
+    ['odd',/(動物|色に例|例える|例えると|無人島|宇宙人|生まれ変わ|マンホール|何個|何本|何台|富士山)/],
+    ['behav',/(経験|これまで|今まで|過去|具体的|実際に|エピソード|失敗|挫折|困難|苦労|叱られ|怒られ|乗り越|やり遂げ|工夫した|どうしました|どうした|何をしました)/],
+    ['situ',/(もし|仮に|だったら|としたら|場合|入社して.*たら)/],
+    ['knowledge',/(とは|説明し|仕組み|違い|知って|業界|市場|競合|技術|ニュース|最近気にな|数字|決算|トレンド)/],
+    ['self',/(強み|弱み|長所|短所|自己PR|自己ＰＲ|年後|将来|キャリア|一言で|性格|周りから|どんな人)/],
+    ['motive',/(志望|なぜ弊社|なぜ当社|なんで弊社|弊社|当社|うちの会社|御社|入社したら|やりたい仕事|他社|第一志望)/],
+    ['chat',/(趣味|休日|好き|最近|ハマ|週末|映画|音楽|食べ物|旅行|休み)/],
+  ];
+  for(const [k,re] of tests)if(re.test(t))return {type:k,reason:'キーワードから判定'};
+  return {type:'chat',reason:'どの型にも当てはまらないので雑談扱い'};
+}
+function sigFor(c,type){const f=FT[type];let s=0;for(const k in f.w)s+=f.w[k]*c.t[k];return s+f.noise*gz()}
+const tierOf=s=>s>.5?'hi':s>-.45?'mid':'lo';
+function poolFor(type,tier){const f=FT[type];if(f.any)return f.any;if(f.from)return Q[f.from][tier];return f[tier]}
+async function callLLM(prompt){
+  if(KEIGAN_ENDPOINT){const r=await fetch(KEIGAN_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt})});if(!r.ok)throw new Error('http '+r.status);return (await r.json()).text}
+  const use=window.claude&&window.claude.use;if(!use)throw new Error('unavailable');
+  const sample=await window.claude.use('sample');if(!sample)throw new Error('unavailable');
+  const res=await sample(prompt,{modelTier:'quick',cache:false});return res.text;
+}
+function buildPrompt(c,q,sigs,dv){
+  const ind=IND[G.cfg.ind];const P=k=>pct(c.t[k]);
+  const table=FT_ORDER.filter(k=>k!=='viol').map(k=>`${k}=${{hi:'高',mid:'中',lo:'低'}[tierOf(sigs[k])]}`).join(', ');
+  const bg=c.mode==='new'?`${c.uni}${c.fac}。学生時代に力を入れたこと：${c.gHead}`:`${c.jobs.map(j=>j.co+j.y+'年').join('→')}。実績：${c.ach.join(' / ')}`;
+  return `あなたは採用面接ゲームの中で、候補者を演じます。JSONだけを返してください。
+# 候補者
+${c.name}（${c.gender}・${c.age}歳）。${bg}。趣味：${c.hobby}。
+本当の特性（0〜100。本人も知らない数値なので、口に出さない）：地頭${P('g')}、誠実性${P('con')}、実務スキル${P('skill')}、協調性${P('soc')}、話のうまさ${P('cha')}、倫理観${P('integ')}
+応募先：${ind.name}の${ind.role[c.mode]}
+# 面接官の質問
+「${q}」
+# 手順
+1. 質問の種類を1つ選ぶ。behav=過去の具体的な行動や経験を聞く / situ=仮定の状況での行動を聞く / knowledge=業務知識・専門性・業界理解を問う / self=強み・弱み・将来像など自己評価 / motive=志望動機・会社について / chat=雑談・趣味・好み / odd=例え話や正解のない奇問 / pressure=否定・威圧で揺さぶる / viol=家族・出身地・本籍・結婚・出産・恋愛・宗教・支持政党・尊敬する人物・愛読書・容姿など、本人の適性と関係がなく就職差別につながるおそれのある質問。
+2. 回答の中身の質は、種類ごとに次のとおりにする：${table}。高なら具体的で、自分の失敗や数字を含む。中なら無難で抽象的。低なら的外れ、言い訳、または一般論。
+3. 話し方は「${dv>.6?'上手':dv<-.5?'下手':'普通'}」。話し方は答えの頭に（）で短いト書きとして書く。
+4. viol なら、戸惑う・濁す・答えを拒むなど、困った反応にする。
+5. 回答は日本語で1〜3文。候補者の口調で「」に入れる。数値や特性名は出さない。
+# 出力形式
+{"type":"behav|situ|knowledge|self|motive|chat|odd|pressure|viol","reason":"分類の理由（20字以内）","answer":"（ト書き）「回答」"}`;
+}
+async function askFree(c,q){
+  const sigs={};FT_ORDER.forEach(k=>sigs[k]=sigFor(c,k));
+  const dv=c.t.cha+.35*gz();c.obs.deliv.push(dv);
+  let {type,reason}=classify(q);let text=null,src='内蔵の判定';
+  if(G.cfg.ai==='ai'){
+    try{const raw=await callLLM(buildPrompt(c,q,sigs,dv));const m=raw.match(/\{[\s\S]*\}/);const j=JSON.parse(m[0]);
+      if(FT[j.type]&&j.answer){type=j.type;reason=j.reason||'';text=String(j.answer).slice(0,300);src='生成AI';}}
+    catch(e){G.aiNote='生成AIにつながらなかったので、内蔵の判定で答えました。';}
+  }
+  if(!text){
+    const pre=dv>.6?pick(['（よどみなく、目を見て）','（笑顔で、間を置かずに）']):dv<-.5?pick(['（少し考えてから、小さな声で）','（視線を落としたまま）']):pick(['（落ち着いた様子で）','']);
+    text=(pre?pre+' ':'')+fill(pick(poolFor(type,tierOf(sigs[type]))),{ep:c.episode});
+  }
+  const f=FT[type];let aside='';
+  if(type==='viol'){aside='その質問は、厚労省が「就職差別につながるおそれがある」としている種類のものだ。';G.viol.push({q:'free',id:c.id,text:q});}
+  if(f.accept)c.acceptAdj=(c.acceptAdj||0)+f.accept;
+  if(type==='knowledge')c.obs.work=c.obs.work===undefined?sigs.knowledge:c.obs.work;
+  G.free[c.id]={q,type,reason,src};
+  return {qid:'free',qtext:q,text,aside,free:{type,src}};
+}
+
+function ask(c,qid){
+  const q=qid==='pro'?{...Q.pro,...IND[G.cfg.ind].pro}:Q[qid];const t=c.t;
+  const dv=t.cha+.35*gz();c.obs.deliv.push(dv);
+  const pre=dv>.6?pick(['（よどみなく、目を見て）','（笑顔で、間を置かずに）','（身振りを交えて）','（面接官の名前を呼んでから）']):dv<-.5?pick(['（少し考えてから、小さな声で）','（視線を落としたまま）','（早口で一気に）','（何度も言い直しながら）']):pick(['（落ち着いた様子で）','','（一呼吸おいて）','']);
+  let text,aside='';
+  if(qid==='family'){
+    text=t.wealth>.7?pick(['「父は医師で、母は会社を経営しています」','「父は弁護士で、母は大学で教えています」']):t.wealth>-.5?pick(['「父は会社員で、母はパートをしています」','「両親とも公務員です」']):pick(['「父は工場に勤めています。母は……早くに亡くなりました」','「母が一人で育ててくれました。スーパーで働いています」']);
+    aside='この情報を評価のどこに使うつもりか、メモ欄が静かにこちらを見ている。';G.viol.push({q:qid,id:c.id});
+  }else if(qid==='marry'){
+    text=pick(['「……それ、答えないといけませんか」','「今のところ予定はありません」（表情が少し固くなった）','「それは、選考に関係ありますか」（まっすぐこちらを見た）']);
+    aside='候補者の中で、この会社の順位が一つ下がった音がした。';G.viol.push({q:qid,id:c.id});
+  }else if(qid==='hobby'){
+    if(c.sameHobby){text=`「実は${c.hobby}が好きで……」`;aside=`あなたも${c.hobby}が好きだ。話が異様に弾み、気づけば10分経っていた。評価項目には関係がない。`;c.obs.rapport=true;}
+    else text=dv>.3?pick([`「${c.hobby}です。最近は……」（楽しそうに話した）`,`「${c.hobby}ですね。去年からハマっていて、実は……」（止まらなかった）`]):dv>-.4?`「${c.hobby}をしています」（それ以上は広がらなかった）`:pick([`「${c.hobby}、ですかね……」（会話はそこで終わった）`,`「特に……あ、${c.hobby}とか」`]);
+  }else{
+    let s=0;for(const k in q.w)s+=q.w[k]*t[k];s+=q.noise*gz();
+    const tier=s>.5?'hi':s>-.45?'mid':'lo';
+    text=fill(pick(q[tier]),{ep:c.episode});
+    c.obs[qid]=s;
+  }
+  if(q.accept)c.acceptAdj=(c.acceptAdj||0)+q.accept;
+  return {qid,text:pre?pre+' '+text:text,aside};
+}
+
+/* ============ シミュレーション ============ */
+function simSeat(c,env,r,cfg){
+  const S=SIZE[cfg.size],I=IND[cfg.ind];let st='在籍',leave=false,sum=0,worked=0,pen=0;const ys=[];const fit=gz(r)*.8;
+  const comp={abil:0,mgr:0,fit:0,luck:0};
+  const pLeave=c.gender==='女性'?.05:c.gender==='男性'?.015:.03;
+  for(let y=0;y<3;y++){
+    if(st!=='在籍'){ys.push(null);continue}
+    if(y>0&&!leave&&r()<pLeave){
+      leave=true;const back=({big:.85,sme:.7,startup:.55})[cfg.size]+(env.mgr[y]>0?.1:-.1);
+      if(r()>back)st='育休後退職';
+      ys.push({leave:true,mgr:env.mgr[y]});continue;
+    }
+    const luck=gz(r)*S.luck;let perf=.65*c.pot+.3*env.mgr[y]+fit+luck;let ev=null;
+    comp.abil+=.65*c.pot;comp.mgr+=.3*env.mgr[y];comp.fit+=fit;comp.luck+=luck;
+    if(c.t.integ<-1.2&&r()<(I.integ||.2)){perf-=2.2;comp.scan=(comp.scan||0)-2.2;st='懲戒';ev='scandal'}
+    let qp=I.quit+S.quit+.07*(-c.t.stay)+(env.mgr[y]<-.7?.1:0)+(perf>1.2&&cfg.size!=='big'?.06:0);
+    if(cfg.mode==='mid')qp-=.02;
+    sum+=perf;worked++;
+    const rec={perf,luck,mgr:env.mgr[y],ev,quit:false};ys.push(rec);
+    if(st==='在籍'&&r()<clamp(qp,.02,.6)){st='退職';rec.quit=true;pen=.5}
+  }
+  // 育休の年は比較から外す：休んだ場合は在籍した年の平均×3、自己都合退職はその時点までの合計
+  let total;
+  if(leave){const k=worked?3/worked:0;total=sum*k;for(const x in comp)comp[x]*=k;}
+  else{total=sum-pen;}
+  return {total,ys,st,leave,comp};
+}
+function mkEnv(r,cfg){const s=SIZE[cfg.size].mgr;const m=gz(r)*s;return {mgr:[m,m*.8+gz(r)*s*.5,m*.5+gz(r)*s*.7]}}
+
+/* ============ 描画共通 ============ */
+const $=s=>document.querySelector(s);
+function stamps(){
+  const i=PHASES.indexOf(G?G.phase:'setup');
+  $('#approve').innerHTML=STAMP_LB.map((l,k)=>{const cls=k+1<i?'done':k+1===i?'cur':'';return `<div class="${cls}"><div class="lb">${l}</div><div class="bx">${cls==='done'?'<span>済</span>':cls==='cur'?'<span></span>':''}</div></div>`}).join('');
+}
+function go(phase){G.phase=phase;render();window.scrollTo({top:0});}
+function render(){
+  stamps();const m=$('#main');
+  const p=G?G.phase:'setup';
+  m.innerHTML=(p==='setup'?vSetup():p==='docs'?vDocs():p==='group'?vGroup():p==='iv'?vIv():p==='board'?vBoard():vResult())+(G&&G.modal!=null?vModal(G.cands[G.modal]):'');
+}
+const profileLine=c=>`${c.gender==='未回答'?'性別未回答':c.gender}・${c.age}歳・${c.mode==='new'?c.uni:`転職${c.hops}回・前職 ${c.jobs[c.jobs.length-1].co.replace('株式会社','')}`}`;
+
+/* ============ 0. 設定 ============ */
+function chipset(name,opts,cur){return `<div class="chips">${opts.map(o=>`<label class="chip"><input type="radio" name="${name}" id="${name}-${o[0]}" value="${o[0]}" ${o[0]===cur?'checked':''}><span>${o[1]}${o[2]?`<small>${o[2]}</small>`:''}</span></label>`).join('')}</div>`}
+function vSetup(){
+  const rs=Math.round(REP.score);
+  return `<section class="setup">
+  <div class="intro">
+    <h2>あなたには、人を見る目がある。</h2>
+    <p class="sub">少なくとも、あなたはそう思っている。</p>
+    <ol>
+      <li><span>書類選考</span><span>12通の履歴書から6人を通す</span></li>
+      <li><span>集団面接</span><span>6人から3人を通す</span></li>
+      <li><span>個別面接</span><span>1人につき質問は3つまで。評価と確信度をつける</span></li>
+      <li><span>役員会</span><span>推薦順位を出す。決めるのは役員</span></li>
+      <li><span>三年後</span><span>採った人がどうなったか。採らなかった11人が同じ席でどうなったか。候補者はあなたの会社を口コミサイトに書く</span></li>
+    </ol>
+    <div class="repbox"><div>就活口コミサイトでの御社の評価　<span class="stars-s">${starsTxt(rs)}</span> <b class="num">${REP.score.toFixed(2)}</b> <span class="note">（${REP.n}件）</span></div><div class="note">応募者の集まり方：${repLabel(REP.score)}。評価を動かすのは、あなたの選考のやり方（書類を読む速さ、面接で何を聞いたか）だけです。次の応募者の質と内定承諾率に響きます。</div>${REP.n?'<div><button class="linkbtn" data-act="represet">口コミを初期状態に戻す</button></div>':''}</div>
+    ${setupRadar()}
+  </div>
+  <form class="form" id="setupForm">
+    <fieldset><legend>採用区分</legend>${chipset('mode',[['new','新卒採用'],['mid','中途採用']],CFG.mode)}</fieldset>
+    <fieldset><legend>業種</legend>${chipset('ind',Object.entries(IND).map(([k,v])=>[k,v.name]),CFG.ind)}</fieldset>
+    <fieldset><legend>企業規模</legend>${chipset('size',Object.entries(SIZE).map(([k,v])=>[k,v.name,v.sub]),CFG.size)}</fieldset>
+    <fieldset><legend>面接官（あなた）について</legend>
+      <div class="me">
+        <label for="uni">出身大学<select id="uni" name="uni">${MY_UNIS.map(u=>`<option ${u===CFG.uni?'selected':''}>${u}</option>`).join('')}</select></label>
+        <label for="hobby">趣味<select id="hobby" name="hobby">${HOBBIES.map(u=>`<option ${u===CFG.hobby?'selected':''}>${u}</option>`).join('')}</select></label>
+      </div>
+      <p class="note">選考には関係のない情報です。関係ないはずなので、関係なかったかどうかを最後に確認します。</p>
+    </fieldset>
+    <fieldset><legend>自由質問の答え方</legend>${chipset('ai',[['builtin','内蔵の判定','すぐ答える'],['ai','生成AIが答える',KEIGAN_ENDPOINT?'より自然な回答・数秒かかる':'あなたの Claude 利用枠を使用']],CFG.ai||(KEIGAN_ENDPOINT?'ai':'builtin'))}
+      <p class="note">${KEIGAN_ENDPOINT?'生成AIを選ぶと、候補者があなたの質問そのものに答えます。回答には数秒かかります。つながらないときは、自動で内蔵の判定に切り替わります。':'生成AIを選ぶと、候補者があなたの質問そのものに答えます。回答には数秒〜数十秒かかり、初回は利用の許可を求められます。使えない環境では自動で内蔵の判定に切り替わります。'}</p></fieldset>
+    <div><button class="btn" type="submit">採用活動を始める</button></div>
+  </form></section>`;
+}
+function start(){
+  const f=$('#setupForm');const fd=new FormData(f);
+  CFG={mode:fd.get('mode'),ind:fd.get('ind'),size:fd.get('size'),uni:fd.get('uni'),hobby:fd.get('hobby'),ai:fd.get('ai')||(KEIGAN_ENDPOINT?'ai':'builtin')};
+  const seed=Math.floor(Math.random()*2147483646)+1;
+  R=mulberry32(seed);
+  G={seed,cfg:{...CFG},phase:'docs',cands:[],p1:new Set(),p2:new Set(),final:[],iv:0,asked:{},log:{},rate:{},rank:[],reason:null,viol:[],declined:[],free:{},fqDraft:'',pending:false,aiNote:'',t0:performance.now(),t1:null,modal:null,rep0:REP.score};
+  for(let i=0;i<12;i++)G.cands.push(makeCand(G.cfg,i));
+  go('docs');
+}
+
+/* ============ 1. 書類 ============ */
+function sheet(c,sel,still){
+  const cfg=G.cfg;
+  let body;
+  if(cfg.mode==='new'){
+    body=`<div class="sec"><h4>学生時代に力を入れたこと</h4><p class="lead">${esc(c.gHead)}</p><p>${esc(c.gBody)}</p></div>`;
+  }else{
+    body=`<div class="sec"><h4>職務経歴（転職${c.hops}回）</h4><ul>${c.jobs.map(j=>`<li>${esc(j.co)}　<span class="num">${j.y}</span>年</li>`).join('')}</ul></div>
+    <div class="sec"><h4>主な実績</h4>${c.ach.map((a,i)=>`<p class="${i===0&&c.ach.length>1?'lead':''}">${esc(a)}</p>`).join('')}</div>`;
+  }
+  const attrs=still?'':`data-act="t1" data-id="${c.id}" tabindex="0" role="button" aria-pressed="${sel}"`;
+  return `<article class="sheet ${sel?'on':''}" ${attrs}>
+    <div class="hd"><b>履歴書</b><span>No.${String(c.id+1).padStart(2,'0')}</span></div>
+    <div class="idrow"><div class="photo">${face(c)}</div>
+      <dl><div><dt>氏名</dt><dd class="nm">${esc(c.name)}</dd></div>
+      <div><dt>性別</dt><dd>${c.gender}　<span class="num">${c.age}</span>歳${cfg.mode==='mid'?`　希望年収 <span class="num">${c.salary}</span>万円`:''}</dd></div>
+      <div><dt>学歴</dt><dd>${esc(c.uni)} ${esc(c.fac)}${c.alma?'<span class="flag">あなたの母校</span>':''}<span class="tier">${c.tierLabel}</span></dd></div></dl></div>
+    ${body}
+    <div class="sec two"><div><h4>資格</h4><p>${c.certs.length?c.certs.join('、'):'なし'}</p></div><div><h4>TOEIC</h4><p class="num">${c.toeic??'未受験'}</p></div></div>
+    <div class="sec"><h4>志望動機</h4><p>${esc(c.motive)}</p></div>
+    <div class="sec two"><div><h4>趣味</h4><p>${esc(c.hobby)}${c.sameHobby?'<span class="flag">あなたと同じ</span>':''}</p></div><div><h4>備考</h4><p>${esc(c.gap)}</p></div></div>
+    <div class="looks">写真と受付での印象：${c.looks.join('／')}</div>
+    ${still?'':'<div class="stamp">通過</div>'}
+  </article>`;
+}
+function vDocs(){
+  const n=G.p1.size;
+  return `<div class="fusen">${IND[G.cfg.ind].name}・${SIZE[G.cfg.size].name}の${G.cfg.mode==='new'?'新卒':'中途'}採用。職種は<b>${IND[G.cfg.ind].role[G.cfg.mode]}</b>。<br>履歴書は12通。6通に判子を押してください。一通に何秒かけたかは、こちらで数えておきます。</div>
+  <div class="bar-row"><span class="count">通過 <b>${n}</b> / 6</span><button class="btn" data-act="next1" ${n===6?'':'disabled'}>集団面接へ進める</button></div>
+  <div class="grid">${G.cands.map(c=>sheet(c,G.p1.has(c.id))).join('')}</div>
+  <div class="bar-row"><span class="count">通過 <b>${n}</b> / 6</span><button class="btn" data-act="next1" ${n===6?'':'disabled'}>集団面接へ進める</button></div>`;
+}
+
+/* ============ 2. 集団面接 ============ */
+const INTRO={
+  hi:['「{nm}です！ {gs}に全力を注いできました。今日はよろしくお願いします！」（よく通る声で、30秒ぴったり）','「{nm}です。一言で言うと“巻き込み型のリーダー”です！」（自分でキャッチコピーをつけていた）','「{nm}です。{gs}では毎日が挑戦でした。今日は皆さんと熱い議論ができればと思います！」（全員の目を順番に見た）','「はじめまして、{nm}です！ 実は、全然緊張していません！」（本当に緊張していなかった）','「{nm}と申します。趣味は{hobby}、特技は初対面の人と仲良くなることです」（隣の候補者が少し引いた）'],
+  mid:['「{nm}と申します。{gs}をしていました。よろしくお願いいたします」','「{nm}です。本日はよろしくお願いします」（深くお辞儀をした）','「{nm}です。{gs}のことを少しお話しできればと思います。よろしくお願いします」','「{nm}です。{hobby}が好きです。よろしくお願いします」（笑いは起きなかった）'],
+  lo:['「……{nm}です。えっと、{gs}を少し。よろしくお願いします」','「{nm}です。……以上です」（面接官が次の言葉を待ったが、何も来なかった）','「あ、{nm}です。すみません、ちょっと緊張していて」（声が裏返った）','「{nm}です。{gs}を……すみません、最初からいいですか」'],
+};
+const GD_HI=['「そもそも目標が『半分にする』なのか『相手が困らない』なのかで、打ち手が変わると思います」','「案を増やす前に、今いちばん時間を食っているものを一つ決めませんか」','「その案だと、費用は誰が持つんですか」','「一つ前の案、試すなら最初の一か月で効果が分かる形にできますよね」','「全部やると予算が足りないので、やらないことを先に決めましょう」','「それ、うまくいったかどうかを何で判断しますか」','「さっきの二つの案は同じ問題を解いているので、一本にまとめられます」','「現場の人が今それをやっていない理由が、たぶん一番のヒントです」'];
+const GD_MID=['「SNSを活用するのはどうでしょうか」','「まずアンケートを取ってニーズを把握すべきだと思います」','「成功事例を参考にするのがいいと思います」','「〇〇さんの意見に賛成で、そこに少し付け加えると……」','「ターゲットを明確にすることが大事だと思います」','「インフルエンサーとコラボするのはどうでしょう」','「PDCAを回していくことが重要だと思います」','「若手の意見を取り入れる仕組みがあるといいと思います」'];
+const GD_LO=['「若い人はやっぱりTikTokだと思います！」','「とりあえず全部やってみればいいと思います」','（前の人と同じ内容を、別の言葉で言い直した）','「AIを使えば解決すると思います」','「逆に、あえて何もしないというのはどうでしょう」（誰も拾わなかった）','「私のバイト先ではこうだったんですけど……」（5分続いた）','「それって結局、やる気の問題じゃないですか」','「ちょっと話を戻していいですか」（戻った先は、誰も話していない論点だった）'];
+const NOTES={
+  socHi:['黙っていた人に話を振った','反対意見にも「それもありですね」と先に言ってから話した','他の人の案に名前をつけて整理した','議論が荒れた場面で一度要約を入れた'],
+  socLo:['他人の発言を「つまり」でまとめて、自分の案に戻した','他の人が話している途中で割り込んだ（2回）','他人の案を、自分の案のように言い直した'],
+  conHi:['残り時間を二度確認した','書記を買って出た','最後にホワイトボードを消して帰った','課題文の条件を最初に読み上げた'],
+  gHi:['前提の食い違いを一言で指摘した','数字の見積もりをその場で出した','議論が同じところを回り始めたことに最初に気づいた'],
+  gLo:['途中で論点がずれた','課題を途中から別の課題だと思っていた','同じ質問を二回した'],
+  chaHi:['最初に手を挙げて司会を買って出た','最後のまとめを引き取った','面接官のほうをよく見ていた','発表役に立候補した'],
+  chaLo:['ほとんど発言しなかった','話を振られるまで黙っていた','発言の最初に必ず「すみません」と言った'],
+  neutral:['うなずきが多い','メモを細かく取っていた','ときどき時計を見た','貧乏ゆすりをしていた','他の候補者の発言に大きく笑った','水に一度も口をつけなかった','付箋を色分けして使っていた','椅子に浅く座っていた'],
+};
+const GD_REACT={hi:['「〇〇さんの案、前提だけ直せば使えると思います」','「今の意見、もう少し詳しく聞かせてもらえますか」','「私の案は取り下げます。そっちのほうがいいです」','「反対の人の意見も一回聞きませんか」'],mid:['「なるほど、いいですね」','「私もそう思います」','（うなずきながら聞いていた）','「確かに、それもありですね」'],lo:['「いや、それは違うと思います」（食い気味だった）','「さっきも言いましたけど……」','（他の人が話している間、ずっと自分のメモを書いていた）','「それ、意味あります？」']};
+function gdRole(c){const h=c.t.cha+.6*gz(),k=c.t.con+.6*gz();if(h>.9)return pick(['司会（自分から立候補）','発表役（自分から立候補）']);if(k>.9)return pick(['書記','タイムキーパー']);if(h>.3)return '発表役（じゃんけんで負けた）';return 'なし'}
+function gdNotes(c){
+  const t=c.t,o=v=>v+.8*gz();const cand=[];
+  const s=o(t.soc),k=o(t.con),g=o(t.g),h=o(t.cha);
+  if(s>.6)cand.push([s,pick(NOTES.socHi)]);
+  if(s<-.6&&h>.2)cand.push([-s,pick(NOTES.socLo)]);
+  if(k>.6)cand.push([k,pick(NOTES.conHi)]);
+  if(g>.7)cand.push([g,pick(NOTES.gHi)]);
+  if(g<-.8)cand.push([-g,pick(NOTES.gLo)]);
+  if(h>.6)cand.push([h,pick(NOTES.chaHi)]);
+  if(h<-.6)cand.push([-h,pick(NOTES.chaLo)]);
+  let n1=pick(NOTES.neutral),n2=pick(NOTES.neutral);while(n2===n1)n2=pick(NOTES.neutral);
+  cand.push([.2+R()*.3,n1],[.1+R()*.2,n2]);
+  cand.sort((a,b)=>b[0]-a[0]);return cand.slice(0,3).map(x=>x[1]);
+}
+function prepGroup(){
+  if(G.gdReady)return;
+  G.gdTopic=pick([...IND[G.cfg.ind].gd,...GD_COMMON]);
+  G.cands.filter(c=>G.p1.has(c.id)).forEach(c=>{
+    const tt=c.obs.talk;const nm=c.name.split(' ')[0];
+    c.intro=fill(pick(INTRO[tt>.6?'hi':tt>-.4?'mid':'lo']),{nm,gs:c.gs,hobby:c.hobby});
+    c.gdQuote=pick(c.obs.gdC>.45?GD_HI:c.obs.gdC>-.4?GD_MID:GD_LO);c.gdNotes=gdNotes(c);{const sv=c.t.soc+.7*gz();c.gdReact=pick(GD_REACT[sv>.5?'hi':sv>-.5?'mid':'lo'])}c.gdRole=gdRole(c);c.talkN=Math.round(clamp(4+2.2*c.obs.talk,1,9));
+  });G.gdReady=true;
+}
+function vGroup(){
+  prepGroup();const list=G.cands.filter(c=>G.p1.has(c.id));
+  const n=G.p2.size;
+  return `<div class="fusen">集団面接。6人並べて40分。声の大きい人から順に賢く見える時間です。<br>3人を個別面接に進めてください。</div>
+  <div class="bar-row"><span class="count">通過 <b>${n}</b> / 3</span><button class="btn" data-act="next2" ${n===3?'':'disabled'}>個別面接へ進める</button></div>
+  <div class="theme"><h4>グループディスカッションの課題</h4><p>${esc(G.gdTopic)}</p></div>
+  <div class="grid">${list.map(c=>`<article class="sheet ${G.p2.has(c.id)?'on':''}" data-act="t2" data-id="${c.id}" tabindex="0" role="button" aria-pressed="${G.p2.has(c.id)}">
+    <div class="who">${face(c)}<div><div class="nm">${esc(c.name)}</div><div class="note">${esc(profileLine(c))}</div><div class="mrow"><span>発言量</span><div class="meter" aria-label="発言${c.talkN}回">${Array.from({length:9},(_,i)=>`<i class="${i<c.talkN?'f':''}"></i>`).join('')}</div><span class="num">${c.talkN}回</span></div></div><div></div></div>
+    <div class="sec"><h4>自己紹介</h4><p class="quote">${esc(c.intro)}</p></div>
+    <div class="sec"><h4>議論での役割</h4><p>${esc(c.gdRole)}</p></div>
+    <div class="sec"><h4>議論での発言（抜粋）</h4><p class="quote">${esc(c.gdQuote)}</p><p class="quote" style="margin-top:4px">${esc(c.gdReact)}</p></div>
+    <div class="sec"><h4>面接官メモ</h4><ul class="memo">${c.gdNotes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+    <div class="stamp">通過</div></article>`).join('')}</div>`;
+}
+
+/* ============ 3. 個別面接 ============ */
+function vIv(){
+  const c=G.cands[G.final[G.iv]];const asked=G.asked[c.id]||[];const log=G.log[c.id]||[];const rt=G.rate[c.id]||{star:0,conf:70};
+  const qs=Q_ORDER.filter(k=>!(Q[k].midOnly&&G.cfg.mode==='new'));
+  const full=asked.length>=3;
+  const recap=G.cfg.mode==='new'?`<p class="lead">${esc(c.gHead)}</p><p class="note">${esc(c.uni)}・${esc(c.fac)}</p>`:`<p class="lead">${esc(c.ach[0])}</p><p class="note">希望年収 ${c.salary}万円</p>`;
+  return `<div class="fusen">個別面接。1人につき質問は3つまで。何を聞くかで、あなたが本当は何を知りたいのかが分かります。</div>
+  <div class="bar-row"><div class="tabs">${G.final.map((id,i)=>`<span class="${i===G.iv?'cur':i<G.iv?'dn':''}">${esc(G.cands[id].name)}</span>`).join('')}</div><span class="count">質問 <b>${asked.length}</b> / 3</span></div>
+  <div class="iv">
+    <div>
+      <article class="sheet"><div class="who">${face(c)}<div><div class="nm">${esc(c.name)}</div><div class="note">${esc(profileLine(c))}</div></div><div></div></div>
+      <div class="sec"><h4>書類より</h4>${recap}</div>
+      <div class="sec"><h4>集団面接</h4><p class="note">役割：${esc(c.gdRole||'なし')}</p><p class="quote">${esc(c.gdQuote)}</p><p class="quote">${esc(c.gdReact||'')}</p><ul class="memo">${c.gdNotes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+      <div class="looks">印象：${c.looks.join('／')}</div></article>
+      <h3 style="font-size:16px;margin:18px 0 8px">質問を選ぶ</h3>
+      <div class="qs">${qs.map(k=>`<button class="q ${asked.includes(k)?'asked':''}" data-act="ask" data-q="${k}" ${asked.includes(k)||full||G.pending?'disabled':''}><span>${esc(qLabel(k))}</span><small>${Q[k].tag}</small></button>`).join('')}</div>
+      <div class="freeq"><label for="fq">自由質問（1人につき1回・3問のうちに数えます）</label>
+      <textarea id="fq" rows="2" maxlength="80" placeholder="例：前のアルバイトで一番怒られたのは、何をしたときですか" ${asked.includes('free')||full||G.pending?'disabled':''}>${esc(G.fqDraft||'')}</textarea>
+      <div class="row"><span class="note">${G.cfg.ai==='ai'?'生成AIが答え、質問の種類を判定します':'内蔵の判定が質問の種類を見分けて答えます'}</span><button class="btn small" data-act="freeask" ${asked.includes('free')||full||G.pending?'disabled':''}>この質問をする</button></div></div>
+    </div>
+    <div>
+      <div class="log">${log.length?log.map(e=>`<div class="ex"><div class="qq">Q. ${esc(eqLabel(e))}${e.free?`<span class="tagfree">自由質問</span>`:''}</div><div class="aa">${esc(e.text)}</div>${e.aside?`<div class="aside">${esc(e.aside)}</div>`:''}</div>`).join(''):'<p class="empty">左から質問を選ぶか、自由質問を書いてください。</p>'}${G.pending?'<p class="thinking">（候補者が考えています……）</p>':''}${G.aiNote?`<p class="note">${esc(G.aiNote)}</p>`:''}</div>
+      ${full?`<div class="rate"><div><h4 style="margin:0 0 4px;font-size:13px">この人の評価</h4><div class="stars">${[1,2,3,4,5].map(s=>`<button data-act="star" data-s="${s}" class="${s<=rt.star?'on':''}" aria-label="${s}点">★</button>`).join('')}</div></div>
+      <div><label for="conf" style="font-size:13px">確信度　<b class="num" id="confv">${rt.conf}</b>%</label><input type="range" id="conf" min="50" max="100" step="5" value="${rt.conf}"></div>
+      <div><button class="btn" data-act="nextiv" ${rt.star?'':'disabled'}>${G.iv<2?'次の候補者へ':'役員会の準備へ'}</button></div></div>`:''}
+    </div>
+  </div>`;
+}
+
+/* ============ 4. 役員会 ============ */
+const REASONS=[['g','地頭が良い'],['con','誠実で真面目'],['skill','即戦力になる'],['soc','コミュニケーション力'],['fit','カルチャーフィット'],['gut','なんとなく、目が良かった']];
+function dossier(c){
+  const docs=c.mode==='new'?`<p class="lead">${esc(c.gHead)}</p><p>${esc(c.gBody)}</p>`:`<p>${c.jobs.map(j=>esc(j.co.replace('株式会社',''))+` ${j.y}年`).join(' → ')}</p>${c.ach.map(a=>`<p>${esc(a)}</p>`).join('')}`;
+  const log=G.log[c.id]||[];
+  return `<div class="sec"><h4>書類</h4>${docs}<p class="note">${esc(c.uni)} ${esc(c.fac)}（${c.tierLabel}）／資格：${c.certs.length?c.certs.join('、'):'なし'}／TOEIC ${c.toeic??'未受験'}／趣味：${esc(c.hobby)}${c.similar?'<span class="flag">あなたと共通点</span>':''}</p><p class="note">志望動機：${esc(c.motive)}</p></div>
+  ${c.intro?`<div class="sec"><h4>集団面接（発言${c.talkN}回）</h4><p class="quote">${esc(c.intro)}</p><p class="note">役割：${esc(c.gdRole||'なし')}</p><p class="quote">${esc(c.gdQuote)}</p><p class="quote">${esc(c.gdReact||'')}</p><ul class="memo">${c.gdNotes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
+  ${log.length?`<div class="sec"><h4>個別面接</h4>${log.map(e=>`<div class="qa"><div class="qq">Q. ${esc(eqLabel(e))}</div><div>${esc(e.text)}</div>${e.aside?`<div class="aside">${esc(e.aside)}</div>`:''}</div>`).join('')}</div>`:''}
+  <div class="looks">印象：${c.looks.join('／')}</div>`;
+}
+function vBoard(){
+  const done=!!G.board;
+  const cards=G.final.map(id=>{const c=G.cands[id];const rk=G.rank.indexOf(id);const r=G.rate[id];
+    return `<article class="bcard ${rk>=0?'ranked':''}"><div class="who">${face(c)}<div><div class="nm">${esc(c.name)}</div><div class="note">${esc(profileLine(c))}</div><div class="st">${starsTxt(r.star)}</div><div class="note">確信度 ${r.conf}%</div></div>
+    <div>${rk>=0?`<div class="rkbadge">${rk+1}位</div>`:done?'':`<button class="btn small" data-act="rk" data-id="${id}">${G.rank.length+1}位に推す</button>`}</div></div>${dossier(c)}</article>`}).join('');
+  let html=`<div class="fusen">役員会に推薦します。あなたの推薦は、参考意見として大切に扱われます。<br>3人の推薦順位と、1位に推す理由を決めてください。</div>`;
+  if(!done){
+    html+=`<div class="bar-row"><span class="count">推薦順位 <b>${G.rank.length}</b> / 3</span><button class="btn ghost small" data-act="rkreset" ${G.rank.length?'':'disabled'}>順位を付け直す</button></div><div class="bgrid">${cards}</div>
+    <div class="form" style="margin-top:18px"><fieldset><legend>1位に推す理由</legend><div class="chips">${REASONS.map(r=>`<label class="chip"><input type="radio" name="reason" id="rs-${r[0]}" value="${r[0]}" ${G.reason===r[0]?'checked':''}><span>${r[1]}</span></label>`).join('')}</div></fieldset>
+    <div><button class="btn" data-act="meet" ${G.rank.length===3&&G.reason?'':'disabled'}>役員会を開く</button></div></div>`;
+  }else{
+    html+=`${G.board.html}<div class="foot-actions"><button class="btn" data-act="toresult">三年後を見る</button></div><div style="margin-top:22px" class="bgrid">${cards}</div>`;
+  }
+  return html;
+}
+function meeting(){
+  const fin=G.final.map(id=>G.cands[id]);const cfg=G.cfg;
+  const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+  const sc={
+    ceo:c=>.6*(c.obs.talk+avg(c.obs.deliv))+.35*(c.tier-3)/1.2+.35*c.t.attract+(c.taiiku?.7:0)+.3*gz(),
+    coo:c=>(c.obs.work!==undefined?c.obs.work:c.obs.pro!==undefined?c.obs.pro:.45*(c.tier-3)/1.2+.4*c.obs.gdC+(cfg.mode==='mid'?.4*c.prest:0))+.25*gz(),
+    cfo:c=>cfg.mode==='mid'?-(c.salary-500)/60+.3*gz():-.6*(c.gap==='特になし'?0:1)+.15*c.certs.length+.4*gz(),
+  };
+  const who={ceo:'権田 社長',coo:'鷲尾 事業本部長',cfo:'金子 CFO'};
+  const pts={};fin.forEach(c=>pts[c.id]=0);
+  G.rank.forEach((id,i)=>pts[id]+=(3-i)*3);
+  const lines=[];const fam=c=>c.name.split(' ')[0];const nm=c=>fin.some(o=>o!==c&&fam(o)===fam(c))?c.name.replace(' ',''):fam(c);
+  lines.push(['sys',`人事より推薦順位を説明。1位 ${G.cands[G.rank[0]].name}、理由「${REASONS.find(r=>r[0]===G.reason)[1]}」。`]);
+  for(const k of ['ceo','coo','cfo']){
+    const ord=[...fin].sort((a,b)=>sc[k](b)-sc[k](a));
+    ord.forEach((c,i)=>pts[c.id]+=3-i);
+    const top=ord[0];let say;
+    if(k==='ceo')say=top.taiiku?`「${nm(top)}さん、体育会だったんだろ。それで十分だよ」`:pick([`「${nm(top)}さんがいい。目が死んでない。こういうのは理屈じゃないんだ」`,`「写真を見た瞬間に${nm(top)}さんだと思ったね。俺の勘は当たるんだ」`,`「${nm(top)}さんは声がいい。声がいい人間は伸びる」`]);
+    if(k==='coo')say=top.obs.work===undefined&&top.obs.pro!==undefined?`「専門的な質問への答えを見ました。現場で話が通じるのは${nm(top)}さんです」`:top.obs.work!==undefined?`「課題の出来を見ました。現場で使えるのは${nm(top)}さんです」`:`「課題を出していないなら判断材料が少ない。経歴で言えば${nm(top)}さんでしょう」`;
+    if(k==='cfo')say=cfg.mode==='mid'?`「${nm(top)}さんの希望年収は${top.salary}万円。一番まともです」`:pick([`「リスクが一番少ないのは${nm(top)}さんです。根拠ですか。勘です」`,`「${nm(top)}さんは資格を持っている。少なくとも勉強はする人です」`]);
+    lines.push([who[k],say]);
+  }
+  const order=[...fin].sort((a,b)=>pts[b.id]-pts[a.id]||G.rank.indexOf(a.id)-G.rank.indexOf(b.id));
+  const overridden=order[0].id!==G.rank[0];
+  lines.push(['sys',`集計：${order.map(c=>`${c.name} ${pts[c.id]}点`).join('／')}（人事の推薦は1位9点・2位6点・3位3点、役員は各3・2・1点）`]);
+  lines.push(['権田 社長',overridden?`「人事の意見はよく分かった。参考にさせてもらったよ。${nm(order[0])}さんで行こう」`:`「人事の目は確かだな。${nm(order[0])}さんで行こう」`]);
+  let hired=null;const declined=[];
+  for(const c of order){
+    const mv=.5*c.pot+.3*(c.tier-3)/1.2+.3*c.t.cha;
+    const p=clamp(SIZE[cfg.size].accept-.13*Math.max(0,mv)+(c.acceptAdj||0)+(c.obs.rapport?.05:0)+(G.rep0-3.5)*.08,.15,.95);
+    if(R()<p){hired=c;lines.push(['sys',`${c.name} に内定を出した。承諾。`]);break}
+    declined.push(c.id);lines.push(['sys',`${c.name} に内定を出した。「大変ありがたいお話ですが、他社様にお世話になることにいたしました」`]);
+  }
+  if(!hired)lines.push(['sys','3人とも辞退。今期の採用はゼロ。欠員のまま一年が始まる。']);
+  G.order=order.map(c=>c.id);G.hired=hired?hired.id:null;G.declined=declined;G.overridden=overridden;
+  G.board={html:`<div class="minutes"><h3>議事録</h3>${lines.map((l,i)=>l[0]==='sys'?`<div class="line sys" style="animation-delay:${i*.35}s">${esc(l[1])}</div>`:`<div class="line" style="animation-delay:${i*.35}s"><b>${esc(l[0])}</b><span>${esc(l[1])}</span></div>`).join('')}</div>`};
+}
+
+/* ============ 5. 結果 ============ */
+const grade=p=>p>1.1?'S':p>.4?'A':p>-.4?'B':p>-1.1?'C':'D';
+function yearText(c,rec,used){
+  if(rec.ev==='scandal')return '経費精算の不正が発覚した。本人は「みんなやってる」と言った。懲戒処分。';
+  let s;
+  if(rec.luck>.7)s=pick(['担当顧客が勝手に伸びた。評価面談では本人の手柄になった。','異動してきた部長が当たりだった。本人はそれを実力だと思っている。','たまたま担当した案件が社長賞を取った。']);
+  else if(rec.luck<-.7)s=pick(['担当案件が、本人と関係のない理由で凍結された。','配属先の課長が半年で休職し、放置された一年だった。','取引先が倒産した。本人のせいではないが、数字は本人に付いた。']);
+  else if(rec.mgr<-.6)s='直属の上司は、部下の名前を2か月覚えなかった。';
+  else if(c.pot>.6)s=pick(['やるべきことを、やるべき順にやっていた。目立たないが、周りが楽になった。','誰も気づかないところで、誰かの残業を減らしていた。']);
+  else if(c.pot<-.6)s=pick(['頑張ってはいる。頑張っていることは、みんな知っている。','会議での発言は多い。議事録に残る内容は少ない。']);
+  else s='可もなく不可もない一年。この「可もなく」が組織の大半を占めている。';
+  if(used.has(s))s=pick(['去年と同じような一年。本人は去年より成長したと言っている。','特に何も起きなかった。それが一番多い一年の形だ。','評価面談は15分で終わった。']);used.add(s);
+  if(rec.quit)s+=pick(['　年度末、「成長できる環境を求めて」転職した。','　秋に退職代行から連絡が来た。','　競合から声がかかり、あっさり移った。']);
+  return s;
+}
+let USED=new Set();
+const pu=a=>{const f=a.filter(x=>!USED.has(x));const v=pick(f.length?f:a);USED.add(v);return v};
+function fateText(c,rank,n){
+  const st=c.res.st;
+  if(st==='懲戒')return pu(['2年目に経費の不正が見つかり、懲戒処分になった。','取引先との不適切なやりとりが発覚し、諭旨退職になった。']);
+  if(st==='育休後退職')return pu(['育休のあと、復帰せずに退職した。部署に短時間勤務の枠がなかった。','復帰面談で「前と同じ仕事は難しい」と言われ、そのまま辞めた。']);
+  if(st==='退職')return rank<=4?pu(['2年目に競合から引き抜かれた。条件は年収1.3倍だったらしい。','成果を出したあと、もっと大きな裁量を求めて同業他社へ移った。']):pu(['2年目に「成長できない」と言って転職した。','1年半で退職した。送別会の幹事は本人がやった。','退職代行を使って辞めた。最終出社日を誰も知らなかった。','地元に戻って家業を手伝うことになった。']);
+  const lv=c.res.leave?(c.gender==='男性'?'半年の育休を取って復帰した。':'産休・育休を経て復帰した。'):'';
+  let t;
+  if(rank<=2)t=pu(['2年目で主任に抜擢された。社内報にも載った。','担当した取引先が、社内で最大の顧客になった。','新人の教育係を任されている。部署で一番頼られている。']);
+  else if(rank<=5)t=pu(['評価は安定してA。昇格の話が出ている。','目立たないが、周りの仕事が確実に減った。','上司が異動するとき、後任に指名された。']);
+  else if(rank<=8)t=pu(['評価はB。本人はAだと思っている。','可もなく不可もなく3年目を迎えた。','異動を2回した。どちらも本人の希望ではない。','会議での発言は多い。議事録に残る内容は少ない。']);
+  else if(rank<=10)t=pu(['配属先で浮いている。上司とは週に一度しか話さない。','評価はC。本人は「上司が悪い」と言っている。半分は正しい。','残業は部署で一番多い。成果は部署で一番少ない。']);
+  else t=pu(['試用期間の延長を経て、なんとか在籍している。','3年目に「配置転換」という名目で別部署に移された。','毎年の評価面談が15分で終わる。']);
+  return lv?lv+t:t;
+}
+function makeReviews(){
+  USED=new Set();const out=[];const fast=G.R0secs<4;const F={};let sat=0,n=0;
+  for(const c of G.cands){
+    const fr=G.free[c.id];const qs=(G.asked[c.id]||[]).map(k=>k!=='free'?k:({behav:'behav',situ:'situ',knowledge:'work',odd:'animal',pressure:'pressure',viol:'viol'}[fr.type]||'x'));
+    const hasViol=qs.includes('family')||qs.includes('marry')||qs.includes('viol');
+    const hired=c.id===G.hired;let stage,s=3.5,emp=3.5;const lines=[];const mine=[];
+    const eff=(k,v)=>{s+=v;mine.push([k,v])};
+    if(hired){
+      if(c.res.st==='懲戒')continue;
+      const ys=c.res.ys.filter(y=>y);const m=ys.reduce((a,y)=>a+y.mgr,0)/ys.length;
+      stage=c.res.st==='育休後退職'?'元社員（育休後に退職）':c.res.st==='退職'?'元社員（3年以内に退職）':'社員（入社3年目）';
+      emp=3.2+m*.9+(c.res.st==='退職'?-.8:0)+(c.res.st==='育休後退職'?-1.1:0);
+      lines.push(c.res.st==='育休後退職'?pu(['育休から戻る場所がありませんでした。制度はあるのに、使える空気がない会社です。','復帰面談で「前と同じ仕事は難しい」と言われました。']):c.res.st==='退職'?pu(['面接で聞いた話と、配属先の現実は八割違いました。','人事は面接のときだけ優しい会社です。']):m>.3?pu(['上司に恵まれました。ただし、完全に上司ガチャです。','仕事は地味ですが、まともな人が多いです。']):m<-.3?pu(['配属ガチャに外れました。人事に言っても何も変わりません。','直属の上司が合わない人は地獄だと思います。']):pu(['良くも悪くも普通の会社です。','給料は相場並み。やりがいは自分で探すタイプの職場です。']));
+    }else if(!G.p1.has(c.id)){
+      stage='書類選考で不合格';
+      lines.push(fast?pu(['応募して2時間でお祈りが来ました。たぶん読まれていません。','ガクチカは3日かけて書きました。結果は即日でした。']):pu(['お祈りメールはテンプレートでした。','書類で落ちたので、会社の中身は分かりません。','結果の連絡は丁寧でした。落ちましたけど。']));
+      if(fast)eff('書類を1通あたり数秒で落とした',-.6);
+    }else if(!G.p2.has(c.id)){
+      stage='集団面接で不合格';
+      lines.push(pu(['集団面接。声の大きい人が通っていった印象です。','GDの課題は面白かったです。落ちましたが、納得はしています。','面接官がずっと手元の紙を見ていて、こちらを見ていませんでした。','6人中、一番しゃべった人が通ったと聞きました。']));
+    }else if(G.declined.includes(c.id)){
+      stage='内定を辞退';eff('内定を出した（辞退されたが、印象は悪くない）',.2);
+      lines.push(hasViol?'内定はもらいましたが、面接で聞かれた内容を思い出して辞退しました。':pu(['内定をいただきましたが辞退しました。他社のほうが条件が良かっただけです。','条件面で辞退しました。社員の方は感じが良かったです。','最後まで、現場の人の顔が見えませんでした。']));
+    }else{
+      stage='最終選考で不合格';
+      lines.push(pu(['最終まで行って落ちました。何が足りなかったのかは分かりません。','役員会で決まるらしく、誰に落とされたのかも分からないまま終わりました。','個別面接の手応えは良かったんですが、結果はダメでした。']));
+    }
+    if(qs.includes('pressure')){eff('圧迫質問をした',-1.3);lines.push('「その経歴だと厳しい」と言われました。じゃあ、なぜ呼んだのでしょう。')}
+    if(qs.includes('family')){eff('不適切な質問をした',-1.8);lines.push('親の職業を聞かれました。いつの時代の話でしょうか。')}
+    if(qs.includes('marry')){eff('不適切な質問をした',-1.8);lines.push('結婚と出産の予定を聞かれました。この会社は受けないほうがいいです。')}
+    if(qs.includes('viol')){eff('不適切な質問をした',-1.8);lines.push(`面接で「${fr.q}」と聞かれました。いまだに意味が分かりません。`)}
+    if(qs.includes('work')){eff('実務課題で実力を見た',.3);lines.push('その場で課題が出ました。準備できないぶん、実力を見てもらえた気がします。')}
+    if(qs.includes('pro')){eff('仕事に関わる専門的なことを聞いた',.2);lines.push('業界の具体的な質問が来ました。ちゃんと仕事の話ができた面接でした。')}
+    if(qs.includes('behav')||qs.includes('situ')){eff('具体的な行動や判断を聞いた',.3);lines.push('具体的な行動を深掘りされました。きつかったけど、まともな面接でした。')}
+    if(qs.includes('animal')){eff('意図の分からない質問をした',-.2);lines.push('「動物に例えると？」みたいな質問をされました。何を見ているのか最後まで分かりませんでした。')}
+    if(c.obs.rapport){eff('趣味の話で盛り上がった',.3);lines.push('面接官と趣味の話で盛り上がりました。それだけで終わった気もします。')}
+    if(!hired){sat+=clamp(s,1,5);n++;mine.forEach(([k,v])=>F[k]=(F[k]||0)+v);}
+    const post=hired||hasViol||qs.includes('pressure')||R()<.55;
+    if(!post)continue;
+    out.push({c,stage,emp:hired,stars:Math.round(clamp(hired?emp:s,1,5)),text:lines.slice(0,3).join(' ')});
+  }
+  return {out,mean:n?sat/n:3.5,F,n};
+}
+const RADAR_AX=['中身','印象','肩書き','親近感','質問設計'];
+const RADAR_TYPE=[['中身を読む人','いちばんまともな読み方です。ただし、中身の読み取りにも誤差があります。'],['雰囲気で選ぶ人','話のうまい人を、仕事のできる人と取り違えやすいタイプです。'],['偏差値を信じる人','このゲームで学歴がいちばんよく予測するのは、実家の太さです。'],['自分に似た人を採る人','面接で見つけているのは、候補者ではなく自分です。'],['仕組みで選ぶ人','良い質問をしても、答えを読むのはあなたです。']];
+const radarType=v=>RADAR_TYPE[v.indexOf(Math.max(...v))];
+function radarSvg(me,avg){
+  const cx=150,cy=138,Rr=92,N=5;const ang=i=>-Math.PI/2+i*2*Math.PI/N;
+  const P=(i,v)=>[+(cx+Math.cos(ang(i))*Rr*v/100).toFixed(1),+(cy+Math.sin(ang(i))*Rr*v/100).toFixed(1)];
+  const poly=vals=>vals.map((v,i)=>P(i,v).join(',')).join(' ');
+  let g=[25,50,75,100].map(l=>`<polygon points="${poly(Array(N).fill(l))}" fill="none" stroke="var(--rule)" stroke-width="${l===50?1.4:1}"/>`).join('');
+  g+=RADAR_AX.map((_,i)=>{const [x,y]=P(i,100);return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--rule)" stroke-width="1"/>`}).join('');
+  if(avg)g+=`<polygon points="${poly(avg)}" fill="none" stroke="var(--ink-2)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>`;
+  const main=me||avg;
+  g+=`<polygon points="${poly(main)}" fill="var(--shu)" fill-opacity=".16" stroke="var(--shu)" stroke-width="2" stroke-linejoin="round"/>`+main.map((v,i)=>{const [x,y]=P(i,v);return `<circle cx="${x}" cy="${y}" r="4.5" fill="var(--shu)" stroke="var(--paper)" stroke-width="2"><title>${RADAR_AX[i]} ${v}</title></circle>`}).join('');
+  g+=RADAR_AX.map((a,i)=>{const [x,y]=P(i,118);const anc=Math.abs(x-cx)<5?'middle':x>cx?'start':'end';return `<text x="${x}" y="${y+4}" text-anchor="${anc}" font-size="13" fill="var(--ink)" font-weight="700">${a}<tspan fill="var(--ink-2)" font-weight="400" font-family="IBM Plex Mono,monospace"> ${main[i]}</tspan></text>`}).join('');
+  return `<svg viewBox="-50 0 400 272" role="img" aria-label="選考のクセ：${RADAR_AX.map((a,i)=>a+' '+main[i]).join('、')}">${g}</svg>`;
+}
+function setupRadar(){
+  const H=store.get('keigan-v1',[]).filter(r=>r.radar);if(!H.length)return '';
+  const avg=[0,1,2,3,4].map(i=>Math.round(H.reduce((a,r)=>a+r.radar[i],0)/H.length));const t=radarType(avg);
+  return `<div class="setup-radar"><h4 style="margin:0 0 6px;font-size:13px">あなたの選考のクセ（${H.length}回の平均）</h4><div class="radarwrap">${radarSvg(avg,null)}<div><div class="radar-type">${t[0]}</div><p class="note">${t[1]}</p></div></div></div>`;
+}
+const sameQs=()=>G.final.every(id=>JSON.stringify([...(G.asked[id]||[])].map(k=>k==='free'?'free:'+G.free[id].type:k).sort())===JSON.stringify([...(G.asked[G.final[0]]||[])].map(k=>k==='free'?'free:'+G.free[G.final[0]].type:k).sort()));
+function computeResult(){
+  const cfg=G.cfg;const r=mulberry32(G.seed^0x5bd1e995);
+  G.R0secs=(G.t1-G.t0)/1000/12;
+  const env=mkEnv(r,cfg);
+  G.cands.forEach(c=>{c.res=simSeat(c,env,r,cfg)});
+  const sorted=[...G.cands].sort((a,b)=>b.res.total-a.res.total);sorted.forEach((c,i)=>c.rank=i+1);
+  const best=[...G.cands].sort((a,b)=>b.pot-a.pot)[0];
+  const N=600;const hist=Array(12).fill(0);let bestFirst=0;const r2=mulberry32(G.seed^0x27d4eb2d);
+  for(let k=0;k<N;k++){const e=mkEnv(r2,cfg);const tot=G.cands.map(c=>simSeat(c,e,r2,cfg).total);
+    const rk=id=>1+tot.filter(v=>v>tot[id]).length;
+    if(G.hired!==null)hist[rk(G.hired)-1]++;
+    if(rk(best.id)===1)bestFirst++;}
+  const adv=G.cands.map(c=>!G.p1.has(c.id)?0:!G.p2.has(c.id)?1:2+G.rate[c.id].star/5);
+  const picked=[['実際の能力（3年後の成果）',G.cands.map(c=>c.res.total)],['話のうまさ・印象',G.cands.map(c=>c.t.cha)],['見た目',G.cands.map(c=>c.t.attract)],['学歴',G.cands.map(c=>c.tier)],['実家の太さ',G.cands.map(c=>c.t.wealth)],['あなたとの共通点',G.cands.map(c=>c.similar?1:0)]].map(([l,v])=>[l,pearson(adv,v)]);
+  const saveR=R,saveRep=REP;R=mulberry32(G.seed^0x1234567);REP={score:3.5,n:0};const rr=mulberry32(G.seed^0x7654321);
+  const sig={'ワークサンプル':[],'専門質問の答えの中身':[],'行動面接の答えの中身':[],'集団面接の発言の中身':[],'ガクチカ／実績の具体性':[],'学歴':[],'資格の数':[],'志望動機のうまさ':[],'集団面接の発言量':[],'見た目':[],'動物に例えると':[]};const out=[];
+  for(let i=0;i<1200;i++){const c=makeCand(cfg,i);const e=mkEnv(rr,cfg);out.push(simSeat(c,e,rr,cfg).total);
+    const val=q=>{let s=0;for(const k in Q[q].w)s+=Q[q].w[k]*c.t[k];return s+Q[q].noise*gz()};
+    sig['ワークサンプル'].push(val('work'));sig['専門質問の答えの中身'].push(val('pro'));sig['行動面接の答えの中身'].push(val('behav'));sig['集団面接の発言の中身'].push(c.obs.gdC);sig['ガクチカ／実績の具体性'].push(c.conc);sig['学歴'].push(c.tier);sig['資格の数'].push(c.certs.length);sig['志望動機のうまさ'].push(c.polish);sig['集団面接の発言量'].push(c.obs.talk);sig['見た目'].push(c.t.attract);sig['動物に例えると'].push(val('animal'));}
+  R=saveR;REP=saveRep;
+  const world=Object.entries(sig).map(([k,v])=>[k,pearson(v,out)]).sort((a,b)=>b[1]-a[1]);
+  const RV=makeReviews();const reviews=RV.out;const before=REP.score;
+  const after=clamp(before*.6+RV.mean*.4,1,5);
+  const factors=Object.entries(RV.F).map(([k,v])=>[k,v/RV.n*.4]).filter(x=>Math.abs(x[1])>=.005).sort((a,b)=>a[1]-b[1]);
+  const drift=.4*(3.5-before);if(Math.abs(drift)>=.005)factors.push([drift>0?'時間がたって、前の悪評が少し薄れた':'時間がたって、前の好評が少し薄れた',drift]);
+  REP={score:after,n:REP.n+reviews.filter(v=>!v.emp).length};store.set('keigan-rep-v1',REP);
+  const contentObs=c=>{const v=[c.conc];if(G.p1.has(c.id))v.push(c.obs.gdC);['behav','situ','work','pro','ref'].forEach(k=>{if(c.obs[k]!==undefined)v.push(c.obs[k])});return v.reduce((a,b)=>a+b,0)/v.length};
+  const sc=r=>r===null?50:clamp(Math.round(50+r*90),0,100);
+  const qv=[];G.final.forEach(id=>(G.asked[id]||[]).forEach(k=>qv.push(k==='free'?FT[G.free[id].type].v:Q[k].v)));
+  const qd=clamp(Math.round((qv.length?qv.reduce((a,b)=>a+b,0)/qv.length:0)/.42*100+(sameQs()?10:0)-G.viol.length*15),0,100);
+  const radar=[sc(pearson(adv,G.cands.map(contentObs))),sc(pearson(adv,G.cands.map(c=>c.t.cha+c.t.attract))),sc(pearson(adv,G.cands.map(c=>c.tier+(c.prest||0)))),sc(pearson(adv,G.cands.map(c=>c.similar?1:0))),qd];
+  const passS=G.cands.filter(c=>c.similar),passO=G.cands.filter(c=>!c.similar);
+  const run={t:Date.now(),rank:G.hired!==null?G.cands[G.hired].rank:null,conf:G.rate[G.rank[0]].conf,recRank:G.cands[G.rank[0]].rank,
+    stars:G.final.map(id=>({s:G.rate[id].star,z:G.cands[id].res.total,sim:G.cands[id].similar?1:0})),
+    sim:[passS.filter(c=>G.p1.has(c.id)).length,passS.length],oth:[passO.filter(c=>G.p1.has(c.id)).length,passO.length],viol:G.viol.length,radar};
+  const prevH=store.get('keigan-v1',[]).filter(r=>r.radar);const prevAvg=prevH.length?[0,1,2,3,4].map(i=>Math.round(prevH.reduce((a,r)=>a+r.radar[i],0)/prevH.length)):null;
+  const history=store.get('keigan-v1',[]);history.push(run);store.set('keigan-v1',history.slice(-200));
+  G.R={best,hist,N,bestFirst,picked,world,history,secs:G.R0secs,reviews,before,after:REP.score,factors,radar,prevAvg};G.R.boss=bossGrade(G.R);
+}
+function rbar(label,r,mine){
+  if(r===null)return `<div class="rbar"><span>${label}</span><div class="track"></div><span class="num">—</span></div>`;
+  const v=clamp(r,-1,1);const w=Math.abs(v)*50;const left=v>=0?50:50-w;
+  return `<div class="rbar ${mine?'mine':''}"><span>${label}</span><div class="track"><div class="fill ${v<0?'neg':''}" style="left:${left}%;width:${w}%"></div></div><span class="num">${v>=0?'+':''}${v.toFixed(2)}</span></div>`;
+}
+const axis=`<div class="axis"><div></div><div><span>−1</span><span>0</span><span>+1</span></div><div></div></div>`;
+function cutText(c){return c.id===G.hired?'採用':G.declined.includes(c.id)?'内定辞退':G.final.includes(c.id)?'役員会で落選':G.p2.has(c.id)?'':G.p1.has(c.id)?'集団面接で落選':'書類で落選'}
+function compView(c){
+  const m=c.res.comp;const rows=[['本人の能力',m.abil],['上司',m.mgr],['配属との相性',m.fit],['運',m.luck]];if(m.scan)rows.push(['不祥事',m.scan]);
+  const mx=Math.max(3,...rows.map(r=>Math.abs(r[1])));
+  const bar=(l,v)=>{const w=Math.abs(v)/mx*50;return `<div class="rbar"><span>${l}</span><div class="track"><div class="fill ${v<0?'neg':''}" style="left:${v>=0?50:50-w}%;width:${w}%"></div></div><span class="num">${v>=0?'+':'−'}${Math.abs(v).toFixed(1)}</span></div>`};
+  const ext=m.mgr+m.fit+m.luck;let say;
+  if(m.abil>.6&&ext<-1)say='能力はありました。上司と配属と運が、それを発揮させませんでした。';
+  else if(m.abil<-.6&&ext>1)say='能力は高くありません。上司と配属と運が、それを隠しました。';
+  else if(ext>1)say='追い風の三年でした。本人はそれを実力だと思っています。';
+  else if(ext<-1)say='向かい風の三年でした。';
+  else say='おおむね、能力どおりの三年でした。';
+  return `<p class="note" style="margin-bottom:6px">成績の内訳（三年分の合計）</p>${rows.map(r=>bar(r[0],r[1])).join('')}<p class="say" style="margin-top:8px;font-size:14px">${say}${c.res.leave?' 育休の年は比較から外し、働いた年の平均で計算しています。':''}</p>`;
+}
+function bossGrade(X){
+  const it=[];let sc=3;const h=G.hired!==null;
+  if(!h){sc-=2;it.push('採用目標が未達。欠員のまま期が終わった。')}else{sc+=.5;it.push('今期の枠を埋めた。まずはそれでいい。')}
+  if(X.secs<5){sc+=1;it.push(`書類を1通${X.secs.toFixed(1)}秒で処理した。生産性が高い。`)}else if(X.secs>40){sc-=.5;it.push(`書類1通に${Math.round(X.secs)}秒。丁寧なのはいいが、時間は有限だ。`)}
+  if(G.overridden){sc-=.5;it.push('推薦が役員会で通らなかった。根回しが足りない。')}else if(h){sc+=.5;it.push('役員会で揉めなかった。こういうのが大事なんだ。')}
+  if(G.declined.length){sc-=.4*G.declined.length;it.push(`内定辞退が${G.declined.length}人。歩留まりを意識してほしい。`)}
+  if(G.viol.length){sc-=1.5;it.push('面接の質問について、法務から問い合わせが来ている。研修を受けてもらう。')}
+  if(X.after-X.before<-.1){sc-=.5;it.push('口コミサイトが荒れている、と広報から言われた。')}
+  const g=sc>=4.5?'S':sc>=3.5?'A':sc>=2.5?'B':sc>=1.5?'C':'D';
+  return {g,it};
+}
+function bossSection(X){
+  const b=X.boss;
+  return `<section class="sect"><h3>人事部長からの、あなたへの評価</h3><p class="lede">あなたも評価される側です。部長の評価は、この期のうちに締まります。</p>
+  <div class="panel"><div class="radarwrap" style="grid-template-columns:auto 1fr"><div class="bigstamp" style="width:96px;height:96px;border-width:4px"><div class="r" style="font-size:40px">${b.g}</div></div>
+  <div><p class="note">大河内 人事部長のコメント</p><ul class="memo" style="margin:4px 0 0;padding-left:1.1em">${b.it.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+  <p class="note" style="margin-top:10px">部長の評価に入っていないもの：採用した人が三年後にどうなったか。あなたが何を質問したか（違法なもの以外）。</p></div></div></div></section>`;
+}
+function shareHref(X){
+  const h=G.hired!==null?G.cands[G.hired]:null;const rec=G.cands[G.rank[0]];const t=radarType(X.radar);
+  const lines=['慧眼採用課で面接官をやった。',
+    h?`採用した人：12人中${h.rank}位`:'採用した人：なし（全員に辞退された）',
+    `確信度${G.rate[rec.id].conf}%で推した人：${rec.rank}位`,
+    `選考のクセ：${t[0]}（中身${X.radar[0]}・印象${X.radar[1]}・肩書き${X.radar[2]}・親近感${X.radar[3]}・質問設計${X.radar[4]}）`,
+    `部長からの評価：${X.boss.g}`,'#慧眼採用課'];
+  return 'https://twitter.com/intent/tweet?text='+encodeURIComponent(lines.join('\n'))+(SHARE_URL?'&url='+encodeURIComponent(SHARE_URL):'');
+}
+function vModal(c){
+  const tr=['g','con','skill','soc','cha','integ','stay','attract','wealth'];
+  const rt=G.rate[c.id];const log=G.log[c.id]||[];const revealed=G.phase==='result'&&c.res;
+  return `<div class="veil" data-act="close"><div class="modal" role="dialog" aria-modal="true" aria-label="${esc(c.name)}の記録">
+  <div class="mh"><h3>${esc(c.name)}<span class="note">　${cutText(c)}${rt?`・あなたの評価 ${starsTxt(rt.star)} 確信度${rt.conf}%`:''}</span></h3><button class="btn small ghost" data-act="close">閉じる</button></div>
+  <div class="mb">
+    ${revealed?`<div class="panel"><h4>本当の姿（選考中は一度も見えていなかった値）</h4>${tr.map(k=>`<div class="tbar"><span>${TRAIT_JP[k]}</span><div class="pbar"><i style="width:${pct(c.t[k])}%"></i></div><span class="num">${pct(c.t[k])}</span></div>`).join('')}
+    <p class="note" style="margin-top:6px">数値は同世代の中での位置（50が平均）。</p>
+    <p class="note" style="margin-top:6px">項目の一部は、成果の計算には一切使っていません。</p></div>
+    <div class="panel"><h4>この席での三年の成績：12人中${c.rank}位${c.res.st!=='在籍'?`（${c.res.st}）`:''}</h4>${compView(c)}</div>`:''}
+    ${sheet(c,false,true)}
+    ${c.intro||log.length?`<article class="sheet"><div class="hd"><b>面接記録</b><span></span></div>${c.intro?`<div class="sec"><h4>集団面接（発言${c.talkN}回）</h4><p class="quote">${esc(c.intro)}</p><p class="note">役割：${esc(c.gdRole||'なし')}</p><p class="quote">${esc(c.gdQuote)}</p><p class="quote">${esc(c.gdReact||'')}</p><ul class="memo">${c.gdNotes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}${log.length?`<div class="sec"><h4>個別面接</h4>${log.map(e=>`<div class="qa"><div class="qq">Q. ${esc(eqLabel(e))}</div><div>${esc(e.text)}</div></div>`).join('')}</div>`:''}</article>`:''}
+  </div></div></div>`;
+}
+function vResult(){
+  if(!G.R)computeResult();
+  const X=G.R,cfg=G.cfg;const h=G.hired!==null?G.cands[G.hired]:null;
+  const rec=G.cands[G.rank[0]];
+  let title,say;const rk=h?h.rank:null;
+  if(!h){title='欠員採用';say='誰も採らなかった。会社は特に困らなかった。それがいちばん怖い。';}
+  else if(rk===1){title='慧眼（今回は）';say='12人中1位。次も当たると思った瞬間から、あなたは平均に戻り始めます。';}
+  else if(rk<=3){title='目利き（暫定）';say='サイコロよりは良かった。それが実力かどうかは、あと200回やれば分かります。';}
+  else if(rk<=6){title='平均的な人事';say='12人からランダムに選んだ場合の期待値は6.5位です。おめでとうございます。ほぼ誤差です。';}
+  else if(rk<=9){title='直感派';say='あなたの直感は、あなたのことをよく知っています。候補者のことは知りません。';}
+  else {title='逆・慧眼';say='あなたの逆を選べば当たります。ただし、それを知った時点で当たらなくなります。';}
+  const score=h?Math.round((12-rk)/11*100):20;const pen=G.viol.length*15;
+  let out=`<section class="hero"><div class="bigstamp"><div><div class="r">${h?`${rk}<small>位</small>`:'—'}</div><div class="t">${h?'12人中':'採用なし'}</div></div></div>
+  <div><h2>${title}</h2><p class="say">${say}</p>
+  <p style="margin-top:12px"><a class="btn red small" href="${shareHref(X)}" target="_blank" rel="noopener">結果を X でシェア</a></p>
+  <p class="score">採用スコア <b>${Math.max(0,score-pen)}</b> / 100${pen?`（不適切な質問 −${pen}）`:''}　／　書類1通あたり <b>${X.secs.toFixed(1)}</b>秒</p>
+  ${h?`<p class="say">あなたが確信度${G.rate[rec.id].conf}%で1位に推した${esc(rec.name)}さんは、${rec.rank}位でした。${G.overridden?`役員会はあなたの推薦を覆しました。${h.id===rec.id?'':'結果として、'+(h.rank<rec.rank?'役員のほうが正しかった。':'あなたのほうが正しかった。誰も覚えていないけれど。')}`:''}</p>`:''}</div></section>`;
+  if(h){
+    const rs=REASONS.find(r=>r[0]===G.reason);let msg;
+    if(!['fit','gut'].includes(G.reason)){const k=G.reason;const pos=1+G.cands.filter(c=>c.t[k]>rec.t[k]).length;msg=`1位推薦の理由は「${rs[1]}」。${esc(rec.name)}さんの実際の${TRAIT_JP[k]}は、12人中${pos}位でした。`}
+    else if(G.reason==='fit')msg=`1位推薦の理由は「カルチャーフィット」。あとから確認できる記録はありません。${rec.similar?'この人はあなたと母校か趣味が同じでした。':''}`;
+    else msg=`1位推薦の理由は「なんとなく、目が良かった」。正直で良いと思います。`;
+    out+=`<p class="warn">${msg} <button class="linkbtn" data-act="open" data-id="${rec.id}">推した人を見る</button>${h.id!==rec.id?` ／ <button class="linkbtn" data-act="open" data-id="${h.id}">採用した人を見る</button>`:''}</p>`;
+  }
+  out+=bossSection(X);
+  const sorted=[...G.cands].sort((a,b)=>a.rank-b.rank);const mx=Math.max(...G.cands.map(c=>Math.abs(c.res.total)))||1;const pmx=Math.max(...G.cands.map(c=>Math.abs(c.pot)))||1;
+  const hint=c=>c.mode==='new'?c.gHead:c.ach[0];USED=new Set();sorted.forEach(c=>{if(c.fate===undefined)c.fate=fateText(c,c.rank,12)});
+  out+=`<section class="sect"><h3>同じ席に、他の11人を座らせたら</h3><p class="lede">同じ部署、同じ上司、同じ景気で、12人全員がそれぞれ三年働いた場合の成績順です。「潜在力」はこのゲームが最初から決めていた本当の値で、あなたには一度も見えていません。行を押すと、その人の履歴書・面接記録・本当の姿が開きます。</p>
+  <div class="scroll"><table><thead><tr><th>順位</th><th>候補者</th><th>あなたの判断</th><th>評価</th><th>潜在力</th><th>三年の成績</th><th>この席での三年</th></tr></thead><tbody>
+  ${sorted.map(c=>{const ct=cutText(c);return `<tr class="clk ${c.id===G.hired?'hired':''}" data-act="open" data-id="${c.id}" tabindex="0" role="button"><td class="num">${c.rank}</td><td><div class="pname">${face(c)}<div>${esc(c.name)}${c.similar?'<span class="flag">共通点</span>':''}<small>${esc(profileLine(c))}</small><small>${esc(hint(c))}</small></div></div></td><td>${ct?`<span class="cut ${c.id===G.hired?'h':''}">${ct}</span>`:''}</td><td style="color:var(--shu);white-space:nowrap">${G.rate[c.id]?'★'.repeat(G.rate[c.id].star):''}</td><td><div class="pbar"><i style="width:${clamp((c.pot/pmx+1)/2*100,3,100)}%"></i></div></td><td><div class="pbar"><i style="width:${clamp((c.res.total/mx+1)/2*100,3,100)}%;background:${c.id===G.hired?'var(--shu)':'var(--bar)'}"></i></div></td><td class="fate">${esc(c.fate)}</td></tr>`}).join('')}
+  </tbody></table></div>
+  <p class="warn">神の目で本当の潜在力が一番高い人（${esc(X.best.name)}）を選んでいたとしても、この世界線では${X.best.rank}位でした。同じ条件で世界を${X.N}回やり直すと、その人が1位になるのは${Math.round(X.bestFirst/X.N*100)}%です。</p></section>`;
+  if(h){const hm=Math.max(...X.hist)||1;const exp=X.hist.reduce((s,v,i)=>s+v*(i+1),0)/X.N;
+  out+=`<section class="sect"><h3>乱数の神にもう一度聞く</h3><p class="lede">三年の成績は「本人の能力＋上司＋配属との相性＋運」で決まります。能力があっても、上司や配属が合わなければ成績は出ません。一覧の行を押すと、一人ずつの内訳が見られます。<br>${esc(h.name)}さんを採った事実はそのままに、上司と運と相性だけを${X.N}回引き直しました。赤が今回の世界線の順位です。平均順位は${exp.toFixed(1)}位。</p>
+  <div class="panel"><div class="hist">${X.hist.map((v,i)=>`<div class="${i+1===h.rank?'me':''}" style="height:${v/hm*100}%"><span>${Math.round(v/X.N*100)}%</span></div>`).join('')}</div><div class="hlab">${X.hist.map((_,i)=>`<span>${i+1}位</span>`).join('')}</div></div></section>`;}
+  const d=X.after-X.before;
+  out+=`<section class="sect"><h3>候補者たちは、あなたの会社をこう書いた</h3><p class="lede">就活口コミサイトへの投稿です。あなたが候補者を評価していた間、候補者もあなたを評価していました。</p>
+  <div class="repline"><span>御社の評価 <b>${X.before.toFixed(2)}</b> → <b style="color:${d<0?'var(--ng)':'var(--ok)'}">${X.after.toFixed(2)}</b></span><span class="note">次回の応募者：${repLabel(X.after)}${d<-.05?'。少し質が下がり、内定辞退も増えます':d>.05?'。少し良い人が来るようになります':''}</span></div>
+  <div class="panel" style="margin-bottom:14px"><h4>評価が動いた理由</h4>${X.factors.length?X.factors.map(([k,v])=>`<div class="factor"><span>${esc(k)}</span><span style="color:${v<0?'var(--ng)':'var(--ok)'}">${v>=0?'+':'−'}${Math.abs(v).toFixed(2)}</span></div>`).join(''):'<p class="note">あなたは特に何もしませんでした。評価もほとんど動きませんでした。</p>'}<p class="note" style="margin-top:8px">評価を動かすのは、落ちた人と辞退した人の感想だけです。採用した人の社員口コミは配属先の上司で決まるので、含めていません。あなたのせいではないので。</p></div>
+  ${X.reviews.length?`<div class="reviews">${X.reviews.map(v=>`<div class="rv"><div class="s">${starsTxt(v.stars)}</div><div class="meta">${ageBand(v.c.age)}・${v.c.gender==='未回答'?'性別非公開':v.c.gender}・${v.stage}</div><p>${esc(v.text)}</p><button class="linkbtn" data-act="open" data-id="${v.c.id}" style="justify-self:start">投稿者：${esc(v.c.name)}（あなたにだけ分かる）</button></div>`).join('')}</div>`:'<p class="note">今回は誰も書き込みませんでした。興味すら持たれていない可能性があります。</p>'}</section>`;
+  {const t=radarType(X.radar);
+  out+=`<section class="sect"><h3>あなたの選考のクセ</h3><p class="lede">あなたが誰をどこまで進めたかを、5つの物差しで見たものです。50は「関係なし」。高いほど、その要素で人を選んでいます。</p>
+  <div class="panel"><div class="radarwrap">${radarSvg(X.radar,X.prevAvg)}<div><div class="radar-type">${t[0]}</div><p class="say" style="margin-top:6px">${t[1]}</p>
+  ${X.prevAvg?'<div class="legend"><span><i></i>今回</span><span><i class="avg"></i>これまでの平均</span></div>':''}
+  <div class="kv" style="margin-top:12px;font-size:12.5px;color:var(--ink-2)"><div>中身</div><div>発言・回答の具体性</div><div>印象</div><div>話のうまさと見た目</div><div>肩書き</div><div>学歴と経歴</div><div>親近感</div><div>母校・趣味の一致</div><div>質問設計</div><div>聞いた質問の予測力</div></div></div></div></div></section>`;}
+  out+=`<section class="sect"><h3>あなたの判断が拾っていたもの</h3><p class="lede">あなたが各候補者をどこまで進めたか（書類落ち＝0、集団落ち＝1、最終3人は2＋評価）と、それぞれの要素との相関です。12人分なので揺れは大きめです。</p>
+  <div class="cols"><div class="panel"><h4>今回の選考</h4>${axis}${X.picked.map(([l,r],i)=>rbar(l,r,i===0)).join('')}</div>
+  <div class="panel"><h4>このゲームの世界で、各情報が三年後の成果をどれだけ予測するか</h4>${axis}${X.world.map(([l,r])=>rbar(l,r)).join('')}<p class="note" style="margin-top:8px">${IND[cfg.ind].name}・${SIZE[cfg.size].name}の候補者1,200人で計算。どれを使っても、成果の大半は説明できません。</p></div></div></section>`;
+  const used=new Set(Object.values(G.asked).flat());const frees=G.final.filter(id=>G.free[id]);const same=sameQs();
+  out+=`<section class="sect"><h3>あなたの質問の答え合わせ</h3><p class="lede">面接手法と職務成績の相関の目安（Sackett ほか 2022年のメタ分析などによる）。このゲームの数値もおおむねこれに合わせています。</p>
+  <div class="panel"><div class="kv">${['behav','situ','work','pro','ref','reverse','motive','animal','hobby','pressure'].filter(k=>!(Q[k].midOnly&&cfg.mode==='new')).map(k=>`<div>${used.has(k)?'<b>●</b> ':'<span style="color:var(--ink-3)">○</span> '}${esc(qLabel(k))}<span class="note">　${Q[k].tag}</span></div><div>${Q[k].v?'≈ '+Q[k].v.toFixed(2):'ほぼ 0'}</div>`).join('')}</div>
+  ${frees.length?`<div style="margin-top:14px">${frees.map(id=>{const f=G.free[id],t=FT[f.type];return `<div class="fqv">あなたの自作質問「${esc(f.q)}」（${esc(G.cands[id].name)}さんへ）は、予測力 ${t.v?'≈ '+t.v.toFixed(2):'ほぼ 0'} の<b>${t.label}</b>でした。${t.say}<br><span class="note">判定：${f.src}${f.reason?`（${esc(f.reason)}）`:''}</span></div>`}).join('')}</div>`:''}
+  <p class="note" style="margin-top:10px">参考：構造化面接全体 ≈ 0.42、非構造化面接 ≈ 0.19、一般知的能力 ≈ 0.31、誠実性 ≈ 0.19、学歴（年数）≈ 0.10、職務経験年数 ≈ 0.09。</p>
+  ${same?'<p class="note">3人に同じ質問をしていました。比べられる材料をそろえたのは、今回あなたがした中でいちばん賢いことです。</p>':'<p class="note">3人に違う質問をしていました。違う物差しで測った3人を、一つの順位に並べたことになります。</p>'}
+  ${G.viol.length?`<p class="warn">不適切な質問を${G.viol.length}回しています（${[...new Set(G.viol.map(v=>v.q==='free'?`「${v.text}」`:Q[v.q].label))].join('、')}）。家族、結婚・出産、出身地、宗教、尊敬する人物などは本人の能力や適性と関係がなく、厚生労働省の「公正な採用選考」の考え方で、聞くべきでない事項とされています。</p>`:''}</div></section>`;
+  const H=X.history;const pairs=H.flatMap(r=>r.stars||[]);const rs=pearson(pairs.map(p=>p.s),pairs.map(p=>p.z));
+  const ranks=H.filter(r=>r.rank).map(r=>r.rank);const avgR=ranks.length?ranks.reduce((a,b)=>a+b,0)/ranks.length:null;
+  const sp=H.reduce((a,r)=>[a[0]+r.sim[0],a[1]+r.sim[1]],[0,0]),op=H.reduce((a,r)=>[a[0]+r.oth[0],a[1]+r.oth[1]],[0,0]);
+  const simStars=pairs.filter(p=>p.sim),othStars=pairs.filter(p=>!p.sim);const ms=a=>a.length?a.reduce((x,y)=>x+y.s,0)/a.length:null;
+  const confs=H.map(r=>r.conf);const hit=H.filter(r=>r.recRank<=3).length;
+  out+=`<section class="sect"><h3>あなたの通算成績</h3><p class="lede">このブラウザでの${H.length}回分です。1回では運ですが、回数を重ねると癖が出ます。</p>
+  <div class="cols"><div class="panel"><div class="kv">
+  <div>プレイ回数</div><div>${H.length}</div>
+  <div>採用した人の平均順位（ランダムなら6.5）</div><div>${avgR?avgR.toFixed(1):'—'}</div>
+  <div>あなたの★と三年後の成果の相関</div><div>${rs===null?'データ不足':(rs>=0?'+':'')+rs.toFixed(2)}</div>
+  <div>1位推薦の平均確信度</div><div>${Math.round(confs.reduce((a,b)=>a+b,0)/confs.length)}%</div>
+  <div>1位推薦が実際に上位3位以内だった率</div><div>${Math.round(hit/H.length*100)}%</div>
+  </div></div>
+  <div class="panel"><div class="kv">
+  <div>あなたと共通点がある人の書類通過率</div><div>${sp[1]?Math.round(sp[0]/sp[1]*100)+'%':'—'}</div>
+  <div>それ以外の人の書類通過率</div><div>${op[1]?Math.round(op[0]/op[1]*100)+'%':'—'}</div>
+  <div>共通点がある人への平均★</div><div>${ms(simStars)?ms(simStars).toFixed(2):'—'}</div>
+  <div>それ以外の人への平均★</div><div>${ms(othStars)?ms(othStars).toFixed(2):'—'}</div>
+  </div><p class="note" style="margin-top:8px">書類の平均通過率は50%です。共通点は、このゲームでは成果と一切関係ありません。</p></div></div></section>
+  <div class="foot-actions"><a class="btn red" href="${shareHref(X)}" target="_blank" rel="noopener">結果を X でシェア</a><button class="btn" data-act="again">同じ設定で次の採用へ</button><button class="btn ghost" data-act="home">設定を変える</button></div>`;
+  return out;
+}
+
+/* ============ イベント ============ */
+document.addEventListener('submit',e=>{if(e.target.id==='setupForm'){e.preventDefault();start()}});
+const smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+function scrollToLog(){if(!matchMedia('(max-width:820px)').matches)return;const el=$('.log .thinking')||[...document.querySelectorAll('.log .ex')].pop();if(el)el.scrollIntoView({behavior:smooth(),block:'start'})}
+function restart(){CFG={...G.cfg};G=null;render();setTimeout(()=>{$('#setupForm').requestSubmit()},0)}
+function act(el,e){
+  const a=el.dataset.act,id=el.dataset.id!==undefined?+el.dataset.id:null;
+  if(a==='close'){if(e&&el.classList.contains('veil')&&e.target!==el)return;G.modal=null;render();return}
+  if(a==='open'){G.modal=id;render();return}
+  if(a==='t1'){G.p1.has(id)?G.p1.delete(id):G.p1.size<6&&G.p1.add(id);render();return}
+  if(a==='next1'){G.t1=performance.now();go('group');return}
+  if(a==='t2'){G.p2.has(id)?G.p2.delete(id):G.p2.size<3&&G.p2.add(id);render();return}
+  if(a==='next2'){G.final=[...G.p2];G.iv=0;go('iv');return}
+  if(a==='ask'){const c=G.cands[G.final[G.iv]];G.asked[c.id]=G.asked[c.id]||[];G.log[c.id]=G.log[c.id]||[];if(G.asked[c.id].length>=3)return;G.asked[c.id].push(el.dataset.q);G.log[c.id].push(ask(c,el.dataset.q));if(!G.rate[c.id])G.rate[c.id]={star:0,conf:70};render();scrollToLog();return}
+  if(a==='freeask'){const c=G.cands[G.final[G.iv]];const q=(G.fqDraft||'').trim();if(!q||G.pending)return;G.asked[c.id]=G.asked[c.id]||[];G.log[c.id]=G.log[c.id]||[];if(G.asked[c.id].length>=3||G.asked[c.id].includes('free'))return;
+    G.pending=true;G.aiNote='';render();scrollToLog();
+    askFree(c,q).then(e=>{G.asked[c.id].push('free');G.log[c.id].push(e);G.fqDraft='';if(!G.rate[c.id])G.rate[c.id]={star:0,conf:70};G.pending=false;render();scrollToLog()});return}
+  if(a==='star'){const c=G.cands[G.final[G.iv]];G.rate[c.id].star=+el.dataset.s;render();return}
+  if(a==='nextiv'){G.aiNote='';G.fqDraft='';if(G.iv<2){G.iv++;go('iv')}else go('board');return}
+  if(a==='rk'){if(!G.board&&!G.rank.includes(id)&&G.rank.length<3){G.rank.push(id);render()}return}
+  if(a==='rkreset'){G.rank=[];render();return}
+  if(a==='meet'){meeting();render();const mn=$('.minutes');if(mn)mn.scrollIntoView({behavior:smooth(),block:'start'});return}
+  if(a==='toresult'){go('result');return}
+  if(a==='again'){restart();return}
+  if(a==='home'){CFG={...G.cfg};G=null;render();window.scrollTo({top:0});return}
+  if(a==='represet'){REP={score:3.5,n:0};store.set('keigan-rep-v1',REP);render();return}
+}
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]');if(!el||el.tagName==='INPUT')return;
+  if(el.classList.contains('veil')&&e.target!==el)return;
+  act(el,e)});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&G&&G.modal!=null){G.modal=null;render();return}
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches('[role=button][data-act]')){e.preventDefault();act(e.target)}
+});
+document.addEventListener('change',e=>{if(e.target.closest&&e.target.closest('#setupForm')&&['mode','ind','size','uni','hobby','ai'].includes(e.target.name)){CFG[e.target.name]=e.target.value;return}if(e.target.name==='reason'){G.reason=e.target.value;render()}});
+document.addEventListener('input',e=>{
+  if(e.target.id==='fq'){G.fqDraft=e.target.value;return}
+  if(e.target.id==='conf'){const c=G.cands[G.final[G.iv]];G.rate[c.id].conf=+e.target.value;$('#confv').textContent=e.target.value}
+});
+render();
+</script>
+</body>
+</html>
