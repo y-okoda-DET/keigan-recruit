@@ -7,8 +7,8 @@
 <meta property="og:title" content="慧眼採用課">
 <meta property="og:description" content="あなたには、人を見る目がある。少なくとも、あなたはそう思っている。">
 <meta property="og:type" content="website">
-<!-- 公開後にURLとOGP画像を入れる -->
-<!-- <meta property="og:url" content="https://example.com/"> -->
+<meta property="og:url" content="https://keigan-recruit.yhiokd.workers.dev">
+<!-- OGP画像を用意したら↓を有効化 -->
 <!-- <meta property="og:image" content="https://example.com/ogp.png"> -->
 <meta name="twitter:card" content="summary_large_image">
 <style>html{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -559,9 +559,9 @@ const eqLabel=e=>e.qtext?e.qtext:qLabel(e.qid);
 /* ============ 自由質問 ============ */
 // 自分でホストする場合：APIキーを持つ自前のサーバー（例：Cloudflare Workers）のURLを入れる。
 // POST {prompt} を受け取り、Claude Haiku の返答を {text} で返す想定。空なら使わない。
-const KEIGAN_ENDPOINT='';
+const KEIGAN_ENDPOINT='https://keigan-worker.yhiokd.workers.dev';
 // 公開したURL。Xでシェアしたときに添付される。
-const SHARE_URL='';
+const SHARE_URL='https://keigan-recruit.yhiokd.workers.dev';
 const FT={
   behav:{label:'行動面接',v:.42,w:{con:.5,skill:.3,g:.2},noise:.6,from:'behav',say:'研究上いちばん当てになる種類の質問です。自力でたどり着いたなら大したものです。'},
   situ:{label:'状況面接',v:.35,w:{g:.45,soc:.4,con:.15},noise:.7,from:'situ',say:'悪くない質問です。仮定の話でも、考え方の筋は見えます。'},
